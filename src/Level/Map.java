@@ -343,14 +343,6 @@ public abstract class Map {
 		// if player goes past center screen (on the right side) and there is more map
 		// to show on the right side, push player back to center and move camera forward
 
-		if (player.levelState == LevelState.LEVEL_COMPLETED) {
-			return;
-		} else if (player.getBoundsX2() < startBoundX) {
-			player.handleCollisionX(3);
-		} else if (player.getBoundsX2() > endBoundX - 32) {
-			player.handleCollisionX(-3);
-		}
-
 		if (player.getCalibratedXLocation() > xMidPoint && camera.getEndBoundX() < endBoundX) {
 			float xMidPointDifference = xMidPoint - player.getCalibratedXLocation();
 			camera.moveX(-xMidPointDifference);
