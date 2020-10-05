@@ -1,6 +1,9 @@
 package Screens;
 
 import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.KeyLocker;
+import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
@@ -22,7 +25,11 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected Stopwatch screenTimer = new Stopwatch();
     protected LevelClearedScreen levelClearedScreen;
     protected LevelLoseScreen levelLoseScreen;
+    protected boolean isGamePaused;
+    protected PauseLevelScreen pauseLevelScreen;
+    protected KeyLocker keyLocker;
     protected ArrayList<Clip> audioList;
+
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -34,11 +41,14 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         map.reset();
 
         // setup player
+        this.isGamePaused = false;
+        this.pauseLevelScreen = new PauseLevelScreen(screenCoordinator, this);
         this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.player.setMap(map);
         this.player.addListener(this);
         this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
+        this.keyLocker = new KeyLocker();
         audioList = map.loadAudio();
     }
 
@@ -47,9 +57,27 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
-                player.update();
-                map.update(player);
-                break;
+            	 if (Keyboard.isKeyDown(Key.P) && !keyLocker.isKeyLocked(Key.P)) {
+ 					isGamePaused = !isGamePaused;
+ 					keyLocker.lockKey(Key.P);
+ 					
+ 					if (isGamePaused) {
+						pauseLevelScreen.initialize();
+					}
+ 				}
+            	 
+            	 if (Keyboard.isKeyUp(Key.P)) {
+            		 keyLocker.unlockKey(Key.P);
+				}
+            	 
+                 if (isGamePaused) {
+ 					pauseLevelScreen.update();
+ 				}
+                 else {
+ 					player.update();
+ 					map.update(player);
+ 				}
+                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 levelClearedScreen = new LevelClearedScreen();
@@ -89,6 +117,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
             case PLAYER_DEAD:
                 map.draw(graphicsHandler);
                 player.draw(graphicsHandler);
+                if (isGamePaused) {
+    				pauseLevelScreen.draw(graphicsHandler);
+    			} 
                 break;
             case LEVEL_WIN_MESSAGE:
                 levelClearedScreen.draw(graphicsHandler);
