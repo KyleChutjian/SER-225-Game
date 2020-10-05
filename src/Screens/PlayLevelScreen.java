@@ -58,6 +58,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
             	 if (Keyboard.isKeyDown(Key.P) && !keyLocker.isKeyLocked(Key.P)) {
+            	     Map.getAudioList().get(0).stop();
  					isGamePaused = !isGamePaused;
  					keyLocker.lockKey(Key.P);
  					
