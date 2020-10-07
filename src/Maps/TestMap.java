@@ -14,6 +14,7 @@ import Utils.Point;
 
 import java.util.ArrayList;
 
+//Comment
 // Represents a test map to be used in a level
 public class TestMap extends Map {
 

@@ -74,6 +74,13 @@ public class MapTileCollisionHandler {
                 return false;
             case NOT_PASSABLE:
                 return gameObject.intersects(mapTile);
+            case WATER:
+    			if (gameObject instanceof Player && gameObject.intersects(mapTile)) {
+    				Player player = (Player) gameObject;
+    				player.drownPlayer();
+    				return true;
+    			} 
+    			return false;
             case JUMP_THROUGH_PLATFORM:
                 return direction == Direction.DOWN && gameObject.intersects(mapTile) &&
                         Math.round(gameObject.getScaledBoundsY2() - 1) == Math.round(mapTile.getScaledBoundsY1());
