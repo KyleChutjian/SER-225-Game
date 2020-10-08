@@ -10,6 +10,7 @@ import Utils.Direction;
 import java.util.ArrayList;
 
 public abstract class Player extends GameObject {
+
     // values that affect player movement
     // these should be set in a subclass
     protected float walkSpeed = 0;
@@ -380,4 +381,14 @@ public abstract class Player extends GameObject {
     public void addListener(PlayerListener listener) {
         listeners.add(listener);
     }
+
+	public void drownPlayer() {
+		if (!isInvincible) {
+			// if map entity is an enemy, kill player on touch
+			levelState = LevelState.PLAYER_DEAD;
+		} else {
+			return;
+		}
+	}
+
 }

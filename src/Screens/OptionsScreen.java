@@ -78,7 +78,7 @@ public class OptionsScreen extends Screen {
         wasd1DescLabel1.setOutlineColor(Color.black);
         wasd1DescLabel1.setOutlineThickness(3);
 
-        wasd1DescLabel2 = new SpriteFont("Interact:     'F'", 270, 180, "Comic Sans", 20, new Color( 255, 215, 0));
+        wasd1DescLabel2 = new SpriteFont("Interact:     SPACE", 270, 180, "Comic Sans", 20, new Color( 255, 215, 0));
         wasd1DescLabel2.setOutlineColor(Color.black);
         wasd1DescLabel2.setOutlineThickness(3);
 
@@ -97,7 +97,7 @@ public class OptionsScreen extends Screen {
         wasd2DescLabel1.setOutlineColor(Color.black);
         wasd2DescLabel1.setOutlineThickness(3);
 
-        wasd2DescLabel2 = new SpriteFont("Interact:     SPACE", 270, 180, "Comic Sans", 20, new Color( 255, 215, 0));
+        wasd2DescLabel2 = new SpriteFont("Interact:     'F'", 270, 180, "Comic Sans", 20, new Color( 255, 215, 0));
         wasd2DescLabel2.setOutlineColor(Color.black);
         wasd2DescLabel2.setOutlineThickness(3);
 

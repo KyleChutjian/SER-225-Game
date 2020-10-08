@@ -5,6 +5,7 @@ import Builders.MapTileBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.ImageEffect;
+import GameObject.Rectangle;
 import Level.TileType;
 import Level.Tileset;
 
@@ -191,9 +192,10 @@ public class CommonTileset extends Tileset {
         // top water
         Frame topWaterFrame = new FrameBuilder(getSubImage(3, 0), 0)
                 .withScale(tileScale)
+                .withBounds(new Rectangle(0, 8, 16, 8))
                 .build();
 
-        MapTileBuilder topWaterTile = new MapTileBuilder(topWaterFrame);
+        MapTileBuilder topWaterTile = new MapTileBuilder(topWaterFrame).withTileType(TileType.WATER);
 
         mapTiles.add(topWaterTile);
 
@@ -202,7 +204,7 @@ public class CommonTileset extends Tileset {
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder waterTile = new MapTileBuilder(waterFrame);
+        MapTileBuilder waterTile = new MapTileBuilder(waterFrame).withTileType(TileType.WATER);
 
         mapTiles.add(waterTile);
 
