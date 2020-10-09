@@ -481,9 +481,9 @@ public abstract class Map {
 			backgroundControl = (FloatControl) audioList.get(0).getControl(FloatControl.Type.MASTER_GAIN);
 			winningControl = (FloatControl) audioList.get(1).getControl(FloatControl.Type.MASTER_GAIN);
 			losingControl = (FloatControl) audioList.get(2).getControl(FloatControl.Type.MASTER_GAIN);
-			setBackgroundVolume(-10);
+			setBackgroundVolume(-20);
 			setWinningVolume(6);
-			setLosingVolume(-20);
+			setLosingVolume(-10);
 
 
 

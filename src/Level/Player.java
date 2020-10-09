@@ -85,11 +85,13 @@ public abstract class Player extends GameObject {
 
         // if player has beaten level
         else if (levelState == LevelState.LEVEL_COMPLETED) {
+            Map.audioList2.get(1).start();
             updateLevelCompleted();
         }
 
         // if player has lost level
         else if (levelState == LevelState.PLAYER_DEAD) {
+            Map.audioList2.get(2).start();
             updatePlayerDead();
         }
     }
