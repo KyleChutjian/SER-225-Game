@@ -167,9 +167,7 @@ public class OptionsScreen extends Screen {
         returnOptionsLabel = new SpriteFont("Press the INTERACT key to select a preset", 40, 320, "Comic Sans", 22, new Color(49, 207, 240));
         returnOptionsLabel.setOutlineColor(Color.black);
         returnOptionsLabel.setOutlineThickness(3);
-        returnOptionsLabel2 = new SpriteFont("A game restart is required when selecting presets", 40, 342, "Comic Sans", 20, new Color(255, 215, 0));
-        returnOptionsLabel2.setOutlineColor(Color.black);
-        returnOptionsLabel2.setOutlineThickness(3);
+
 
         keyLocker.lockKey(Key.currentINTERACT);
         keyTimer.setWaitTime(200);
@@ -423,7 +421,6 @@ public class OptionsScreen extends Screen {
         	numpadDescLabel2.draw(graphicsHandler);
         	numpadDescLabel3.draw(graphicsHandler);
         returnOptionsLabel.draw(graphicsHandler);
-        returnOptionsLabel2.draw(graphicsHandler);
 
         	//yellow box creation and location set based on active control preset
         File controlsFile = new File("SavedData/ControlPreferences.txt");
