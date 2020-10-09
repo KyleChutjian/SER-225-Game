@@ -363,33 +363,34 @@ public class OptionsScreen extends Screen {
         			//set control preset to WASD preset 1
         			fileWriter.write("Active Preset: 1");
         			fileWriter.close();
-        			System.exit(1);
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
         			screenCoordinator.setGameState(GameState.MENU);
         		} else if (currentMenuItemHovered == 1) {
         			//set control preset to WASD preset 2
         			fileWriter.write("Active Preset: 2");
         			fileWriter.close();
-        			System.exit(1);
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
         			screenCoordinator.setGameState(GameState.MENU);
         		} else if (currentMenuItemHovered == 2) {
         			//set control preset to Arrows preset 1
         			fileWriter.write("Active Preset: 3");
         			fileWriter.close();
-        			System.exit(1);
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
         			screenCoordinator.setGameState(GameState.MENU);
         		} else if (currentMenuItemHovered == 3) {
         			//set control preset to Arrows preset 2
         			fileWriter.write("Active Preset: 4");
         			fileWriter.close();
-        			System.exit(1);
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
         			screenCoordinator.setGameState(GameState.MENU);
         		} else if (currentMenuItemHovered == 4) {
         			//set control preset to NUMPAD preset
         			fileWriter.write("Active Preset: 5");
         			fileWriter.close();
-        			System.exit(1);
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
         			screenCoordinator.setGameState(GameState.MENU);
         		}
+
         	} catch (IOException e) {
         		System.out.println("Error");
         	}

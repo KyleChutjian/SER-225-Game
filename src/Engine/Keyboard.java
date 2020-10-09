@@ -21,7 +21,7 @@ public class Keyboard {
 	private static final HashMap<Integer, Boolean> keyUp = new HashMap<>();
 
 	// maps a Key enum type to its key code
-	private static final EnumMap<Key, Integer> keyMap = buildKeyMap();
+	public static EnumMap<Key, Integer> keyMap = buildKeyMap();
 
 	private static final KeyListener keyListener = new KeyListener() {
         @Override
@@ -83,7 +83,7 @@ public class Keyboard {
 
     // maps a Key enum type to its keycode
 	// Java keycodes were found here: https://stackoverflow.com/a/31637206
-    private static EnumMap<Key, Integer> buildKeyMap() {
+    public static EnumMap<Key, Integer> buildKeyMap() {
     	return new EnumMap<Key, Integer>(Key.class)
 			{{
 				 put(Key.UP, 38);
@@ -143,6 +143,7 @@ public class Keyboard {
 				 try {
 					 fileInput = new Scanner(controlsFile);
 					 String activePreset = fileInput.nextLine();
+
 					 	//changes controls if preset 1 is selected
 					 if (activePreset.equals("Active Preset: 1")) {
 						 put(Key.currentUP, 87);

@@ -49,17 +49,17 @@ public class PauseLevelScreen extends Screen{
 	        
 	        keyTimer.setWaitTime(200);
 	        menuItemSelected = -1;
-	        keyLocker.lockKey(Key.SPACE);
+	        keyLocker.lockKey(Key.currentINTERACT);
 	}
 	
 	@Override
 	public void update() {
 		// Pause menu logic
 		  // if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
-        if (Keyboard.isKeyDown(Key.DOWN) && keyTimer.isTimeUp()) {
+        if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
             keyTimer.reset();
             currentMenuItemHovered++;
-        } else if (Keyboard.isKeyDown(Key.UP) && keyTimer.isTimeUp()) {
+        } else if (Keyboard.isKeyDown(Key.currentUP) && keyTimer.isTimeUp()) {
             keyTimer.reset();
             currentMenuItemHovered--;
         }
@@ -86,10 +86,10 @@ public class PauseLevelScreen extends Screen{
             pointerLocationY = 230;
         } 
         
-        if (Keyboard.isKeyUp(Key.SPACE)) {
-            keyLocker.unlockKey(Key.SPACE);
+        if (Keyboard.isKeyUp(Key.currentINTERACT)) {
+            keyLocker.unlockKey(Key.currentINTERACT);
         }
-        if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
+        if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
                 playLevelScreen.initialize();
