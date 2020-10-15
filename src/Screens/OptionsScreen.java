@@ -179,9 +179,11 @@ public class OptionsScreen extends Screen {
     		//sets currentMenuItemHovered
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
     		keyTimer.reset();
+            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
     		currentMenuItemHovered++;
     	} else if (Keyboard.isKeyDown(Key.currentUP) && keyTimer.isTimeUp()) {
     		keyTimer.reset();
+            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
     		currentMenuItemHovered--;
     	}
 
@@ -354,7 +356,7 @@ public class OptionsScreen extends Screen {
 
         	// applied selected preset and returns to main menu
         if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
-
+            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(2));
         	try {
         		FileWriter fileWriter = new FileWriter("SavedData/ControlPreferences.txt");
         		if(currentMenuItemHovered == 0) {

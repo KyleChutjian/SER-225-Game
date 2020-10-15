@@ -7,6 +7,7 @@ import GameObject.GameObject;
 import GameObject.SpriteSheet;
 import Utils.AirGroundState;
 import Utils.Direction;
+
 import java.util.ArrayList;
 
 public abstract class Player extends GameObject {
@@ -48,6 +49,7 @@ public abstract class Player extends GameObject {
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
+        Map.loadAudio();
         facingDirection = Direction.RIGHT;
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
@@ -62,7 +64,7 @@ public abstract class Player extends GameObject {
 
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
-            Map.startPlaying(Map.getAudioList().get(0));
+            Map.startPlayingLoop(Map.getAudioList().get(0));
             applyGravity();
 
             // update player's state and current actions, which includes things like determining how much it should move each frame and if its walking or jumping
@@ -193,7 +195,7 @@ public abstract class Player extends GameObject {
     protected void playerJumping() {
         // if last frame player was on ground and this frame player is still on ground, the jump needs to be setup
         if (previousAirGroundState == AirGroundState.GROUND && airGroundState == AirGroundState.GROUND) {
-
+            Map.startPlayingOnce(Map.getAudioList().get(3));
             // sets animation to a JUMP animation based on which way player is facing
             currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
 
@@ -312,6 +314,7 @@ public abstract class Player extends GameObject {
             moveYHandleCollision(moveAmountY);
             Map.getAudioList().get(0).stop();
             Map.getAudioList().get(1).start();
+
         }
         // move player to the right until it walks off screen
         else if (map.getCamera().containsDraw(this)) {

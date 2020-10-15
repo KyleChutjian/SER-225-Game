@@ -60,13 +60,15 @@ public class MenuScreen extends Screen {
     public void update() {
         	// update background map (to play tile animations)
         background.update(null);
-
+        Map.restartLoop(screenCoordinator.getMenuAudio().get(0));
         	// if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
             keyTimer.reset();
+            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
             currentMenuItemHovered++;
         } else if (Keyboard.isKeyDown(Key.currentUP) && keyTimer.isTimeUp()) {
             keyTimer.reset();
+            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
             currentMenuItemHovered--;
         }
 
@@ -118,6 +120,7 @@ public class MenuScreen extends Screen {
         }
         if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
             menuItemSelected = currentMenuItemHovered;
+            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
             if (menuItemSelected == 0) {
                 screenCoordinator.setGameState(GameState.LEVEL);
             } else if (menuItemSelected == 1) {

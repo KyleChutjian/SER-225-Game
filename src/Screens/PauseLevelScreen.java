@@ -12,6 +12,7 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import SpriteFont.SpriteFont;
 import Utils.Stopwatch;
+import Level.Map;
 
 public class PauseLevelScreen extends Screen{
 	
@@ -58,9 +59,11 @@ public class PauseLevelScreen extends Screen{
 		  // if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
             keyTimer.reset();
+			Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
             currentMenuItemHovered++;
         } else if (Keyboard.isKeyDown(Key.currentUP) && keyTimer.isTimeUp()) {
             keyTimer.reset();
+			Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
             currentMenuItemHovered--;
         }
 
@@ -90,7 +93,8 @@ public class PauseLevelScreen extends Screen{
             keyLocker.unlockKey(Key.currentINTERACT);
         }
         if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
-            menuItemSelected = currentMenuItemHovered;
+			Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+        	menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
                 playLevelScreen.initialize();
             } else if (menuItemSelected == 1) {

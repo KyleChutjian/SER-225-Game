@@ -37,6 +37,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
+        screenCoordinator.getMenuAudio().get(0).stop();
         this.map = new TestMap();
         map.reset();
 
@@ -49,7 +50,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.keyLocker = new KeyLocker();
-        audioList = map.loadAudio();
+
     }
 
     public void update() {
@@ -63,8 +64,11 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
  					keyLocker.lockKey(Key.P);
  					
  					if (isGamePaused) {
+                        Map.startPlayingOnce(Map.getAudioList().get(4));
 						pauseLevelScreen.initialize();
-					}
+					} else {
+                        Map.startPlayingOnce(Map.getAudioList().get(4));
+                    }
  				}
             	 
             	 if (Keyboard.isKeyUp(Key.P)) {
@@ -85,19 +89,19 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 levelClearedScreen.initialize();
                 screenTimer.setWaitTime(2500);
                 playLevelScreenState = PlayLevelScreenState.LEVEL_WIN_MESSAGE;
-                audioList.get(0).stop();
+                Map.getAudioList().get(0).stop();
                 break;
             // if level cleared screen is up and the timer is up for how long it should stay out, go back to main menu
             case LEVEL_WIN_MESSAGE:
                 if (screenTimer.isTimeUp()) {
                     levelClearedScreen = null;
-                    audioList.get(0).stop();
+                    Map.getAudioList().get(0).stop();
                     goBackToMenu();
                 }
                 break;
             // if player died in level, bring up level lost screen
             case PLAYER_DEAD:
-                audioList.get(0).stop();
+                Map.getAudioList().get(0).stop();
                 levelLoseScreen = new LevelLoseScreen(this);
                 levelLoseScreen.initialize();
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE_MESSAGE;
