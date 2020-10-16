@@ -2,6 +2,7 @@ package Engine;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.sound.sampled.*;
 
 
@@ -67,9 +68,41 @@ public class Audio {
             setVolume(2, -10);
             setVolume(3, -10);
             setVolume(4, -10);
-            setVolume(5, -10);
+            setVolume(5, -40);
             setVolume(6, -10);
             setVolume(7, -10);
+
+            File audioFile = new File("SavedData/AudioPreferences.txt");
+            Scanner audioInput = null;
+            audioInput = new Scanner(audioFile);
+            int musicPreference = audioInput.nextInt();
+            int effectPreference = audioInput.nextInt();
+
+            if (musicPreference == 0) {
+                setMusicVolume(-80);
+            } else if (musicPreference == 1) {
+                setMusicVolume(-30);
+            } else if (musicPreference == 2) {
+                setMusicVolume(-15);
+            } else if (musicPreference == 3) {
+                setMusicVolume(0);
+            } else if (musicPreference == 4) {
+                setMusicVolume(6);
+            }
+
+            if (effectPreference == 0) {
+                setEffectVolume(-80);
+            } else if (effectPreference == 1) {
+                setEffectVolume(-30);
+            } else if (effectPreference == 2) {
+                setEffectVolume(-15);
+            } else if (effectPreference == 3) {
+                setEffectVolume(0);
+            } else if (effectPreference == 4) {
+                setEffectVolume(6);
+            }
+
+
 
             return audioList;
 
@@ -116,6 +149,36 @@ public class Audio {
         FloatControl floatControl = (FloatControl) audioList.get(index).getControl(FloatControl.Type.MASTER_GAIN);
         floatControl.setValue(volume);
     }
+
+    public void setMusicVolume(int volume) {
+        FloatControl menu = (FloatControl) audioList.get(5).getControl(FloatControl.Type.MASTER_GAIN);
+        menu.setValue(volume);
+        FloatControl game = (FloatControl) audioList.get(0).getControl(FloatControl.Type.MASTER_GAIN);
+        game.setValue(volume);
+    }
+
+    public void setEffectVolume(int volume) {
+        FloatControl winning = (FloatControl) audioList.get(1).getControl(FloatControl.Type.MASTER_GAIN);
+        winning.setValue(volume);
+
+        FloatControl losing = (FloatControl) audioList.get(2).getControl(FloatControl.Type.MASTER_GAIN);
+        losing.setValue(volume);
+
+        FloatControl jumping = (FloatControl) audioList.get(3).getControl(FloatControl.Type.MASTER_GAIN);
+        jumping.setValue(volume);
+
+        FloatControl pause = (FloatControl) audioList.get(4).getControl(FloatControl.Type.MASTER_GAIN);
+        pause.setValue(volume);
+
+        FloatControl forward = (FloatControl) audioList.get(6).getControl(FloatControl.Type.MASTER_GAIN);
+        forward.setValue(volume);
+
+        FloatControl backward = (FloatControl) audioList.get(7).getControl(FloatControl.Type.MASTER_GAIN);
+        backward.setValue(volume);
+
+    }
+
+
 
     public void setPosition(int index, int position) {
         audioList.get(index).setFramePosition(position);
