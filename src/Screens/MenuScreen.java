@@ -7,7 +7,6 @@ import Level.Map;
 import Maps.TitleScreenMap;
 import SpriteFont.SpriteFont;
 import Utils.Stopwatch;
-
 import java.awt.*;
 
 // This is the class for the main menu screen
