@@ -123,7 +123,7 @@ public class MenuScreen extends Screen {
             menuItemSelected = currentMenuItemHovered;
             audio.startPlayingOnce(6);
             if (menuItemSelected == 0) {
-                screenCoordinator.setGameState(GameState.LEVEL);
+                screenCoordinator.setGameState(GameState.LEVELSELECT);
             } else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.INSTRUCTIONS);
             } else if (menuItemSelected == 2) {

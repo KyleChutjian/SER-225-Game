@@ -12,7 +12,6 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.awt.*;
 
 // This class is for the credits screen
@@ -166,7 +165,7 @@ public class OptionsScreen extends Screen {
 
         ///////////////////////////////////////////////////////////////////
         	//Return to Main Menu Text
-        returnOptionsLabel = new SpriteFont("Press the INTERACT key to select a preset", 40, 320, "Comic Sans", 22, new Color(49, 207, 240));
+        returnOptionsLabel = new SpriteFont("Press the INTERACT key to select a preset", 40, 320, "Comic Sans", 22, new Color(255, 215, 0));
         returnOptionsLabel.setOutlineColor(Color.black);
         returnOptionsLabel.setOutlineThickness(3);
 

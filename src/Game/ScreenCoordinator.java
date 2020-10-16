@@ -17,6 +17,7 @@ import Screens.CreditsScreen;
 import Screens.InstructionsScreen;
 import Screens.OptionsScreen;
 import Screens.MenuScreen;
+import Screens.LevelSelectScreen;
 import Screens.PlayLevelScreen;
 
 /*
@@ -55,6 +56,9 @@ public class ScreenCoordinator extends Screen {
 				switch(gameState) {
 					case MENU:
 						currentScreen = new MenuScreen(this);
+						break;
+					case LEVELSELECT:
+						currentScreen = new LevelSelectScreen(this);
 						break;
 					case LEVEL:
 						currentScreen = new PlayLevelScreen(this);
