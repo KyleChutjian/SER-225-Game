@@ -32,6 +32,7 @@ public class MenuScreen extends Screen {
     @Override
     public void initialize() {
         audio = GamePanel.getAudio();
+        audio.setPosition(5, 0);
     		//"Play Game" main menu text
         playGame = new SpriteFont("PLAY GAME", 200, 150, "Comic Sans", 30, new Color(49, 207, 240));
         playGame.setOutlineColor(Color.black);
