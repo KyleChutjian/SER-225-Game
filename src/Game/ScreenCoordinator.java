@@ -1,10 +1,21 @@
 package Game;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Level.Map;
 import Screens.CreditsScreen;
 import Screens.InstructionsScreen;
+import Screens.OptionsScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 
@@ -48,8 +59,11 @@ public class ScreenCoordinator extends Screen {
 					case LEVEL:
 						currentScreen = new PlayLevelScreen(this);
 						break;
-					case INSTRUCTIONS :
+					case INSTRUCTIONS:
 						currentScreen = new InstructionsScreen(this);
+						break;
+					case OPTIONS:
+						currentScreen = new OptionsScreen(this);
 						break;
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);

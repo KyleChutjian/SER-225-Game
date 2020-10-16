@@ -1,7 +1,6 @@
 package Screens;
 
-import Engine.GraphicsHandler;
-import Engine.Screen;
+import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
@@ -16,13 +15,17 @@ import java.util.ArrayList;
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen implements PlayerListener {
     protected ScreenCoordinator screenCoordinator;
+    protected Audio audio = null;
     protected Map map;
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected Stopwatch screenTimer = new Stopwatch();
     protected LevelClearedScreen levelClearedScreen;
     protected LevelLoseScreen levelLoseScreen;
-    protected ArrayList<Clip> audioList;
+    protected boolean isGamePaused;
+    protected PauseLevelScreen pauseLevelScreen;
+    protected KeyLocker keyLocker;
+
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -30,16 +33,22 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
+        audio = GamePanel.getAudio();
+        audio.setPosition(0, 0);
+        audio.stopPlaying(5);
         this.map = new TestMap();
         map.reset();
 
         // setup player
+        this.isGamePaused = false;
+        this.pauseLevelScreen = new PauseLevelScreen(screenCoordinator, this);
         this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.player.setMap(map);
         this.player.addListener(this);
         this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
-        audioList = map.loadAudio();
+        this.keyLocker = new KeyLocker();
+
     }
 
     public void update() {
@@ -47,35 +56,56 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
-                player.update();
-                map.update(player);
-                break;
+            	 if (Keyboard.isKeyDown(Key.P) && !keyLocker.isKeyLocked(Key.P)) {
+                     audio.stopPlaying(0);
+ 					isGamePaused = !isGamePaused;
+ 					keyLocker.lockKey(Key.P);
+ 					
+ 					if (isGamePaused) {
+                        audio.startPlayingOnce(4);
+						pauseLevelScreen.initialize();
+					} else {
+                        audio.startPlayingOnce(4);
+                    }
+ 				}
+            	 
+            	 if (Keyboard.isKeyUp(Key.P)) {
+            		 keyLocker.unlockKey(Key.P);
+				}
+            	 
+                 if (isGamePaused) {
+ 					pauseLevelScreen.update();
+ 				}
+                 else {
+ 					player.update();
+ 					map.update(player);
+ 				}
+                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 levelClearedScreen = new LevelClearedScreen();
                 levelClearedScreen.initialize();
                 screenTimer.setWaitTime(2500);
                 playLevelScreenState = PlayLevelScreenState.LEVEL_WIN_MESSAGE;
-                audioList.get(0).stop();
+                audio.stopPlaying(0);
                 break;
             // if level cleared screen is up and the timer is up for how long it should stay out, go back to main menu
             case LEVEL_WIN_MESSAGE:
                 if (screenTimer.isTimeUp()) {
                     levelClearedScreen = null;
-                    audioList.get(0).stop();
+                    audio.stopPlaying(0);
                     goBackToMenu();
                 }
                 break;
             // if player died in level, bring up level lost screen
             case PLAYER_DEAD:
-                audioList.get(0).stop();
+                audio.stopPlaying(0);
                 levelLoseScreen = new LevelLoseScreen(this);
                 levelLoseScreen.initialize();
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE_MESSAGE;
                 break;
             // wait on level lose screen to make a decision (either resets level or sends player back to main menu)
             case LEVEL_LOSE_MESSAGE:
-                audioList.get(0).stop();
                 levelLoseScreen.update();
                 break;
         }
@@ -89,6 +119,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
             case PLAYER_DEAD:
                 map.draw(graphicsHandler);
                 player.draw(graphicsHandler);
+                if (isGamePaused) {
+    				pauseLevelScreen.draw(graphicsHandler);
+    			} 
                 break;
             case LEVEL_WIN_MESSAGE:
                 levelClearedScreen.draw(graphicsHandler);

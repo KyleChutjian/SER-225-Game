@@ -4,6 +4,7 @@ import GameObject.Rectangle;
 import Level.Map;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
+import Engine.Audio;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class GamePanel extends JPanel {
 	// loads Screens on to the JPanel
 	// each screen has its own update and draw methods defined to handle a "section" of the game.
 	private ScreenManager screenManager;
+	private static Audio audio = new Audio();
 
 	// used to create the game loop and cycle between update and draw calls
 	private Timer timer;
@@ -44,10 +46,6 @@ public class GamePanel extends JPanel {
 		graphicsHandler = new GraphicsHandler();
 
 		screenManager = new ScreenManager();
-		
-		pauseLabel = new SpriteFont("PAUSE", 365, 280, "Comic Sans", 24, Color.white);
-		pauseLabel.setOutlineColor(Color.black);
-		pauseLabel.setOutlineThickness(2.0f);
 
 		// Every timer "tick" will call the update method as well as tell the JPanel to repaint
 		// Remember that repaint "schedules" a paint rather than carries it out immediately
@@ -79,18 +77,7 @@ public class GamePanel extends JPanel {
 	}
 
 	public void update() {
-		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
-			isGamePaused = !isGamePaused;
-			keyLocker.lockKey(pauseKey);
-		}
-		
-		if (Keyboard.isKeyUp(pauseKey)) {
-			keyLocker.unlockKey(pauseKey);
-		}
-
-		if (!isGamePaused) {
 			screenManager.update();
-		}
 	}
 
 	public void draw() {
@@ -98,7 +85,7 @@ public class GamePanel extends JPanel {
 
 		// if game is paused, draw pause gfx over Screen gfx
 		if (isGamePaused) {
-			Map.getAudioList().get(0).stop();
+			audio.stopPlaying(0);
 			pauseLabel.draw(graphicsHandler);
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
 		}
@@ -113,5 +100,9 @@ public class GamePanel extends JPanel {
 		if (doPaint) {
 			draw();
 		}
+	}
+
+	public static Audio getAudio() {
+		return audio;
 	}
 }

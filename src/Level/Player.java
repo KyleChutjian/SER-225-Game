@@ -3,13 +3,17 @@ package Level;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
+import Engine.GamePanel;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
 import Utils.AirGroundState;
 import Utils.Direction;
+import Engine.Audio;
+
 import java.util.ArrayList;
 
 public abstract class Player extends GameObject {
+
     // values that affect player movement
     // these should be set in a subclass
     protected float walkSpeed = 0;
@@ -37,16 +41,19 @@ public abstract class Player extends GameObject {
 
     // define keys
     protected KeyLocker keyLocker = new KeyLocker();
-    protected Key JUMP_KEY = Key.UP;
-    protected Key MOVE_LEFT_KEY = Key.LEFT;
-    protected Key MOVE_RIGHT_KEY = Key.RIGHT;
-    protected Key CROUCH_KEY = Key.DOWN;
+    protected Key JUMP_KEY = Key.currentUP;
+    protected Key MOVE_LEFT_KEY = Key.currentLEFT;
+    protected Key MOVE_RIGHT_KEY = Key.currentRIGHT;
+    protected Key CROUCH_KEY = Key.currentDOWN;
 
     // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isInvincible = false;
 
+    protected Audio audio = null;
+
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
+        audio = GamePanel.getAudio();
         facingDirection = Direction.RIGHT;
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
@@ -61,7 +68,7 @@ public abstract class Player extends GameObject {
 
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
-            Map.startPlaying(Map.getAudioList().get(0));
+            audio.startPlayingLoop(0);
             applyGravity();
 
             // update player's state and current actions, which includes things like determining how much it should move each frame and if its walking or jumping
@@ -84,11 +91,13 @@ public abstract class Player extends GameObject {
 
         // if player has beaten level
         else if (levelState == LevelState.LEVEL_COMPLETED) {
+            audio.startPlayingOnce(1);
             updateLevelCompleted();
         }
 
         // if player has lost level
         else if (levelState == LevelState.PLAYER_DEAD) {
+            audio.startPlayingOnce(2);
             updatePlayerDead();
         }
     }
@@ -190,7 +199,7 @@ public abstract class Player extends GameObject {
     protected void playerJumping() {
         // if last frame player was on ground and this frame player is still on ground, the jump needs to be setup
         if (previousAirGroundState == AirGroundState.GROUND && airGroundState == AirGroundState.GROUND) {
-
+            audio.startPlayingOnce(3);
             // sets animation to a JUMP animation based on which way player is facing
             currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
 
@@ -307,8 +316,9 @@ public abstract class Player extends GameObject {
             increaseMomentum();
             super.update();
             moveYHandleCollision(moveAmountY);
-            Map.getAudioList().get(0).stop();
-            Map.getAudioList().get(1).start();
+            audio.stopPlaying(0);
+            audio.startPlayingOnce(1);
+
         }
         // move player to the right until it walks off screen
         else if (map.getCamera().containsDraw(this)) {
@@ -326,7 +336,7 @@ public abstract class Player extends GameObject {
     // if player has died, this will be the update cycle
     public void updatePlayerDead() {
         // change player animation to DEATH
-        Map.getAudioList().get(0).stop();
+        audio.stopPlaying(0);
         //  Insert death sound here
         if (!currentAnimationName.startsWith("DEATH")) {
             if (facingDirection == Direction.RIGHT) {
@@ -380,4 +390,14 @@ public abstract class Player extends GameObject {
     public void addListener(PlayerListener listener) {
         listeners.add(listener);
     }
+
+	public void drownPlayer() {
+		if (!isInvincible) {
+			// if map entity is an enemy, kill player on touch
+			levelState = LevelState.PLAYER_DEAD;
+		} else {
+			return;
+		}
+	}
+
 }
