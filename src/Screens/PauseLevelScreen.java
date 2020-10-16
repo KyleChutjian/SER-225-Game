@@ -2,17 +2,11 @@ package Screens;
 
 import java.awt.Color;
 
-import Engine.GraphicsHandler;
-import Engine.Key;
-import Engine.KeyLocker;
-import Engine.Keyboard;
-import Engine.Screen;
-import Engine.ScreenManager;
+import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import SpriteFont.SpriteFont;
 import Utils.Stopwatch;
-import Level.Map;
 
 public class PauseLevelScreen extends Screen{
 	
@@ -26,6 +20,7 @@ public class PauseLevelScreen extends Screen{
 	protected int menuItemSelected = -1;
 	protected int pointerLocationX, pointerLocationY;
 	protected PlayLevelScreen playLevelScreen;
+	protected Audio audio = null;
 	
 	 public PauseLevelScreen(ScreenCoordinator screenCoordinator, PlayLevelScreen playLevelScreen) {
 	        this.screenCoordinator = screenCoordinator;
@@ -35,6 +30,8 @@ public class PauseLevelScreen extends Screen{
 	@Override
 	public void initialize() {
 		// TODO Auto-generated method stub
+			audio = GamePanel.getAudio();
+
 			pauseLevelTitle = new SpriteFont("PAUSE MENU", 200, 75, "Comic Sans", 30, Color.BLACK);
 			pauseLevelTitle.setOutlineColor(Color.black);
 			pauseLevelTitle.setOutlineThickness(3);
@@ -59,11 +56,11 @@ public class PauseLevelScreen extends Screen{
 		  // if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
             keyTimer.reset();
-			Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+			audio.startPlayingOnce(6);
             currentMenuItemHovered++;
         } else if (Keyboard.isKeyDown(Key.currentUP) && keyTimer.isTimeUp()) {
             keyTimer.reset();
-			Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+			audio.startPlayingOnce(6);
             currentMenuItemHovered--;
         }
 
@@ -93,7 +90,7 @@ public class PauseLevelScreen extends Screen{
             keyLocker.unlockKey(Key.currentINTERACT);
         }
         if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
-			Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+			audio.startPlayingOnce(6);
         	menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
                 playLevelScreen.initialize();

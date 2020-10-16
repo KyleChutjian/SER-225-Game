@@ -4,13 +4,12 @@ import GameObject.Rectangle;
 import Level.Map;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
+import Engine.Audio;
 
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /*
  * This is where the game loop starts
@@ -20,6 +19,7 @@ public class GamePanel extends JPanel {
 	// loads Screens on to the JPanel
 	// each screen has its own update and draw methods defined to handle a "section" of the game.
 	private ScreenManager screenManager;
+	private static Audio audio = new Audio();
 
 	// used to create the game loop and cycle between update and draw calls
 	private Timer timer;
@@ -85,7 +85,7 @@ public class GamePanel extends JPanel {
 
 		// if game is paused, draw pause gfx over Screen gfx
 		if (isGamePaused) {
-			Map.getAudioList().get(0).stop();
+			audio.stopPlaying(0);
 			pauseLabel.draw(graphicsHandler);
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
 		}
@@ -100,5 +100,9 @@ public class GamePanel extends JPanel {
 		if (doPaint) {
 			draw();
 		}
+	}
+
+	public static Audio getAudio() {
+		return audio;
 	}
 }

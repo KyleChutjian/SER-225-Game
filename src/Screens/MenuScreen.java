@@ -13,6 +13,7 @@ import java.awt.*;
 // This is the class for the main menu screen
 public class MenuScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
+    protected Audio audio = null;
     protected int currentMenuItemHovered = 0; // current menu item being "hovered" over
     protected int menuItemSelected = -1;
     protected SpriteFont playGame;
@@ -30,6 +31,7 @@ public class MenuScreen extends Screen {
 
     @Override
     public void initialize() {
+        audio = GamePanel.getAudio();
     		//"Play Game" main menu text
         playGame = new SpriteFont("PLAY GAME", 200, 150, "Comic Sans", 30, new Color(49, 207, 240));
         playGame.setOutlineColor(Color.black);
@@ -60,15 +62,15 @@ public class MenuScreen extends Screen {
     public void update() {
         	// update background map (to play tile animations)
         background.update(null);
-        Map.restartLoop(screenCoordinator.getMenuAudio().get(0));
+        audio.restartLoop(5);
         	// if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
             keyTimer.reset();
-            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+            audio.startPlayingOnce(6);
             currentMenuItemHovered++;
         } else if (Keyboard.isKeyDown(Key.currentUP) && keyTimer.isTimeUp()) {
             keyTimer.reset();
-            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+            audio.startPlayingOnce(6);
             currentMenuItemHovered--;
         }
 
@@ -120,7 +122,7 @@ public class MenuScreen extends Screen {
         }
         if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
             menuItemSelected = currentMenuItemHovered;
-            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+            audio.startPlayingOnce(6);
             if (menuItemSelected == 0) {
                 screenCoordinator.setGameState(GameState.LEVEL);
             } else if (menuItemSelected == 1) {

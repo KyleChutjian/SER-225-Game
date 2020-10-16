@@ -3,10 +3,12 @@ package Level;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
+import Engine.GamePanel;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
 import Utils.AirGroundState;
 import Utils.Direction;
+import Engine.Audio;
 
 import java.util.ArrayList;
 
@@ -47,9 +49,11 @@ public abstract class Player extends GameObject {
     // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isInvincible = false;
 
+    protected Audio audio = null;
+
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
-        Map.loadAudio();
+        audio = GamePanel.getAudio();
         facingDirection = Direction.RIGHT;
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
@@ -64,7 +68,7 @@ public abstract class Player extends GameObject {
 
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
-            Map.startPlayingLoop(Map.getAudioList().get(0));
+            audio.startPlayingLoop(0);
             applyGravity();
 
             // update player's state and current actions, which includes things like determining how much it should move each frame and if its walking or jumping
@@ -87,13 +91,13 @@ public abstract class Player extends GameObject {
 
         // if player has beaten level
         else if (levelState == LevelState.LEVEL_COMPLETED) {
-            Map.audioList2.get(1).start();
+            audio.startPlayingOnce(1);
             updateLevelCompleted();
         }
 
         // if player has lost level
         else if (levelState == LevelState.PLAYER_DEAD) {
-            Map.audioList2.get(2).start();
+            audio.startPlayingOnce(2);
             updatePlayerDead();
         }
     }
@@ -195,7 +199,7 @@ public abstract class Player extends GameObject {
     protected void playerJumping() {
         // if last frame player was on ground and this frame player is still on ground, the jump needs to be setup
         if (previousAirGroundState == AirGroundState.GROUND && airGroundState == AirGroundState.GROUND) {
-            Map.startPlayingOnce(Map.getAudioList().get(3));
+            audio.startPlayingOnce(3);
             // sets animation to a JUMP animation based on which way player is facing
             currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
 
@@ -312,8 +316,8 @@ public abstract class Player extends GameObject {
             increaseMomentum();
             super.update();
             moveYHandleCollision(moveAmountY);
-            Map.getAudioList().get(0).stop();
-            Map.getAudioList().get(1).start();
+            audio.stopPlaying(0);
+            audio.startPlayingOnce(1);
 
         }
         // move player to the right until it walks off screen
@@ -332,7 +336,7 @@ public abstract class Player extends GameObject {
     // if player has died, this will be the update cycle
     public void updatePlayerDead() {
         // change player animation to DEATH
-        Map.getAudioList().get(0).stop();
+        audio.stopPlaying(0);
         //  Insert death sound here
         if (!currentAnimationName.startsWith("DEATH")) {
             if (facingDirection == Direction.RIGHT) {

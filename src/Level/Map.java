@@ -1,5 +1,7 @@
 package Level;
 
+import Engine.Audio;
+
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
@@ -67,7 +69,7 @@ public abstract class Map {
 	// For playing Audio
 	protected static AudioInputStream backgroundAudio, winningSoundAudio, gameOverAudio, jumpingAudio, menuButtonAudio, forwardAudio, backwardAudio, menuSelectionAudio, pauseAudio, mainMenuAudio;
 	protected static Clip backgroundClip, winningSoundClip, gameOverClip, jumpingClip, menuButtonClip, forwardClip, backwardClip, menuSelectionClip, pauseClip, mainMenuClip;
-	protected static ArrayList<Clip> audioList2;
+	protected static ArrayList<Clip> audioList;
 
 
 	public Map(String mapFileName, Tileset tileset, Point playerStartTile) {
@@ -425,85 +427,5 @@ public abstract class Map {
 		camera.draw(graphicsHandler);
 	}
 
-	ArrayList<Clip> audioList = new ArrayList();
-
-	public static ArrayList<Clip> loadAudio() {
-		try {
-			backgroundAudio = AudioSystem.getAudioInputStream(new File("Audio/Jumper.wav"));
-			backgroundClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, backgroundAudio.getFormat()));
-			backgroundClip.open(backgroundAudio);
-
-			winningSoundAudio = AudioSystem.getAudioInputStream(new File("Audio/winningSound.wav"));
-			winningSoundClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, winningSoundAudio.getFormat()));
-			winningSoundClip.open(winningSoundAudio);
-
-			gameOverAudio = AudioSystem.getAudioInputStream(new File("Audio/gameOver.wav"));
-			gameOverClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, gameOverAudio.getFormat()));
-			gameOverClip.open(gameOverAudio);
-
-			jumpingAudio = AudioSystem.getAudioInputStream(new File("Audio/JumpingSound.wav"));
-			jumpingClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, jumpingAudio.getFormat()));
-			jumpingClip.open(jumpingAudio);
-
-			pauseAudio = AudioSystem.getAudioInputStream(new File("Audio/Pause.wav"));
-			pauseClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, pauseAudio.getFormat()));
-			pauseClip.open(pauseAudio);
-
-			ArrayList<Clip> audioList = new ArrayList();
-			audioList.add(backgroundClip); //index 0
-			audioList.add(winningSoundClip); // index 1
-			audioList.add(gameOverClip); // index 2
-			audioList.add(jumpingClip); // index 3
-			audioList.add(pauseClip); // index 4
-
-			audioList2 = audioList;
-
-			setVolume(backgroundClip,- 10);
-			setVolume(winningSoundClip, 6);
-			setVolume(gameOverClip, -20);
-			setVolume(jumpingClip, 0);
-			setVolume(pauseClip, 0);
-
-			return audioList;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public static ArrayList<Clip> getAudioList() {
-		return audioList2;
-	}
-
-	public static void startPlayingLoop(Clip clip) {
-		if (clip.getFramePosition() == clip.getFrameLength()) {
-			clip.setFramePosition(0);
-		} else {
-			clip.start();
-		}
-	}
-
-	public static void restartLoop(Clip clip) {
-		if (!clip.isRunning()) {
-			startPlayingOnce(clip);
-		}
-	}
-
-	public static void startPlayingOnce(Clip clip) {
-		clip.stop();
-		clip.setFramePosition(0);
-		clip.start();
-	}
-
-	public static void setVolume(Clip clip, int volume) {
-		FloatControl floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		floatControl.setValue(volume);
-	}
 
 }

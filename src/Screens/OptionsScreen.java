@@ -18,6 +18,7 @@ import java.awt.*;
 // This class is for the credits screen
 public class OptionsScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
+    protected Audio audio = null;
     protected Map background;
     protected KeyLocker keyLocker = new KeyLocker();
     protected int currentMenuItemHovered = 0;
@@ -54,6 +55,7 @@ public class OptionsScreen extends Screen {
 
     @Override
     public void initialize() {
+        audio = GamePanel.getAudio();
     	background = new TitleScreenMap();
         background.setAdjustCamera(false);
 
@@ -179,11 +181,12 @@ public class OptionsScreen extends Screen {
     		//sets currentMenuItemHovered
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
     		keyTimer.reset();
-            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+            audio.startPlayingOnce(6);
+
     		currentMenuItemHovered++;
     	} else if (Keyboard.isKeyDown(Key.currentUP) && keyTimer.isTimeUp()) {
     		keyTimer.reset();
-            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(1));
+            audio.startPlayingOnce(6);
     		currentMenuItemHovered--;
     	}
 
@@ -356,7 +359,7 @@ public class OptionsScreen extends Screen {
 
         	// applied selected preset and returns to main menu
         if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
-            Map.startPlayingOnce(screenCoordinator.getMenuAudio().get(2));
+            audio.startPlayingOnce(7);
         	try {
         		FileWriter fileWriter = new FileWriter("SavedData/ControlPreferences.txt");
         		if(currentMenuItemHovered == 0) {
