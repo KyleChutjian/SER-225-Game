@@ -40,15 +40,7 @@ public class InstructionsScreen extends Screen {
         
         //Controls text
         controlsLabel = new SpriteFont("   CONTROLS", 60, 250, "Comic Sans", 23, Color.gray);
-        controlsExplanationLabel1 = new SpriteFont("Left Arrow & Right Arrow Keys  : Move left and right", 60, 270, "Comic Sans", 18, Color.gray);
-        controlsExplanationLabel2 = new SpriteFont("Up Arrow Key                            : Jump", 60, 290, "Comic Sans", 18, Color.gray);
-        controlsExplanationLabel3 = new SpriteFont("Down Arrow Key                       : Duck", 60, 310, "Comic Sans", 18, Color.gray);
-        controlsExplanationLabel4 = new SpriteFont("SPACE Bar                               : Interact", 60, 330, "Comic Sans", 18, Color.gray);
-        controlsExplanationLabel5 = new SpriteFont("' P '                                            : Pause", 60, 350, "Comic Sans", 18, Color.gray);
-        
-        //Return to Main Menu Text
-        returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 560, "Comic Sans", 30, Color.white);
-        
+
         keyLocker.lockKey(Key.SPACE);
     }
 
