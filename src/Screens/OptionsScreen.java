@@ -18,6 +18,7 @@ import java.awt.*;
 // This class is for the credits screen
 public class OptionsScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
+    protected Audio audio = null;
     protected Map background;
     protected KeyLocker keyLocker = new KeyLocker();
     protected int currentMenuItemHovered = 0;
@@ -54,6 +55,7 @@ public class OptionsScreen extends Screen {
 
     @Override
     public void initialize() {
+        audio = GamePanel.getAudio();
     	background = new TitleScreenMap();
         background.setAdjustCamera(false);
 
@@ -167,9 +169,7 @@ public class OptionsScreen extends Screen {
         returnOptionsLabel = new SpriteFont("Press the INTERACT key to select a preset", 40, 320, "Comic Sans", 22, new Color(49, 207, 240));
         returnOptionsLabel.setOutlineColor(Color.black);
         returnOptionsLabel.setOutlineThickness(3);
-        returnOptionsLabel2 = new SpriteFont("A game restart is required when selecting presets", 40, 342, "Comic Sans", 20, new Color(255, 215, 0));
-        returnOptionsLabel2.setOutlineColor(Color.black);
-        returnOptionsLabel2.setOutlineThickness(3);
+
 
         keyLocker.lockKey(Key.currentINTERACT);
         keyTimer.setWaitTime(200);
@@ -181,9 +181,12 @@ public class OptionsScreen extends Screen {
     		//sets currentMenuItemHovered
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
     		keyTimer.reset();
+            audio.startPlayingOnce(6);
+
     		currentMenuItemHovered++;
     	} else if (Keyboard.isKeyDown(Key.currentUP) && keyTimer.isTimeUp()) {
     		keyTimer.reset();
+            audio.startPlayingOnce(6);
     		currentMenuItemHovered--;
     	}
 
@@ -356,7 +359,7 @@ public class OptionsScreen extends Screen {
 
         	// applied selected preset and returns to main menu
         if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
-
+            audio.startPlayingOnce(7);
         	try {
         		FileWriter fileWriter = new FileWriter("SavedData/ControlPreferences.txt");
         		if(currentMenuItemHovered == 0) {
@@ -423,7 +426,6 @@ public class OptionsScreen extends Screen {
         	numpadDescLabel2.draw(graphicsHandler);
         	numpadDescLabel3.draw(graphicsHandler);
         returnOptionsLabel.draw(graphicsHandler);
-        returnOptionsLabel2.draw(graphicsHandler);
 
         	//yellow box creation and location set based on active control preset
         File controlsFile = new File("SavedData/ControlPreferences.txt");

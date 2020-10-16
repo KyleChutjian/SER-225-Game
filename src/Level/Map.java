@@ -1,5 +1,7 @@
 package Level;
 
+import Engine.Audio;
+
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
@@ -65,20 +67,9 @@ public abstract class Map {
 	protected boolean adjustCamera = true;
 
 	// For playing Audio
-	protected static String backgroundAudioString = "Jumper.wav";
-	protected static String winningSoundString = "winningSound.wav";
-	protected static String gameOverString = "gameOver.wav";
-	protected static File audioFile;
-	protected static File backgroundAudioFile, winningSoundFile, gameOverFile;
-	protected static AudioInputStream audio;
-	protected static AudioFormat format;
-	protected static DataLine.Info info;
-	protected static AudioInputStream backgroundAudio, winningSoundAudio, gameOverAudio;
-	protected static Clip backgroundClip, winningSoundClip, gameOverClip;
-	protected static ArrayList<Clip> audioList2;
-	protected static FloatControl backgroundControl;
-	protected static FloatControl winningControl;
-	protected static FloatControl losingControl;
+	protected static AudioInputStream backgroundAudio, winningSoundAudio, gameOverAudio, jumpingAudio, menuButtonAudio, forwardAudio, backwardAudio, menuSelectionAudio, pauseAudio, mainMenuAudio;
+	protected static Clip backgroundClip, winningSoundClip, gameOverClip, jumpingClip, menuButtonClip, forwardClip, backwardClip, menuSelectionClip, pauseClip, mainMenuClip;
+	protected static ArrayList<Clip> audioList;
 
 
 	public Map(String mapFileName, Tileset tileset, Point playerStartTile) {
@@ -436,104 +427,5 @@ public abstract class Map {
 		camera.draw(graphicsHandler);
 	}
 
-	public static void wait(int seconds) {
-		for (int i = 0; i < seconds; i++) {
-			System.out.println("(" + i + " / " + seconds + ")");
-
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-		}
-	}
-
-	public ArrayList<Clip> loadAudio() {
-		try {
-			backgroundAudioFile = new File(backgroundAudioString);
-			backgroundAudio = AudioSystem.getAudioInputStream(backgroundAudioFile);
-			format = backgroundAudio.getFormat();
-			info = new DataLine.Info(Clip.class, format);
-			backgroundClip = (Clip) AudioSystem.getLine(info);
-			backgroundClip.open(backgroundAudio);
-
-			winningSoundFile = new File(winningSoundString);
-			winningSoundAudio = AudioSystem.getAudioInputStream(winningSoundFile);
-			format = winningSoundAudio.getFormat();
-			info = new DataLine.Info(Clip.class, format);
-			winningSoundClip = (Clip) AudioSystem.getLine(info);
-			winningSoundClip.open(winningSoundAudio);
-
-			gameOverFile = new File (gameOverString);
-			gameOverAudio = AudioSystem.getAudioInputStream(gameOverFile);
-			format = gameOverAudio.getFormat();
-			info = new DataLine.Info(Clip.class, format);
-			gameOverClip = (Clip) AudioSystem.getLine(info);
-			gameOverClip.open(gameOverAudio);
-
-			ArrayList<Clip> audioList = new ArrayList();
-			audioList.add(backgroundClip);
-			audioList.add(winningSoundClip);
-			audioList.add(gameOverClip);
-			audioList2 = audioList;
-
-			backgroundControl = (FloatControl) audioList.get(0).getControl(FloatControl.Type.MASTER_GAIN);
-			winningControl = (FloatControl) audioList.get(1).getControl(FloatControl.Type.MASTER_GAIN);
-			losingControl = (FloatControl) audioList.get(2).getControl(FloatControl.Type.MASTER_GAIN);
-			setBackgroundVolume(-20);
-			setWinningVolume(6);
-			setLosingVolume(-10);
-
-
-
-
-			return audioList;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public static ArrayList<Clip> getAudioList() {
-		return audioList2;
-	}
-
-
-	public static void startPlaying(Clip clip) {
-		if (clip.getFramePosition() == clip.getFrameLength()) {
-			clip.setFramePosition(0);
-		} else {
-			clip.start();
-		}
-	}
-
-	public static void setVolume(int volume) {
-		backgroundControl.setValue(volume);
-		winningControl.setValue(volume);
-		losingControl.setValue(volume);
-	}
-
-	public static void setBackgroundVolume(int volume) {
-		backgroundControl.setValue(volume);
-	}
-
-	public static void setWinningVolume(int volume) {
-		winningControl.setValue(volume);
-	}
-
-	public static void setLosingVolume(int volume) {
-		losingControl.setValue(volume);
-	}
-
-	public static float getBackGroundVolume() {
-		return backgroundControl.getValue();
-	}
 
 }

@@ -12,6 +12,7 @@ import java.awt.*;
 // This class is for the credits screen
 public class CreditsScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
+    protected Audio audio = null;
     protected Map background;
     protected KeyLocker keyLocker = new KeyLocker();
     protected SpriteFont creditsLabel;
@@ -25,6 +26,7 @@ public class CreditsScreen extends Screen {
 
     @Override
     public void initialize() {
+        audio = GamePanel.getAudio();
         // setup graphics on screen (background map, spritefont text)
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
@@ -44,6 +46,7 @@ public class CreditsScreen extends Screen {
 
         // if space is pressed, go back to main menu
         if (!keyLocker.isKeyLocked(Key.currentINTERACT) && Keyboard.isKeyDown(Key.currentINTERACT)) {
+            audio.startPlayingOnce(7);
             screenCoordinator.setGameState(GameState.MENU);
         }
     }
