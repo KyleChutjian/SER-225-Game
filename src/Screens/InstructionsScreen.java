@@ -31,7 +31,7 @@ public class InstructionsScreen extends Screen {
     @Override
     public void initialize() {
         // setup graphics on screen (background map, spritefont text)
-        background = new TitleScreenMap();
+        //background = new TitleScreenMap();
         background.setAdjustCamera(false);
         
         //Goals text
