@@ -26,7 +26,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected boolean isGamePaused;
     protected PauseLevelScreen pauseLevelScreen;
     protected KeyLocker keyLocker;
-    private long startTime;
+    protected long startTime;
+    protected long pauseTime;
+    protected long startPauseTime;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -67,9 +69,12 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
  					if (isGamePaused) {
                         audio.startPlayingOnce(4);
 						pauseLevelScreen.initialize();
-					
+						startPauseTime = System.currentTimeMillis();
+						
 					} else {
                         audio.startPlayingOnce(4);
+                        long timePassedPaused = System.currentTimeMillis() - startPauseTime;
+                        pauseTime += timePassedPaused;
                     }
  				}
             	 
@@ -87,7 +92,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                  break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
-                levelClearedScreen = new LevelClearedScreen(startTime);
+                levelClearedScreen = new LevelClearedScreen(startTime, pauseTime);
                 levelClearedScreen.initialize();
                 screenTimer.setWaitTime(2500);
                 playLevelScreenState = PlayLevelScreenState.LEVEL_WIN_MESSAGE;

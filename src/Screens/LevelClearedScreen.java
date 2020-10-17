@@ -10,11 +10,13 @@ import java.awt.*;
 // This class is for the level cleared screen
 public class LevelClearedScreen extends Screen {
 	protected long startTime;
+	protected long pauseTime;
     protected SpriteFont winMessage;
     protected SpriteFont timeMessage;
     
-    public LevelClearedScreen(long startTime) {
+    public LevelClearedScreen(long startTime, long pauseTime) {
     	this.startTime = startTime;
+    	this.pauseTime = pauseTime;
     }
 
     @Override
@@ -22,8 +24,9 @@ public class LevelClearedScreen extends Screen {
         winMessage = new SpriteFont("Level Cleared", 320, 270, "Comic Sans", 30, Color.white);
         
         long currentTime = System.currentTimeMillis();
-        long timePassed = currentTime - startTime;
+        long timePassed = currentTime - startTime - pauseTime;
         double timePassedSeconds = timePassed/1000.0;
+        
         timeMessage = new SpriteFont("Time Cleared: " + timePassedSeconds + " seconds", 260, 440, "Comic Sans", 30, Color.white);
     }
 
