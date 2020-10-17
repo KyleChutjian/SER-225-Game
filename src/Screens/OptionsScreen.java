@@ -50,7 +50,6 @@ public class OptionsScreen extends Screen {
     	protected SpriteFont numpadDescLabel3;
     protected SpriteFont returnOptionsLabel;
     protected SpriteFont returnOptionsLabel2;
-
     protected SpriteFont audioLabel;
     protected SpriteFont musicLabel;
     protected SpriteFont musicNumber;
@@ -199,7 +198,7 @@ public class OptionsScreen extends Screen {
 
     public void update() {
     	background.update(null);
-
+        audio.startPlayingLoop(5);
     		//sets currentMenuItemHovered
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
     		keyTimer.reset();
@@ -411,42 +410,36 @@ public class OptionsScreen extends Screen {
             } else if (currentMusicItemHovered < 0) {
                 currentMusicItemHovered = 0;
             }
-
                 try {
                     FileWriter audioWriter = new FileWriter("SavedData/AudioPreferences.txt");
                     if (currentMusicItemHovered == 0) {
                         audio.setMusicVolume(-80);
                         audioWriter.write("0");
                         audioWriter.write("\n" + currentEffectItemHovered);
-
                         audioWriter.close();
                         Keyboard.keyMap = Keyboard.buildKeyMap();
                     } else if (currentMusicItemHovered == 1) {
                         audio.setMusicVolume(-30);
                         audioWriter.write("1");
                         audioWriter.write("\n" + currentEffectItemHovered);
-
                         audioWriter.close();
                         Keyboard.keyMap = Keyboard.buildKeyMap();
                     } else if (currentMusicItemHovered == 2) {
                         audio.setMusicVolume(-15);
                         audioWriter.write("2");
                         audioWriter.write("\n" + currentEffectItemHovered);
-
                         audioWriter.close();
                         Keyboard.keyMap = Keyboard.buildKeyMap();
                     } else if (currentMusicItemHovered == 3) {
                         audio.setMusicVolume(0);
                         audioWriter.write("3");
                         audioWriter.write("\n" + currentEffectItemHovered);
-
                         audioWriter.close();
                         Keyboard.keyMap = Keyboard.buildKeyMap();
                     } else if (currentMusicItemHovered == 4) {
                         audio.setMusicVolume(6);
                         audioWriter.write("4");
                         audioWriter.write("\n" + currentEffectItemHovered);
-
                         audioWriter.close();
                         Keyboard.keyMap = Keyboard.buildKeyMap();
                     }
@@ -455,7 +448,6 @@ public class OptionsScreen extends Screen {
                     System.out.println("Error");
                 }
 
-            //displays associated preset
             wasd1DescLabel1.setFontSize(0);
             wasd1DescLabel2.setFontSize(0);
             wasd1DescLabel3.setFontSize(0);
@@ -508,42 +500,32 @@ public class OptionsScreen extends Screen {
                 FileWriter audioWriter = new FileWriter("SavedData/AudioPreferences.txt");
                 if (currentEffectItemHovered == 0) {
                     audio.setEffectVolume(-80);
-                    //set control preset to WASD preset 1
                     audioWriter.write("" + currentMusicItemHovered);
                     audioWriter.write("\n0");
-
                     audioWriter.close();
                     Keyboard.keyMap = Keyboard.buildKeyMap();
                 } else if (currentEffectItemHovered == 1) {
-                    //set control preset to WASD preset 2
                     audio.setEffectVolume(-30);
                     audioWriter.write("" + currentMusicItemHovered);
                     audioWriter.write("\n1");
-
                     audioWriter.close();
                     Keyboard.keyMap = Keyboard.buildKeyMap();
                 } else if (currentEffectItemHovered == 2) {
-                    //set control preset to Arrows preset 1
                     audio.setEffectVolume(-15);
                     audioWriter.write("" + currentMusicItemHovered);
                     audioWriter.write("\n2");
-
                     audioWriter.close();
                     Keyboard.keyMap = Keyboard.buildKeyMap();
                 } else if (currentEffectItemHovered == 3) {
-                    //set control preset to Arrows preset 2
                     audio.setEffectVolume(0);
                     audioWriter.write("" + currentMusicItemHovered);
                     audioWriter.write("\n3");
-
                     audioWriter.close();
                     Keyboard.keyMap = Keyboard.buildKeyMap();
                 } else if (currentEffectItemHovered == 4) {
-                    //set control preset to NUMPAD preset
                     audio.setEffectVolume(6);
                     audioWriter.write("" + currentMusicItemHovered);
                     audioWriter.write("\n4");
-
                     audioWriter.close();
                     Keyboard.keyMap = Keyboard.buildKeyMap();
                 }
@@ -573,7 +555,6 @@ public class OptionsScreen extends Screen {
             numpadDescLabel2.setFontSize(0);
             numpadDescLabel3.setFontSize(0);
         }
-
 
         if (Keyboard.isKeyUp(Key.currentINTERACT)) {
             keyLocker.unlockKey(Key.currentINTERACT);
@@ -621,14 +602,11 @@ public class OptionsScreen extends Screen {
         	}
         }
 
-//        if (Keyboard.isKeyDown(Key.currentINTERACT) && !keyLocker.isKeyLocked(Key.currentINTERACT)) {
-//            screenCoordinator.setGameState(GameState.MENU);
-//        }
-
         if (Keyboard.isKeyUp(Key.currentINTERACT) && (currentMenuItemHovered == 5 || currentMenuItemHovered == 6)) {
             keyLocker.lockKey(Key.currentINTERACT);
         }
         if (Keyboard.isKeyDown(Key.currentINTERACT) && (currentMenuItemHovered == 5 || currentMenuItemHovered == 6)) {
+            audio.startPlayingOnce(7);
             screenCoordinator.setGameState(GameState.MENU);
         }
 
@@ -673,12 +651,9 @@ public class OptionsScreen extends Screen {
                 musicNumber.setOutlineColor(Color.black);
                 musicNumber.setOutlineThickness(3);
                 musicNumber.draw(graphicsHandler);
-
-
                 if (currentMenuItemHovered == 5) {
                     graphicsHandler.drawFilledRectangleWithBorder(130, 330, 30, 30, new Color(49, 207, 240), Color.black, 3);
                 }
-
             } else if (currentMusicItemHovered == 1) {
                 graphicsHandler.drawFilledRectangle(130, 330, 30, 30, Color.black);
                 graphicsHandler.drawFilledRectangle(170, 330, 30, 30, Color.black);
@@ -705,8 +680,6 @@ public class OptionsScreen extends Screen {
                 if (currentMenuItemHovered == 5) {
                     graphicsHandler.drawFilledRectangleWithBorder(210, 330, 30, 30, new Color(49, 207, 240), Color.black, 3);
                 }
-
-
             } else if (currentMusicItemHovered == 3) {
                 graphicsHandler.drawFilledRectangle(130, 330, 30, 30, Color.black);
                 graphicsHandler.drawFilledRectangle(170, 330, 30, 30, Color.black);
@@ -733,8 +706,6 @@ public class OptionsScreen extends Screen {
                 if (currentMenuItemHovered == 5) {
                     graphicsHandler.drawFilledRectangleWithBorder(290, 330, 30, 30, new Color(49, 207, 240), Color.black, 3);
                 }
-
-
             }
 
         effectLabel.draw(graphicsHandler);
@@ -764,7 +735,6 @@ public class OptionsScreen extends Screen {
                 if (currentMenuItemHovered == 6) {
                     graphicsHandler.drawFilledRectangleWithBorder(170, 380, 30, 30, new Color(49, 207, 240), Color.black, 3);
                 }
-
             } else if (currentEffectItemHovered == 2) {
                 graphicsHandler.drawFilledRectangle(130, 380, 30, 30, Color.black);
                 graphicsHandler.drawFilledRectangle(170, 380, 30, 30, Color.black);
