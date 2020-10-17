@@ -11,6 +11,7 @@ import Players.Cat;
 import Utils.Stopwatch;
 import javax.sound.sampled.Clip;
 import java.util.ArrayList;
+import java.util.Timer;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen implements PlayerListener {
@@ -25,7 +26,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected boolean isGamePaused;
     protected PauseLevelScreen pauseLevelScreen;
     protected KeyLocker keyLocker;
-
+    private long startTime;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -38,7 +39,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         audio.stopPlaying(5);
         this.map = new TestMap();
         map.reset();
-
+        
+        //setup time
+        startTime = System.currentTimeMillis();
+        
         // setup player
         this.isGamePaused = false;
         this.pauseLevelScreen = new PauseLevelScreen(screenCoordinator, this);
@@ -48,7 +52,6 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.keyLocker = new KeyLocker();
-
     }
 
     public void update() {
@@ -64,6 +67,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
  					if (isGamePaused) {
                         audio.startPlayingOnce(4);
 						pauseLevelScreen.initialize();
+					
 					} else {
                         audio.startPlayingOnce(4);
                     }
@@ -83,7 +87,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                  break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
-                levelClearedScreen = new LevelClearedScreen();
+                levelClearedScreen = new LevelClearedScreen(startTime);
                 levelClearedScreen.initialize();
                 screenTimer.setWaitTime(2500);
                 playLevelScreenState = PlayLevelScreenState.LEVEL_WIN_MESSAGE;
