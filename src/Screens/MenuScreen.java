@@ -63,7 +63,7 @@ public class MenuScreen extends Screen {
     public void update() {
         	// update background map (to play tile animations)
         background.update(null);
-        audio.restartLoop(5);
+        audio.startPlayingLoop(5);
         	// if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
             keyTimer.reset();

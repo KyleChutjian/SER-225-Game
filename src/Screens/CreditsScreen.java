@@ -39,7 +39,7 @@ public class CreditsScreen extends Screen {
 
     public void update() {
         background.update(null);
-
+        audio.startPlayingLoop(5);
         if (Keyboard.isKeyUp(Key.currentINTERACT)) {
             keyLocker.unlockKey(Key.currentINTERACT);
         }

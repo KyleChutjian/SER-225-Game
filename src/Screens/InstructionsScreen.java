@@ -31,7 +31,7 @@ public class InstructionsScreen extends Screen {
     @Override
     public void initialize() {
         audio = GamePanel.getAudio();
-
+        audio.startPlayingOnce(6);
         // setup graphics on screen (background map, spritefont text)
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
@@ -75,7 +75,7 @@ public class InstructionsScreen extends Screen {
 
     public void update() {
         background.update(null);
-
+        audio.startPlayingLoop(5);
         if (Keyboard.isKeyUp(Key.currentINTERACT)) {
             keyLocker.unlockKey(Key.currentINTERACT);
         }
