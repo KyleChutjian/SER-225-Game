@@ -1,14 +1,6 @@
 package Game;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
@@ -17,7 +9,10 @@ import Screens.CreditsScreen;
 import Screens.InstructionsScreen;
 import Screens.OptionsScreen;
 import Screens.MenuScreen;
+import Screens.LevelSelectScreen;
 import Screens.PlayLevelScreen;
+import Screens.Level2FieldsScreen;
+import Screens.Level3ForestScreen;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -56,8 +51,17 @@ public class ScreenCoordinator extends Screen {
 					case MENU:
 						currentScreen = new MenuScreen(this);
 						break;
+					case LEVELSELECT:
+						currentScreen = new LevelSelectScreen(this);
+						break;
 					case LEVEL:
 						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL2:
+						currentScreen = new Level2FieldsScreen(this);
+						break;
+					case LEVEL3:
+						currentScreen = new Level3ForestScreen(this);
 						break;
 					case INSTRUCTIONS:
 						currentScreen = new InstructionsScreen(this);

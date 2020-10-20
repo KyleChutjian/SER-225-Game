@@ -7,7 +7,6 @@ import Level.Map;
 import Maps.TitleScreenMap;
 import SpriteFont.SpriteFont;
 import Utils.Stopwatch;
-
 import java.awt.*;
 
 // This is the class for the main menu screen
@@ -63,7 +62,7 @@ public class MenuScreen extends Screen {
     public void update() {
         	// update background map (to play tile animations)
         background.update(null);
-        audio.restartLoop(5);
+        audio.startPlayingLoop(5);
         	// if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
             keyTimer.reset();
@@ -125,7 +124,7 @@ public class MenuScreen extends Screen {
             menuItemSelected = currentMenuItemHovered;
             audio.startPlayingOnce(6);
             if (menuItemSelected == 0) {
-                screenCoordinator.setGameState(GameState.LEVEL);
+                screenCoordinator.setGameState(GameState.LEVELSELECT);
             } else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.INSTRUCTIONS);
             } else if (menuItemSelected == 2) {
@@ -143,6 +142,7 @@ public class MenuScreen extends Screen {
         options.draw(graphicsHandler);
         credits.draw(graphicsHandler);
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
+        graphicsHandler.drawImage(ImageLoader.load("Title.gif"), 225, 5, 350, 100);
     }
 
     public int getMenuItemSelected() {

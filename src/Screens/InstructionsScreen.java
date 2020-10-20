@@ -31,7 +31,7 @@ public class InstructionsScreen extends Screen {
     @Override
     public void initialize() {
         audio = GamePanel.getAudio();
-
+        audio.startPlayingOnce(6);
         // setup graphics on screen (background map, spritefont text)
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
@@ -68,14 +68,14 @@ public class InstructionsScreen extends Screen {
         	hazardsExplanationLabel1.setOutlineThickness(3);
         
         //Return to Main Menu Text
-        returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 560, "Comic Sans", 30, Color.white);
+        returnInstructionsLabel = new SpriteFont("Press INTERACT key to return to the menu", 20, 560, "Comic Sans", 30, Color.white);
         
         keyLocker.lockKey(Key.currentINTERACT);
     }
 
     public void update() {
         background.update(null);
-
+        audio.startPlayingLoop(5);
         if (Keyboard.isKeyUp(Key.currentINTERACT)) {
             keyLocker.unlockKey(Key.currentINTERACT);
         }
