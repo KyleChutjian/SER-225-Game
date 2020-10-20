@@ -152,7 +152,12 @@ public class Audio {
 
     public void setMusicVolume(int volume) {
         FloatControl menu = (FloatControl) audioList.get(5).getControl(FloatControl.Type.MASTER_GAIN);
-        menu.setValue(volume);
+        if (menu.getValue() != volume) {
+            menu.setValue(volume);
+            audioList.get(5).flush();
+            audioList.get(5).setFramePosition(audioList.get(5).getFramePosition() - 45000);
+        }
+
         FloatControl game = (FloatControl) audioList.get(0).getControl(FloatControl.Type.MASTER_GAIN);
         game.setValue(volume);
     }
@@ -177,8 +182,6 @@ public class Audio {
         backward.setValue(volume);
 
     }
-
-
 
     public void setPosition(int index, int position) {
         audioList.get(index).setFramePosition(position);
