@@ -21,6 +21,8 @@ public class OptionsScreen extends Screen {
     protected Map background;
     protected KeyLocker keyLocker = new KeyLocker();
     protected int currentMenuItemHovered = 0;
+    protected int currentMusicItemHovered = 0;
+    protected int currentEffectItemHovered = 0;
     protected Stopwatch keyTimer = new Stopwatch();
     protected int pointerLocationX, pointerLocationY, activePresetX, activePresetY;
     protected SpriteFont controlsLabel;
@@ -47,6 +49,12 @@ public class OptionsScreen extends Screen {
     	protected SpriteFont numpadDescLabel3;
     protected SpriteFont returnOptionsLabel;
     protected SpriteFont returnOptionsLabel2;
+    protected SpriteFont audioLabel;
+    protected SpriteFont musicLabel;
+    protected SpriteFont musicNumber;
+    protected SpriteFont effectLabel;
+    protected SpriteFont effectNumber;
+
 
     public OptionsScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -163,9 +171,22 @@ public class OptionsScreen extends Screen {
         numpadDescLabel3.setOutlineColor(Color.black);
         numpadDescLabel3.setOutlineThickness(3);
 
+        audioLabel = new SpriteFont("VOLUME MIXER", 180, 310, "Comic Sans", 24, new Color(49, 207, 240));
+        audioLabel.setOutlineColor(Color.black);
+        audioLabel.setOutlineThickness(3);
+
+        musicLabel = new SpriteFont("Music", 50, 350, "Comic Sans", 20, new Color(49, 207, 240));
+        musicLabel.setOutlineColor(Color.black);
+        musicLabel.setOutlineThickness(3);
+
+        effectLabel = new SpriteFont("Effects", 50, 400, "Comic Sans", 20, new Color(49, 207, 240));
+        effectLabel.setOutlineColor(Color.black);
+        effectLabel.setOutlineThickness(3);
+
+
         ///////////////////////////////////////////////////////////////////
         	//Return to Main Menu Text
-        returnOptionsLabel = new SpriteFont("Press the INTERACT key to select a preset", 40, 320, "Comic Sans", 22, new Color(255, 215, 0));
+        returnOptionsLabel = new SpriteFont("Press the INTERACT key to select a preset", 40, 555, "Comic Sans", 22, new Color(49, 207, 240));
         returnOptionsLabel.setOutlineColor(Color.black);
         returnOptionsLabel.setOutlineThickness(3);
 
@@ -176,7 +197,7 @@ public class OptionsScreen extends Screen {
 
     public void update() {
     	background.update(null);
-
+        audio.startPlayingLoop(5);
     		//sets currentMenuItemHovered
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {
     		keyTimer.reset();
@@ -190,11 +211,23 @@ public class OptionsScreen extends Screen {
     	}
 
     		// if down is pressed on last menu item or up is pressed on first menu item, "loop" the selection back around to the beginning/end
-    	if (currentMenuItemHovered > 4) {
+    	if (currentMenuItemHovered > 6) {
     		currentMenuItemHovered = 0;
     	} else if (currentMenuItemHovered < 0) {
-    		currentMenuItemHovered = 4;
+    		currentMenuItemHovered = 6;
     	}
+
+
+    	try {
+            File audioFile = new File("SavedData/AudioPreferences.txt");
+            Scanner audioInput = null;
+            audioInput = new Scanner(audioFile);
+            currentMusicItemHovered = audioInput.nextInt();
+            currentEffectItemHovered = audioInput.nextInt();
+
+        } catch (IOException e) {
+            System.out.println("Error");
+        }
 
         if (currentMenuItemHovered == 0) {
         		//Highlights WASD w/ F controls
@@ -352,6 +385,176 @@ public class OptionsScreen extends Screen {
             numpadDescLabel3.setFontSize(20);
         }
 
+        else if (currentMenuItemHovered == 5) {
+            wasd1Label.setColor(new Color( 49, 207, 240));
+            wasd2Label.setColor(new Color( 49, 207, 240));
+            arrows1Label.setColor(new Color( 49, 207, 240));
+            arrows2Label.setColor(new Color( 49, 207, 240));
+            numpadLabel.setColor(new Color( 49, 207, 240));
+            pointerLocationX = -50;
+            pointerLocationY = -50;
+
+            if (Keyboard.isKeyDown(Key.currentLEFT) && keyTimer.isTimeUp()) {
+                keyTimer.reset();
+                audio.startPlayingOnce(6);
+                currentMusicItemHovered--;
+            } else if (Keyboard.isKeyDown(Key.currentRIGHT) && keyTimer.isTimeUp()) {
+                keyTimer.reset();
+                audio.startPlayingOnce(6);
+                currentMusicItemHovered++;
+            }
+
+            if (currentMusicItemHovered > 4) {
+                currentMusicItemHovered = 4;
+            } else if (currentMusicItemHovered < 0) {
+                currentMusicItemHovered = 0;
+            }
+                try {
+                    FileWriter audioWriter = new FileWriter("SavedData/AudioPreferences.txt");
+                    if (currentMusicItemHovered == 0) {
+                        audio.setMusicVolume(-80);
+                        audioWriter.write("0");
+                        audioWriter.write("\n" + currentEffectItemHovered);
+                        audioWriter.close();
+                        Keyboard.keyMap = Keyboard.buildKeyMap();
+                    } else if (currentMusicItemHovered == 1) {
+                        audio.setMusicVolume(-30);
+                        audioWriter.write("1");
+                        audioWriter.write("\n" + currentEffectItemHovered);
+                        audioWriter.close();
+                        Keyboard.keyMap = Keyboard.buildKeyMap();
+                    } else if (currentMusicItemHovered == 2) {
+                        audio.setMusicVolume(-15);
+                        audioWriter.write("2");
+                        audioWriter.write("\n" + currentEffectItemHovered);
+                        audioWriter.close();
+                        Keyboard.keyMap = Keyboard.buildKeyMap();
+                    } else if (currentMusicItemHovered == 3) {
+                        audio.setMusicVolume(0);
+                        audioWriter.write("3");
+                        audioWriter.write("\n" + currentEffectItemHovered);
+                        audioWriter.close();
+                        Keyboard.keyMap = Keyboard.buildKeyMap();
+                    } else if (currentMusicItemHovered == 4) {
+                        audio.setMusicVolume(6);
+                        audioWriter.write("4");
+                        audioWriter.write("\n" + currentEffectItemHovered);
+                        audioWriter.close();
+                        Keyboard.keyMap = Keyboard.buildKeyMap();
+                    }
+
+                } catch (IOException e) {
+                    System.out.println("Error");
+                }
+
+            wasd1DescLabel1.setFontSize(0);
+            wasd1DescLabel2.setFontSize(0);
+            wasd1DescLabel3.setFontSize(0);
+
+            wasd2DescLabel1.setFontSize(0);
+            wasd2DescLabel2.setFontSize(0);
+            wasd2DescLabel3.setFontSize(0);
+
+            arrows1DescLabel1.setFontSize(0);
+            arrows1DescLabel2.setFontSize(0);
+            arrows1DescLabel3.setFontSize(0);
+
+            arrows2DescLabel1.setFontSize(0);
+            arrows2DescLabel2.setFontSize(0);
+            arrows2DescLabel3.setFontSize(0);
+
+            numpadDescLabel1.setFontSize(0);
+            numpadDescLabel2.setFontSize(0);
+            numpadDescLabel3.setFontSize(0);
+        } else if (currentMenuItemHovered == 6) {
+            wasd1Label.setColor(new Color( 49, 207, 240));
+            wasd2Label.setColor(new Color( 49, 207, 240));
+            arrows1Label.setColor(new Color( 49, 207, 240));
+            arrows2Label.setColor(new Color( 49, 207, 240));
+            numpadLabel.setColor(new Color( 49, 207, 240));
+            pointerLocationX = -50;
+            pointerLocationY = -50;
+
+            if (Keyboard.isKeyDown(Key.currentLEFT) && keyTimer.isTimeUp()) {
+                keyTimer.reset();
+                audio.startPlayingOnce(6);
+                currentEffectItemHovered--;
+            } else if (Keyboard.isKeyDown(Key.currentRIGHT) && keyTimer.isTimeUp()) {
+                keyTimer.reset();
+                audio.startPlayingOnce(6);
+                currentEffectItemHovered++;
+            }
+
+            if (currentEffectItemHovered > 4) {
+                currentEffectItemHovered = 4;
+            } else if (currentEffectItemHovered < 0) {
+                currentEffectItemHovered = 0;
+            }
+
+            if (Keyboard.isKeyUp(Key.currentINTERACT)) {
+                keyLocker.lockKey(Key.currentINTERACT);
+            }
+
+            try {
+                FileWriter audioWriter = new FileWriter("SavedData/AudioPreferences.txt");
+                if (currentEffectItemHovered == 0) {
+                    audio.setEffectVolume(-80);
+                    audioWriter.write("" + currentMusicItemHovered);
+                    audioWriter.write("\n0");
+                    audioWriter.close();
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
+                } else if (currentEffectItemHovered == 1) {
+                    audio.setEffectVolume(-30);
+                    audioWriter.write("" + currentMusicItemHovered);
+                    audioWriter.write("\n1");
+                    audioWriter.close();
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
+                } else if (currentEffectItemHovered == 2) {
+                    audio.setEffectVolume(-15);
+                    audioWriter.write("" + currentMusicItemHovered);
+                    audioWriter.write("\n2");
+                    audioWriter.close();
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
+                } else if (currentEffectItemHovered == 3) {
+                    audio.setEffectVolume(0);
+                    audioWriter.write("" + currentMusicItemHovered);
+                    audioWriter.write("\n3");
+                    audioWriter.close();
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
+                } else if (currentEffectItemHovered == 4) {
+                    audio.setEffectVolume(6);
+                    audioWriter.write("" + currentMusicItemHovered);
+                    audioWriter.write("\n4");
+                    audioWriter.close();
+                    Keyboard.keyMap = Keyboard.buildKeyMap();
+                }
+
+            } catch (IOException e) {
+                System.out.println("Error");
+            }
+
+            //displays associated preset
+            wasd1DescLabel1.setFontSize(0);
+            wasd1DescLabel2.setFontSize(0);
+            wasd1DescLabel3.setFontSize(0);
+
+            wasd2DescLabel1.setFontSize(0);
+            wasd2DescLabel2.setFontSize(0);
+            wasd2DescLabel3.setFontSize(0);
+
+            arrows1DescLabel1.setFontSize(0);
+            arrows1DescLabel2.setFontSize(0);
+            arrows1DescLabel3.setFontSize(0);
+
+            arrows2DescLabel1.setFontSize(0);
+            arrows2DescLabel2.setFontSize(0);
+            arrows2DescLabel3.setFontSize(0);
+
+            numpadDescLabel1.setFontSize(0);
+            numpadDescLabel2.setFontSize(0);
+            numpadDescLabel3.setFontSize(0);
+        }
+
         if (Keyboard.isKeyUp(Key.currentINTERACT)) {
             keyLocker.unlockKey(Key.currentINTERACT);
         }
@@ -397,6 +600,15 @@ public class OptionsScreen extends Screen {
         		System.out.println("Error");
         	}
         }
+
+        if (Keyboard.isKeyUp(Key.currentINTERACT) && (currentMenuItemHovered == 5 || currentMenuItemHovered == 6)) {
+            keyLocker.lockKey(Key.currentINTERACT);
+        }
+        if (Keyboard.isKeyDown(Key.currentINTERACT) && (currentMenuItemHovered == 5 || currentMenuItemHovered == 6)) {
+            audio.startPlayingOnce(7);
+            screenCoordinator.setGameState(GameState.MENU);
+        }
+
     }
 
     	//displays screen elements
@@ -425,6 +637,143 @@ public class OptionsScreen extends Screen {
         	numpadDescLabel2.draw(graphicsHandler);
         	numpadDescLabel3.draw(graphicsHandler);
         returnOptionsLabel.draw(graphicsHandler);
+
+        audioLabel.draw(graphicsHandler);
+        musicLabel.draw(graphicsHandler);
+            if (currentMusicItemHovered == 0) {
+                graphicsHandler.drawFilledRectangle(130, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangleWithBorder(170, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(210, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(250, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(290, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                musicNumber = new SpriteFont(" < >    0%", 330, 350, "Comic Sans", 20, new Color(49, 207, 240));
+                musicNumber.setOutlineColor(Color.black);
+                musicNumber.setOutlineThickness(3);
+                musicNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 5) {
+                    graphicsHandler.drawFilledRectangleWithBorder(130, 330, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            } else if (currentMusicItemHovered == 1) {
+                graphicsHandler.drawFilledRectangle(130, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(170, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangleWithBorder(210, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(250, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(290, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                musicNumber = new SpriteFont(" < >    25%", 330, 350, "Comic Sans", 20, new Color(49, 207, 240));
+                musicNumber.setOutlineColor(Color.black);
+                musicNumber.setOutlineThickness(3);
+                musicNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 5) {
+                    graphicsHandler.drawFilledRectangleWithBorder(170, 330, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            } else if (currentMusicItemHovered == 2) {
+                graphicsHandler.drawFilledRectangle(130, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(170, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(210, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangleWithBorder(250, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(290, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                musicNumber = new SpriteFont(" < >    50%", 330, 350, "Comic Sans", 20, new Color(49, 207, 240));
+                musicNumber.setOutlineColor(Color.black);
+                musicNumber.setOutlineThickness(3);
+                musicNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 5) {
+                    graphicsHandler.drawFilledRectangleWithBorder(210, 330, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            } else if (currentMusicItemHovered == 3) {
+                graphicsHandler.drawFilledRectangle(130, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(170, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(210, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(250, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangleWithBorder(290, 330, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                musicNumber = new SpriteFont(" < >    75%", 330, 350, "Comic Sans", 20, new Color(49, 207, 240));
+                musicNumber.setOutlineColor(Color.black);
+                musicNumber.setOutlineThickness(3);
+                musicNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 5) {
+                    graphicsHandler.drawFilledRectangleWithBorder(250, 330, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            } else if (currentMusicItemHovered == 4) {
+                graphicsHandler.drawFilledRectangle(130, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(170, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(210, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(250, 330, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(290, 330, 30, 30, Color.black);
+                musicNumber = new SpriteFont(" < >    100%", 330, 350, "Comic Sans", 20, new Color(49, 207, 240));
+                musicNumber.setOutlineColor(Color.black);
+                musicNumber.setOutlineThickness(3);
+                musicNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 5) {
+                    graphicsHandler.drawFilledRectangleWithBorder(290, 330, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            }
+
+        effectLabel.draw(graphicsHandler);
+            if (currentEffectItemHovered == 0) {
+                graphicsHandler.drawFilledRectangle(130, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangleWithBorder(170, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(210, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(250, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(290, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                effectNumber = new SpriteFont(" < >    0%", 330, 400, "Comic Sans", 20, new Color(49, 207, 240));
+                effectNumber.setOutlineColor(Color.black);
+                effectNumber.setOutlineThickness(3);
+                effectNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 6) {
+                    graphicsHandler.drawFilledRectangleWithBorder(130, 380, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            } else if (currentEffectItemHovered == 1) {
+                graphicsHandler.drawFilledRectangle(130, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(170, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangleWithBorder(210, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(250, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(290, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                effectNumber = new SpriteFont(" < >    25%", 330, 400, "Comic Sans", 20, new Color(49, 207, 240));
+                effectNumber.setOutlineColor(Color.black);
+                effectNumber.setOutlineThickness(3);
+                effectNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 6) {
+                    graphicsHandler.drawFilledRectangleWithBorder(170, 380, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            } else if (currentEffectItemHovered == 2) {
+                graphicsHandler.drawFilledRectangle(130, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(170, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(210, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangleWithBorder(250, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                graphicsHandler.drawFilledRectangleWithBorder(290, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                effectNumber = new SpriteFont(" < >    50%", 330, 400, "Comic Sans", 20, new Color(49, 207, 240));
+                effectNumber.setOutlineColor(Color.black);
+                effectNumber.setOutlineThickness(3);
+                effectNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 6) {
+                    graphicsHandler.drawFilledRectangleWithBorder(210, 380, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            } else if (currentEffectItemHovered == 3) {
+                graphicsHandler.drawFilledRectangle(130, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(170, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(210, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(250, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangleWithBorder(290, 380, 30, 30, new Color(153, 217, 234), Color.black, 3);
+                effectNumber = new SpriteFont(" < >    75%", 330, 400, "Comic Sans", 20, new Color(49, 207, 240));
+                effectNumber.setOutlineColor(Color.black);
+                effectNumber.setOutlineThickness(3);
+                effectNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 6) {
+                    graphicsHandler.drawFilledRectangleWithBorder(250, 380, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            } else if (currentEffectItemHovered == 4) {
+                graphicsHandler.drawFilledRectangle(130, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(170, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(210, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(250, 380, 30, 30, Color.black);
+                graphicsHandler.drawFilledRectangle(290, 380, 30, 30, Color.black);
+                effectNumber = new SpriteFont(" < >    100%", 330, 400, "Comic Sans", 20, new Color(49, 207, 240));
+                effectNumber.setOutlineColor(Color.black);
+                effectNumber.setOutlineThickness(3);
+                effectNumber.draw(graphicsHandler);
+                if (currentMenuItemHovered == 6) {
+                    graphicsHandler.drawFilledRectangleWithBorder(290, 380, 30, 30, new Color(49, 207, 240), Color.black, 3);
+                }
+            }
 
         	//yellow box creation and location set based on active control preset
         File controlsFile = new File("SavedData/ControlPreferences.txt");
