@@ -141,6 +141,7 @@ public class MenuScreen extends Screen {
         options.draw(graphicsHandler);
         credits.draw(graphicsHandler);
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
+        graphicsHandler.drawImage(ImageLoader.load("Title.gif"), 225, 5, 350, 100);
     }
 
     public int getMenuItemSelected() {

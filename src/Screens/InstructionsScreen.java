@@ -68,7 +68,7 @@ public class InstructionsScreen extends Screen {
         	hazardsExplanationLabel1.setOutlineThickness(3);
         
         //Return to Main Menu Text
-        returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 560, "Comic Sans", 30, Color.white);
+        returnInstructionsLabel = new SpriteFont("Press INTERACT key to return to the menu", 20, 560, "Comic Sans", 30, Color.white);
         
         keyLocker.lockKey(Key.currentINTERACT);
     }

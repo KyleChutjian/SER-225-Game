@@ -47,7 +47,7 @@ public class CreditsScreen extends Screen {
     	bestTeamLabel = new SpriteFont("3MK Developers: Kyle Chutjian, Michael Tambascio, Max Petruzziello, Matthew Gumprecht", 110, 240, "Comic Sans", 14, new Color(255, 215, 0));
     	bestTeamLabel.setOutlineColor(Color.black);
     	bestTeamLabel.setOutlineThickness(3);
-        returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 560, "Comis Sans", 30, Color.white);
+        returnInstructionsLabel = new SpriteFont("Press INTERACT key to return to the menu", 20, 560, "Comis Sans", 30, Color.white);
         keyLocker.lockKey(Key.currentINTERACT);
     }
 

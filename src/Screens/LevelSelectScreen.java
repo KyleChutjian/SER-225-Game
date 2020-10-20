@@ -486,9 +486,9 @@ public class LevelSelectScreen extends Screen {
         		if(currentMenuItemHovered == 0) {
         			screenCoordinator.setGameState(GameState.LEVEL);
         		} else if (currentMenuItemHovered == 1) {
-        			//screenCoordinator.setGameState(GameState.LEVEL2);
+        			screenCoordinator.setGameState(GameState.LEVEL2);
         		} else if (currentMenuItemHovered == 2) {
-        			//screenCoordinator.setGameState(GameState.LEVEL3);
+        			screenCoordinator.setGameState(GameState.LEVEL3);
         		} else if (currentMenuItemHovered == 3) {
         			//screenCoordinator.setGameState(GameState.LEVEL4);
         		} else if (currentMenuItemHovered == 4) {
