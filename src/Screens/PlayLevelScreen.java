@@ -1,4 +1,5 @@
 package Screens;
+import Engine.Audio;
 
 import Engine.*;
 import Game.GameState;
@@ -10,6 +11,10 @@ import Maps.TestMap;
 import Players.Cat;
 import Utils.Stopwatch;
 import javax.sound.sampled.Clip;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 // This class is for when the platformer game is actually being played
@@ -48,6 +53,21 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.keyLocker = new KeyLocker();
+         {
+			
+        	 
+			@Override
+			public Instant instant() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public ZoneId getZone() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		};
 
     }
 
