@@ -5,6 +5,7 @@ import Engine.Audio;
 import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import Level.HUD;
 import Level.Map;
 import Level.Player;
 import Level.PlayerListener;
@@ -25,6 +26,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 	protected Audio audio = null;
 	protected Map map;
 	protected Player player;
+	protected HUD hud;
 	protected PlayLevelScreenState playLevelScreenState;
 	protected Stopwatch screenTimer = new Stopwatch();
 	protected LevelClearedScreen levelClearedScreen;
@@ -60,6 +62,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
 		this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 		this.keyLocker = new KeyLocker();
+		this.hud = new HUD(player);
 	}
 
 	public void update() {
@@ -94,6 +97,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 			} else {
 				player.update();
 				map.update(player);
+				hud.update();
 			}
 			break;
 		// if level has been completed, bring up level cleared screen
@@ -136,6 +140,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		case PLAYER_DEAD:
 			map.draw(graphicsHandler);
 			player.draw(graphicsHandler);
+			hud.draw(graphicsHandler);
 			if (isGamePaused) {
 				pauseLevelScreen.draw(graphicsHandler);
 			}

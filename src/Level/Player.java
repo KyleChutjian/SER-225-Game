@@ -22,6 +22,9 @@ public abstract class Player extends GameObject {
     protected float jumpDegrade = 0;
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
+    protected int currentHealth = 200;
+	protected float knockbackAmount = 0;
+	protected float knockMaxHeight = 20;
 
     // values used to handle player movement
     protected float jumpForce = 0;
@@ -48,6 +51,11 @@ public abstract class Player extends GameObject {
 
     // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isInvincible = false;
+    
+    // Each check if the player should be knocked back to the right, left or if the player was just hit
+	protected boolean knockRight = false;
+	protected boolean knockLeft = false;
+	protected boolean justHurt = false;
 
     protected Audio audio = null;
 
@@ -65,6 +73,37 @@ public abstract class Player extends GameObject {
     public void update() {
         moveAmountX = 0;
         moveAmountY = 0;
+        
+        // Check if player is hurt and needs to be knocked back, if so perform knockback
+        if (knockbackAmount != 0) {
+			justHurt = true;
+			currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
+			if (knockLeft == true) {
+				moveAmountX = -7;
+				knockbackAmount -= 10;
+				if (knockMaxHeight != 0) { 
+					moveAmountY = -7;
+					knockMaxHeight -= 10;
+				} else { 
+					moveAmountY = 7;
+				}
+			}
+			else if (knockRight == true) {
+				moveAmountX = 7;
+				knockbackAmount -= 10;
+				if (knockMaxHeight != 0) { 
+					moveAmountY = -7;
+					knockMaxHeight -= 10;
+				} else { 
+					moveAmountY = 7;
+				}
+			}
+			
+		} else if (knockbackAmount == 0) {
+			justHurt = false;
+			knockLeft = false;
+			knockRight = true;
+		}
 
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
@@ -295,14 +334,50 @@ public abstract class Player extends GameObject {
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
-            // if map entity is an enemy, kill player on touch
-            if (mapEntity instanceof Enemy) {
-                levelState = LevelState.PLAYER_DEAD;
-            }
+        	// if map entity is an enemy, hurt player on touch and initiate knock back.
+        				if (justHurt == true ) {
+        					return;
+        				}
+        				 else if ((mapEntity instanceof Enemy && currentHealth > 0) && !currentAnimationName.startsWith("HURT") ) {
+        						currentHealth = getCurrentHealth() - 25;
+        						if (getCurrentHealth() <= 0) {
+        							currentHealth = 0;
+        							levelState = LevelState.PLAYER_DEAD;
+        						} else {
+        							currentAnimationName = "HURT";
+        							knockBack(mapEntity);
+        						}
+        					}
+        					else if (mapEntity instanceof Enemy){
+        						currentHealth = getCurrentHealth() - 25;
+        						if (getCurrentHealth() <= 0) {
+        							currentHealth = 0;
+        							levelState = LevelState.PLAYER_DEAD;
+        						} else {
+        							currentAnimationName = "HURT";
+        							knockBack(mapEntity);
+        						}
+        					}
         }
     }
+    
+    public void knockBack(MapEntity mapEntity) {
+		if ((mapEntity instanceof Enemy) && (this.getX() > mapEntity.getX())) {
+			knockRight = true;
+			justHurt = true;
+			momentumY = 0;
+			knockbackAmount = 100;
+			knockMaxHeight = 50;
+		} else if ((mapEntity instanceof Enemy) && (mapEntity.getX() > this.getX())) {
+			knockLeft = true;
+			justHurt = true;
+			momentumY = 0;
+			knockbackAmount = 100;
+			knockMaxHeight = 50;
+		}  
+	}
 
-    // other entities can call this to tell the player they beat a level
+	// other entities can call this to tell the player they beat a level
     public void completeLevel() {
         levelState = LevelState.LEVEL_COMPLETED;
     }
@@ -362,6 +437,14 @@ public abstract class Player extends GameObject {
             }
         }
     }
+    
+    public int getCurrentHealth() {
+  		return currentHealth;
+  	}
+
+  	public void setCurrentHealth(int currentHealth) {
+  		this.currentHealth = currentHealth;
+  	}
 
     public PlayerState getPlayerState() {
         return playerState;
