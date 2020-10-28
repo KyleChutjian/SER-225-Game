@@ -46,6 +46,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		// define/setup map
 		audio = GamePanel.getAudio();
 		audio.setPosition(0, 0);
+		audio.setPosition(5, 0);
 		audio.stopPlaying(5);
 		this.map = new TestMap();
 		map.reset();

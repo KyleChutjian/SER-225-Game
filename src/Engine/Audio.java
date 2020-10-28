@@ -42,7 +42,7 @@ public class Audio {
             pauseClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, pauseAudio.getFormat()));
             pauseClip.open(pauseAudio);
 
-            mainMenuAudio = AudioSystem.getAudioInputStream(new File("Audio/MainMenu2.wav"));
+            mainMenuAudio = AudioSystem.getAudioInputStream(new File("Audio/MainMenu.wav"));
             mainMenuClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, mainMenuAudio.getFormat()));
             mainMenuClip.open(mainMenuAudio);
 
