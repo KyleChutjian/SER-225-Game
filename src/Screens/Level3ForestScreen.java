@@ -3,6 +3,7 @@ package Screens;
 import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import Level.HUD;
 import Level.Map;
 import Level.Player;
 import Level.PlayerListener;
@@ -18,12 +19,15 @@ public class Level3ForestScreen extends Screen implements PlayerListener {
     protected Audio audio = null;
     protected Map map;
     protected Player player;
+    protected HUD hud;
     protected PlayLevelScreenState playLevelScreenState;
     protected Stopwatch screenTimer = new Stopwatch();
     protected LevelClearedScreen levelClearedScreen;
     protected Level3LoseScreen levelLoseScreen;
     protected boolean isGamePaused;
     protected Level3PauseScreen pauseLevelScreen;
+    protected long startTime;
+    protected long pauseTime;
     protected KeyLocker keyLocker;
 
 
@@ -48,6 +52,7 @@ public class Level3ForestScreen extends Screen implements PlayerListener {
         this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.keyLocker = new KeyLocker();
+        this.hud = new HUD(player);
     }
 
     public void update() {
@@ -78,11 +83,12 @@ public class Level3ForestScreen extends Screen implements PlayerListener {
                  else {
  					player.update();
  					map.update(player);
+ 					hud.update();
  				}
                  break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
-                levelClearedScreen = new LevelClearedScreen();
+                levelClearedScreen = new LevelClearedScreen(startTime, pauseTime);
                 levelClearedScreen.initialize();
                 screenTimer.setWaitTime(2500);
                 playLevelScreenState = PlayLevelScreenState.LEVEL_WIN_MESSAGE;
@@ -118,6 +124,7 @@ public class Level3ForestScreen extends Screen implements PlayerListener {
             case PLAYER_DEAD:
                 map.draw(graphicsHandler);
                 player.draw(graphicsHandler);
+                hud.draw(graphicsHandler);
                 if (isGamePaused) {
     				pauseLevelScreen.draw(graphicsHandler);
     			} 
