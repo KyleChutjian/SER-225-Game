@@ -1,6 +1,5 @@
 package Screens;
 import Engine.Audio;
-
 import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
@@ -11,7 +10,6 @@ import Maps.TestMap;
 import Players.Cat;
 import Utils.Stopwatch;
 import javax.sound.sampled.Clip;
-
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -30,7 +28,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected boolean isGamePaused;
     protected PauseLevelScreen pauseLevelScreen;
     protected KeyLocker keyLocker;
-
+//    protected LevelSelectScreen LevelSelectScreen;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -42,6 +40,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         audio.setPosition(0, 0);
         audio.stopPlaying(5);
         this.map = new TestMap();
+//        LevelSelectScreen.getMap();
         map.reset();
 
         // setup player

@@ -9,7 +9,7 @@ import SpriteFont.SpriteFont;
 import Utils.Stopwatch;
 
 public class PauseLevelScreen extends Screen{
-	
+
 	protected SpriteFont resetLevel;  
 	protected SpriteFont exitGame;
 	protected SpriteFont pauseLevelTitle;
@@ -21,12 +21,12 @@ public class PauseLevelScreen extends Screen{
 	protected int pointerLocationX, pointerLocationY;
 	protected PlayLevelScreen playLevelScreen;
 	protected Audio audio = null;
-	
+
 	 public PauseLevelScreen(ScreenCoordinator screenCoordinator, PlayLevelScreen playLevelScreen) {
 	        this.screenCoordinator = screenCoordinator;
 	        this.playLevelScreen = playLevelScreen;
 	    }
-	    
+
 	@Override
 	public void initialize() {
 		// TODO Auto-generated method stub
@@ -49,7 +49,7 @@ public class PauseLevelScreen extends Screen{
 	        menuItemSelected = -1;
 	        keyLocker.lockKey(Key.currentINTERACT);
 	}
-	
+
 	@Override
 	public void update() {
 		// Pause menu logic
@@ -85,7 +85,7 @@ public class PauseLevelScreen extends Screen{
             pointerLocationX = 170;
             pointerLocationY = 230;
         } 
-        
+
         if (Keyboard.isKeyUp(Key.currentINTERACT)) {
             keyLocker.unlockKey(Key.currentINTERACT);
         }
@@ -99,7 +99,7 @@ public class PauseLevelScreen extends Screen{
             } 
         }
 	}
-	
+
 	@Override
 	public void draw(GraphicsHandler graphicsHandler) {
 		graphicsHandler.drawFilledRectangle(ScreenManager.getScreenWidth()/2 - 250, ScreenManager.getScreenHeight()/2 - 250, 500, 500, new Color(0, 255, 255, 100));

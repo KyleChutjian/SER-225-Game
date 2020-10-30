@@ -38,6 +38,8 @@ public class LevelSelectScreen extends Screen {
     protected SpriteFont level14Label;
     protected SpriteFont level15Label;
     protected SpriteFont returnOptionsLabel;
+    protected String test;
+    
     public LevelSelectScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
@@ -485,6 +487,7 @@ public class LevelSelectScreen extends Screen {
         	
         		if(currentMenuItemHovered == 0) {
         			screenCoordinator.setGameState(GameState.LEVEL);
+//        			test = "Hello";
         		} else if (currentMenuItemHovered == 1) {
         			screenCoordinator.setGameState(GameState.LEVEL2);
         		} else if (currentMenuItemHovered == 2) {
@@ -517,7 +520,11 @@ public class LevelSelectScreen extends Screen {
         	}
 
         }
-    
+//    public String getMap() {
+//    	System.out.println(test);
+//    	return this.test;
+//    }
+
 ///////////////////////////////////////////////Draws Screen Elements///////////////////////////////////////////////////////////////
 
     	//displays screen elements

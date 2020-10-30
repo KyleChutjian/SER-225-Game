@@ -1,5 +1,4 @@
 package Maps;
-
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
 import Engine.ImageLoader;

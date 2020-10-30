@@ -4,11 +4,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Random;
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /*
  * This class is used throughout the engine for detecting keyboard state
@@ -178,11 +177,17 @@ public class Keyboard {
 					 }
 					 	//changes controls if preset 5 is selected
 					 if (activePreset.equals("Active Preset: 5")) {
-						 put(Key.currentUP, 104);
-						 put(Key.currentDOWN, 101);
-						 put(Key.currentLEFT, 100);
-						 put(Key.currentRIGHT, 102);
-						 put(Key.currentINTERACT, 37);
+						 Random rand = new Random();
+						 int upVal = rand.nextInt((69 - 65) + 1) + 65;
+						 int downVal = rand.nextInt((85 - 81) + 1) + 81;
+						 int leftVal = rand.nextInt((90 - 87) + 1) + 87;
+						 int rightVal = rand.nextInt((79 - 75) + 1) + 74;
+						 int interactVal = rand.nextInt((74 - 70) + 1) + 70;
+						 put(Key.currentUP, upVal);
+						 put(Key.currentDOWN, downVal);
+						 put(Key.currentLEFT, leftVal);
+						 put(Key.currentRIGHT, rightVal);
+						 put(Key.currentINTERACT, interactVal);
 					 }
 				 } catch (FileNotFoundException e) {
 					 System.out.println("Error");
@@ -190,4 +195,5 @@ public class Keyboard {
 				 }
 			}};
     }
+
 }

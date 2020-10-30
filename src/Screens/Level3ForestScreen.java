@@ -48,7 +48,6 @@ public class Level3ForestScreen extends Screen implements PlayerListener {
         this.player.setLocation(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.keyLocker = new KeyLocker();
-
     }
 
     public void update() {
@@ -68,11 +67,11 @@ public class Level3ForestScreen extends Screen implements PlayerListener {
                         audio.startPlayingOnce(4);
                     }
  				}
-            	 
+
             	 if (Keyboard.isKeyUp(Key.P)) {
             		 keyLocker.unlockKey(Key.P);
 				}
-            	 
+
                  if (isGamePaused) {
  					pauseLevelScreen.update();
  				}

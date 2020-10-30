@@ -154,16 +154,16 @@ public class OptionsScreen extends Screen {
 
         /////////////////////////////////////////////////////////////////
         	//NUMPAD Arrows text
-        numpadLabel = new SpriteFont("Numberpad Arrows", 50, 270, "Comic Sans", 20, new Color(49, 207, 240));
+        numpadLabel = new SpriteFont("Challenge Preset", 50, 270, "Comic Sans", 20, new Color(49, 207, 240));
         numpadLabel.setOutlineColor(Color.black);
         numpadLabel.setOutlineThickness(3);
 
         		//Preset Description
-        numpadDescLabel1 = new SpriteFont("Movement: Numberpad 8, 4, 5, 6", 270, 150, "Comic Sans", 20, new Color( 255, 215, 0));
+        numpadDescLabel1 = new SpriteFont("Movement: ?", 270, 150, "Comic Sans", 20, new Color( 255, 215, 0));
         numpadDescLabel1.setOutlineColor(Color.black);
         numpadDescLabel1.setOutlineThickness(3);
 
-        numpadDescLabel2 = new SpriteFont("Interact:     LEFT Arrow", 270, 180, "Comic Sans", 20, new Color( 255, 215, 0));
+        numpadDescLabel2 = new SpriteFont("Interact:     ?", 270, 180, "Comic Sans", 20, new Color( 255, 215, 0));
         numpadDescLabel2.setOutlineColor(Color.black);
         numpadDescLabel2.setOutlineThickness(3);
 
@@ -171,6 +171,8 @@ public class OptionsScreen extends Screen {
         numpadDescLabel3.setOutlineColor(Color.black);
         numpadDescLabel3.setOutlineThickness(3);
 
+        ///////////////////////////////////////////////////////////////////
+        	//Audio Text Labels
         audioLabel = new SpriteFont("VOLUME MIXER", 180, 310, "Comic Sans", 24, new Color(49, 207, 240));
         audioLabel.setOutlineColor(Color.black);
         audioLabel.setOutlineThickness(3);
