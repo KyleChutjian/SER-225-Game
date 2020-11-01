@@ -11,6 +11,7 @@ import NPCs.Walrus;
 import Tilesets.CommonTileset;
 import Utils.Direction;
 import Utils.Point;
+import EnhancedMapTiles.ItemBlock;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,10 @@ public class TestMap extends Map {
 
         enhancedMapTiles.add(new EndLevelBox(
                 getPositionByTileIndex(32, 7)
+        ));
+
+        enhancedMapTiles.add(new ItemBlock(
+                getPositionByTileIndex(14, 5)
         ));
 
         return enhancedMapTiles;
