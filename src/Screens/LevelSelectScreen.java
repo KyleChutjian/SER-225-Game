@@ -487,11 +487,13 @@ public class LevelSelectScreen extends Screen {
         	
         		if(currentMenuItemHovered == 0) {
         			screenCoordinator.setGameState(GameState.LEVEL);
-//        			test = "Hello";
+        			PlayLevelScreen.mapSelection(0);
         		} else if (currentMenuItemHovered == 1) {
         			screenCoordinator.setGameState(GameState.LEVEL2);
+        			PlayLevelScreen.mapSelection(1);
         		} else if (currentMenuItemHovered == 2) {
         			screenCoordinator.setGameState(GameState.LEVEL3);
+        			PlayLevelScreen.mapSelection(2);
         		} else if (currentMenuItemHovered == 3) {
         			//screenCoordinator.setGameState(GameState.LEVEL4);
         		} else if (currentMenuItemHovered == 4) {
@@ -520,11 +522,6 @@ public class LevelSelectScreen extends Screen {
         	}
 
         }
-//    public String getMap() {
-//    	System.out.println(test);
-//    	return this.test;
-//    }
-
 ///////////////////////////////////////////////Draws Screen Elements///////////////////////////////////////////////////////////////
 
     	//displays screen elements
