@@ -9,6 +9,8 @@ import Level.Map;
 import Level.Player;
 import Level.PlayerListener;
 import Maps.TestMap;
+import Maps.Level2Fields;
+import Maps.Level3Forest;
 import Players.Cat;
 import Utils.Stopwatch;
 import javax.sound.sampled.Clip;
@@ -35,9 +37,15 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 	protected long startTime;
 	protected long pauseTime;
 	protected long startPauseTime;
+	protected static int k;
 
 	public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
 		this.screenCoordinator = screenCoordinator;
+	}
+	
+	public static int mapSelection(int i) {
+		k = i;
+		return k;
 	}
 
 	public void initialize() {
@@ -46,7 +54,14 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		audio.setPosition(0, 0);
 		audio.setPosition(5, 0);
 		audio.stopPlaying(5);
-		this.map = new TestMap();
+		if (k == 0) {
+			this.map = new TestMap();
+		} else if (k == 1) {
+			this.map = new Level2Fields();
+		} else if (k == 2) {
+			this.map = new Level3Forest();
+		}
+		
 		map.reset();
 
 		// setup time
@@ -179,4 +194,5 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 	private enum PlayLevelScreenState {
 		RUNNING, LEVEL_COMPLETED, PLAYER_DEAD, LEVEL_WIN_MESSAGE, LEVEL_LOSE_MESSAGE
 	}
+
 }

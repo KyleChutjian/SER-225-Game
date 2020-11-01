@@ -11,8 +11,6 @@ import Screens.OptionsScreen;
 import Screens.MenuScreen;
 import Screens.LevelSelectScreen;
 import Screens.PlayLevelScreen;
-import Screens.Level2FieldsScreen;
-import Screens.Level3ForestScreen;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -58,10 +56,10 @@ public class ScreenCoordinator extends Screen {
 						currentScreen = new PlayLevelScreen(this);
 						break;
 					case LEVEL2:
-						currentScreen = new Level2FieldsScreen(this);
+						currentScreen = new PlayLevelScreen(this);
 						break;
 					case LEVEL3:
-						currentScreen = new Level3ForestScreen(this);
+						currentScreen = new PlayLevelScreen(this);
 						break;
 					case INSTRUCTIONS:
 						currentScreen = new InstructionsScreen(this);
