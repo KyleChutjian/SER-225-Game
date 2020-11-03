@@ -453,7 +453,12 @@ public abstract class Player extends GameObject {
 	}
 
 	public void setCurrentHealth(int currentHealth) {
-		this.currentHealth = currentHealth;
+		if (currentHealth > 0 && currentHealth < 10) {
+			this.currentHealth = currentHealth;
+		} else {
+			System.out.println("Not within 0 and 9 health");
+		}
+
 	}
 
 	public PlayerState getPlayerState() {
