@@ -195,7 +195,7 @@ public class CommonTileset extends Tileset {
                 .withBounds(new Rectangle(0, 8, 16, 8))
                 .build();
 
-        MapTileBuilder topWaterTile = new MapTileBuilder(topWaterFrame).withTileType(TileType.WATER);
+        MapTileBuilder topWaterTile = new MapTileBuilder(topWaterFrame).withTileType(TileType.LIQUID);
 
         mapTiles.add(topWaterTile);
 
@@ -204,7 +204,7 @@ public class CommonTileset extends Tileset {
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder waterTile = new MapTileBuilder(waterFrame).withTileType(TileType.WATER);
+        MapTileBuilder waterTile = new MapTileBuilder(waterFrame).withTileType(TileType.LIQUID);
 
         mapTiles.add(waterTile);
 
@@ -217,7 +217,255 @@ public class CommonTileset extends Tileset {
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(greyRockTile);
+        
+     // Snowy Rock
+        Frame greyRockSnowFrame = new FrameBuilder(getSubImage(3, 3), 0)
+                .withScale(tileScale)
+                .build();
 
+        MapTileBuilder greyRockSnowTile = new MapTileBuilder(greyRockSnowFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(greyRockSnowTile);
+        
+     // Snowy Grass
+        Frame grassSnowFrame = new FrameBuilder(getSubImage(3, 4), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder grassSnowTile = new MapTileBuilder(grassSnowFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(grassSnowTile);
+        
+     // Sand
+        Frame sandFrame = new FrameBuilder(getSubImage(3, 5), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder sandTile = new MapTileBuilder(sandFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(sandTile);
+
+        // SandStone
+        Frame sandStoneFrame = new FrameBuilder(getSubImage(4, 0), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder sandStoneTile = new MapTileBuilder(sandStoneFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(sandStoneTile);
+        
+     // Left End Branch with Snow at Night
+        Frame leftEndSnowyNightBranchFrame = new FrameBuilder(getSubImage(4, 1), 0)
+                .withScale(tileScale)
+                .withBounds(0, 6, 16, 4)
+                .build();
+
+        MapTileBuilder leftEndSnowyNightBranchTile = new MapTileBuilder(leftEndSnowyNightBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+
+        mapTiles.add(leftEndSnowyNightBranchTile);
+        
+        // Right End Branch with Snow at Night
+        Frame rightEndSnowyNightBranchFrame = new FrameBuilder(getSubImage(4, 2), 0)
+                .withScale(tileScale)
+                .withBounds(0, 6, 16, 4)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+
+        MapTileBuilder rightEndSnowyNightBranchTile = new MapTileBuilder(rightEndSnowyNightBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+        
+        mapTiles.add(rightEndSnowyNightBranchTile);
+        
+        
+     // Ice
+        Frame iceFrame = new FrameBuilder(getSubImage(4, 3), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder iceTile = new MapTileBuilder(iceFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(iceTile);
+        
+     // Left End Branch at Night
+        Frame leftEndNightBranchFrame = new FrameBuilder(getSubImage(4, 4), 0)
+                .withScale(tileScale)
+                .withBounds(0, 6, 16, 4)
+                .build();
+
+        MapTileBuilder leftEndNightBranchTile = new MapTileBuilder(leftEndNightBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+
+        mapTiles.add(leftEndNightBranchTile);
+
+        // Right End Branch at Night
+        Frame rightEndNightBranchFrame = new FrameBuilder(getSubImage(4, 5), 0)
+                .withScale(tileScale)
+                .withBounds(0, 6, 16, 4)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+
+        MapTileBuilder rightEndNightBranchTile = new MapTileBuilder(rightEndNightBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+
+        mapTiles.add(rightEndNightBranchTile);
+        
+     // Night Sky Single Star
+        Frame NightSkyFrame = new FrameBuilder(getSubImage(5, 0), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder NightSkyTile = new MapTileBuilder(NightSkyFrame);
+
+        mapTiles.add(NightSkyTile);
+        
+     // Water Night
+        Frame NightWaterFrame = new FrameBuilder(getSubImage(5, 1), 0)
+                .withScale(tileScale)
+                .withBounds(new Rectangle(0, 8, 16, 8))
+                .build();
+
+        MapTileBuilder NightWaterTile = new MapTileBuilder(NightWaterFrame)
+                .withTileType(TileType.LIQUID);
+
+        mapTiles.add(NightWaterTile);
+        
+     // LAVA Night
+        Frame NightLavaFrame = new FrameBuilder(getSubImage(5, 2), 0)
+                .withScale(tileScale)
+                .withBounds(new Rectangle(0, 8, 16, 8))
+                .build();
+
+        MapTileBuilder NightLavaTile = new MapTileBuilder(NightLavaFrame)
+                .withTileType(TileType.LIQUID);
+
+        mapTiles.add(NightLavaTile);
+        
+     // LAVA
+        Frame LavaFrame = new FrameBuilder(getSubImage(5, 3), 0)
+                .withScale(tileScale)
+                .withBounds(new Rectangle(0, 8, 16, 8))
+                .build();
+
+        MapTileBuilder LavaTile = new MapTileBuilder(LavaFrame)
+                .withTileType(TileType.LIQUID);
+
+        mapTiles.add(LavaTile);
+        
+        // LAVA Body
+        Frame LavaBodyFrame = new FrameBuilder(getSubImage(5, 4), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder LavaBodyTile = new MapTileBuilder(LavaBodyFrame);
+
+        mapTiles.add(LavaBodyTile);
+        
+     // Snowy Treetop
+        Frame treeTopSnowFrame = new FrameBuilder(getSubImage(5, 5), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder treeTopSnowTile = new MapTileBuilder(treeTopSnowFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(treeTopSnowTile);
+        
+     // Right End Branch with Snow
+        Frame rightEndSnowyBranchFrame = new FrameBuilder(getSubImage(6, 0), 0)
+                .withScale(tileScale)
+                .withBounds(0, 6, 16, 4)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+
+        MapTileBuilder rightEndSnowyBranchTile = new MapTileBuilder(rightEndSnowyBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+
+        mapTiles.add(rightEndSnowyBranchTile);
+        
+        // Left End Branch with Snow
+        Frame leftEndSnowyBranchFrame = new FrameBuilder(getSubImage(6, 1), 0)
+                .withScale(tileScale)
+                .withBounds(0, 6, 16, 4)
+                .build();
+
+        MapTileBuilder leftEndSnowyBranchTile = new MapTileBuilder(leftEndSnowyBranchFrame)
+                .withTileType(TileType.JUMP_THROUGH_PLATFORM);
+
+        mapTiles.add(leftEndSnowyBranchTile);
+
+    
+        // Moon
+        Frame MoonFrame = new FrameBuilder(getSubImage(6, 2), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder MoonTile = new MapTileBuilder(MoonFrame);
+
+        mapTiles.add(MoonTile);
+        
+     // Open Night Sky
+        Frame NightFrame = new FrameBuilder(getSubImage(6, 3), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder NightTile = new MapTileBuilder(NightFrame);
+
+        mapTiles.add(NightTile);
+        
+     // Cactus Top
+        Frame CactusTopFrame = new FrameBuilder(getSubImage(6, 4), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder CactusTopTile = new MapTileBuilder(CactusTopFrame)
+        		.withTileType(TileType.CACTUS);
+
+        mapTiles.add(CactusTopTile);
+        
+     // Cactus Body
+        Frame CactusBodyFrame = new FrameBuilder(getSubImage(6, 5), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder CactusBodyTile = new MapTileBuilder(CactusBodyFrame)
+        		.withTileType(TileType.CACTUS);
+
+        mapTiles.add(CactusBodyTile);
+        
+     // Cactus Top at Night
+        Frame CactusTopNightFrame = new FrameBuilder(getSubImage(7, 0), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder CactusTopNightTile = new MapTileBuilder(CactusTopNightFrame)
+        		.withTileType(TileType.CACTUS);
+
+        mapTiles.add(CactusTopNightTile);
+        
+     // Night Sky with Stars Variant 1
+        Frame Night2Frame = new FrameBuilder(getSubImage(7, 1), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder Night2Tile = new MapTileBuilder(Night2Frame);
+
+        mapTiles.add(Night2Tile);
+        
+     // Night Sky with Stars Variant 2
+        Frame Night3Frame = new FrameBuilder(getSubImage(7, 2), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder Night3Tile = new MapTileBuilder(Night3Frame);
+
+        mapTiles.add(Night3Tile);
+        
         return mapTiles;
     }
 }
