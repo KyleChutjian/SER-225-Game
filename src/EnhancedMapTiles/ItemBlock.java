@@ -80,9 +80,6 @@ public class ItemBlock extends EnhancedMapTile {
     }
 
     public void changeAnimation(int x) {
-
-
-
         if (test != 1) {
                 z++;
                 if (z % 3 == 0) {
