@@ -11,6 +11,18 @@ import Level.PlayerListener;
 import Maps.TestMap;
 import Maps.Level2Fields;
 import Maps.Level3Forest;
+import Maps.Level4Lake;
+import Maps.Level5Hills;
+import Maps.Level6Sands;
+import Maps.Level7Dunes;
+import Maps.Level8Pyramid;
+import Maps.Level9Oasis;
+import Maps.Level10Mirage;
+import Maps.Level11Rocks;
+import Maps.Level12Mountains;
+import Maps.Level13Cliffs;
+import Maps.Level14Volcano;
+import Maps.Level15Descent;
 import Players.Cat;
 import Utils.Stopwatch;
 import javax.sound.sampled.Clip;
@@ -60,8 +72,32 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 			this.map = new Level2Fields();
 		} else if (k == 2) {
 			this.map = new Level3Forest();
+		} else if (k == 3) {
+			this.map = new Level4Lake();
+		} else if (k == 4) {
+			this.map = new Level5Hills();
+		} else if (k == 5) {
+			this.map = new Level6Sands();
+		} else if (k == 6) {
+			this.map = new Level7Dunes();
+		} else if (k == 7) {
+			this.map = new Level8Pyramid();
+		} else if (k == 8) {
+			this.map = new Level9Oasis();
+		} else if (k == 9) {
+			this.map = new Level10Mirage();
+		} else if (k == 10) {
+			this.map = new Level11Rocks();
+		} else if (k == 11) {
+			this.map = new Level12Mountains();
+		} else if (k == 12) {
+			this.map = new Level13Cliffs();
+		} else if (k == 13) {
+			this.map = new Level14Volcano();
+		} else if (k == 14) {
+			this.map = new Level15Descent();
 		}
-		
+
 		map.reset();
 
 		// setup time

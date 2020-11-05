@@ -495,29 +495,41 @@ public class LevelSelectScreen extends Screen {
         			screenCoordinator.setGameState(GameState.LEVEL3);
         			PlayLevelScreen.mapSelection(2);
         		} else if (currentMenuItemHovered == 3) {
-        			//screenCoordinator.setGameState(GameState.LEVEL4);
+        			screenCoordinator.setGameState(GameState.LEVEL4);
+        			PlayLevelScreen.mapSelection(3);
         		} else if (currentMenuItemHovered == 4) {
-        			//screenCoordinator.setGameState(GameState.LEVEL5);
+        			screenCoordinator.setGameState(GameState.LEVEL5);
+        			PlayLevelScreen.mapSelection(4);
         		} else if (currentMenuItemHovered == 5) {
-        			//screenCoordinator.setGameState(GameState.LEVEL6);
+        			screenCoordinator.setGameState(GameState.LEVEL6);
+        			PlayLevelScreen.mapSelection(5);
         		} else if (currentMenuItemHovered == 6) {
-        			//screenCoordinator.setGameState(GameState.LEVEL7);
+        			screenCoordinator.setGameState(GameState.LEVEL7);
+        			PlayLevelScreen.mapSelection(6);
         		} else if (currentMenuItemHovered == 7) {
-        			//screenCoordinator.setGameState(GameState.LEVEL8);
+        			screenCoordinator.setGameState(GameState.LEVEL8);
+        			PlayLevelScreen.mapSelection(7);
         		} else if (currentMenuItemHovered == 8) {
-        			//screenCoordinator.setGameState(GameState.LEVEL9);
+        			screenCoordinator.setGameState(GameState.LEVEL9);
+        			PlayLevelScreen.mapSelection(8);
         		} else if (currentMenuItemHovered == 9) {
-        			//screenCoordinator.setGameState(GameState.LEVEL10);
+        			screenCoordinator.setGameState(GameState.LEVEL10);
+        			PlayLevelScreen.mapSelection(9);
         		} else if (currentMenuItemHovered == 10) {
-        			//screenCoordinator.setGameState(GameState.LEVEL11);
+        			screenCoordinator.setGameState(GameState.LEVEL11);
+        			PlayLevelScreen.mapSelection(10);
         		} else if (currentMenuItemHovered == 11) {
-        			//screenCoordinator.setGameState(GameState.LEVEL12);
+        			screenCoordinator.setGameState(GameState.LEVEL12);
+        			PlayLevelScreen.mapSelection(11);
         		} else if (currentMenuItemHovered == 12) {
-        			//screenCoordinator.setGameState(GameState.LEVEL13);
+        			screenCoordinator.setGameState(GameState.LEVEL13);
+        			PlayLevelScreen.mapSelection(12);
         		} else if (currentMenuItemHovered == 13) {
-        			//screenCoordinator.setGameState(GameState.LEVEL14);
+        			screenCoordinator.setGameState(GameState.LEVEL14);
+        			PlayLevelScreen.mapSelection(13);
         		} else if (currentMenuItemHovered == 14) {
-        			//screenCoordinator.setGameState(GameState.LEVEL15);
+        			screenCoordinator.setGameState(GameState.LEVEL15);
+        			PlayLevelScreen.mapSelection(14);
         		}
         	}
 

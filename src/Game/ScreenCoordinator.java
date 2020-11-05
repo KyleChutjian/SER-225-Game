@@ -61,6 +61,42 @@ public class ScreenCoordinator extends Screen {
 					case LEVEL3:
 						currentScreen = new PlayLevelScreen(this);
 						break;
+					case LEVEL4:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL5:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL6:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL7:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL8:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL9:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL10:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL11:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL12:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL13:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL14:
+						currentScreen = new PlayLevelScreen(this);
+						break;
+					case LEVEL15:
+						currentScreen = new PlayLevelScreen(this);
+						break;
 					case INSTRUCTIONS:
 						currentScreen = new InstructionsScreen(this);
 						break;
