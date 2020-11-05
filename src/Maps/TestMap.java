@@ -3,14 +3,18 @@ package Maps;
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
 import Engine.ImageLoader;
+import EnhancedMapTiles.CuriosityOrb;
+import EnhancedMapTiles.CuriosityOrb;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
+import EnhancedMapTiles.Items;
 import GameObject.Rectangle;
 import Level.*;
 import NPCs.Walrus;
 import Tilesets.CommonTileset;
 import Utils.Direction;
 import Utils.Point;
+import EnhancedMapTiles.ItemBlock;
 
 import java.util.ArrayList;
 
@@ -47,7 +51,14 @@ public class TestMap extends Map {
         enhancedMapTiles.add(new EndLevelBox(
                 getPositionByTileIndex(32, 7)
         ));
-
+        
+        enhancedMapTiles.add(new CuriosityOrb(
+                getPositionByTileIndex(21, 5)
+        ));
+        
+        ItemBlock itemBlock = new ItemBlock(getPositionByTileIndex(14, 5), enhancedMapTiles, loadEnemies());
+        enhancedMapTiles.add(itemBlock);
+       
         return enhancedMapTiles;
     }
 

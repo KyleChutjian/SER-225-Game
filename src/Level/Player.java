@@ -315,7 +315,13 @@ public abstract class Player extends GameObject {
 
 	@Override
 	public void onEndCollisionCheckX(boolean hasCollided, Direction direction) {
-
+		if (hasCollided) {
+			if (MapTileCollisionHandler.getCollidedXTile() == null) {
+				return;
+			} else if (MapTileCollisionHandler.getCollidedXTile().tileType == TileType.CACTUS) {
+				decreaseHealth();
+			}
+		}
 	}
 
 	@Override
@@ -340,6 +346,31 @@ public abstract class Player extends GameObject {
 			}
 		}
 	}
+	
+	// Mainly used to hurt player if comes in contact with sides of cacti
+	public void decreaseHealth() {
+	    currentHealth = getCurrentHealth() - 1;
+	    if (MapTileCollisionHandler.getCollidedXTile().getX2() <= this.getX()) {
+    		knockRight = true;
+			justHurt = true;
+			momentumY = 0;
+			knockbackAmount = 100;
+			knockMaxHeight = 50;
+    	} else if (MapTileCollisionHandler.getCollidedXTile().getX2() > this.getX()) {
+    		knockLeft = true;
+			justHurt = true;
+			momentumY = 0;
+			knockbackAmount = 100;
+			knockMaxHeight = 50;
+    	}
+	    if (getCurrentHealth() <= 0) {
+	        currentHealth = 0;
+	        levelState = LevelState.PLAYER_DEAD;
+	    } else {
+	        currentAnimationName = "HURT";
+	    }
+	}
+	
 
 	// other entities can call this method to hurt the player
 	public void hurtPlayer(MapEntity mapEntity) {
@@ -453,7 +484,12 @@ public abstract class Player extends GameObject {
 	}
 
 	public void setCurrentHealth(int currentHealth) {
-		this.currentHealth = currentHealth;
+		if (currentHealth > 0 && currentHealth < 10) {
+			this.currentHealth = currentHealth;
+		} else {
+			System.out.println("Not within 0 and 9 health");
+		}
+
 	}
 
 	public PlayerState getPlayerState() {
