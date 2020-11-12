@@ -31,6 +31,7 @@ public class Level2Fields extends Map {
         enemies.add(new BugEnemy(getPositionByTileIndex(55, 16), Direction.RIGHT));
         enemies.add(new BugEnemy(getPositionByTileIndex(65, 17), Direction.RIGHT));
         enemies.add(new BugEnemy(getPositionByTileIndex(75, 16), Direction.LEFT));
+        
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(92, 8).addY(2), getPositionByTileIndex(95, 8).addY(2), Direction.RIGHT));
         return enemies;
     }

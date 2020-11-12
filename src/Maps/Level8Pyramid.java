@@ -24,15 +24,12 @@ public class Level8Pyramid extends Map {
         if (randomEndValue == 0) {
         	x = 147;
         	y = 7;
-        	System.out.println("0");
         } else if (randomEndValue == 1) {
         	x = 147;
         	y = 26;
-        	System.out.println("1");
         } else if (randomEndValue == 2) {
         	x = 148;
         	y = 46;
-        	System.out.println("2");
         }
 
     }

@@ -175,6 +175,14 @@ public class LevelSelectScreen extends Screen {
     		keyTimer.reset();
             audio.startPlayingOnce(6);
     		currentMenuItemHovered--;
+    	} else if (Keyboard.isKeyDown(Key.currentRIGHT) && keyTimer.isTimeUp()) {
+    		keyTimer.reset();
+            audio.startPlayingOnce(6);
+    		currentMenuItemHovered += 5;
+    	} else if (Keyboard.isKeyDown(Key.currentLEFT) && keyTimer.isTimeUp()) {
+    		keyTimer.reset();
+            audio.startPlayingOnce(6);
+    		currentMenuItemHovered -= 5;
     	}
 
 
