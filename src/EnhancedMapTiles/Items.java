@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class Items extends EnhancedMapTile {
     private Float x,y;
     private ItemBlock itemBlock;
-    private boolean hit = false;
+    private boolean hitItem = false;
     private ArrayList<Enemy> enemyList;
 
 
@@ -35,11 +35,11 @@ public class Items extends EnhancedMapTile {
     public void update(Player player) {
         super.update(player);
 
-        if (player.intersects(this) && hit == false) {
+        if (player.intersects(this) && itemBlock.getHit() == true && hitItem == false) {
             System.out.println("Hit Item");
             getItem(player);
             setAnimation("DEFAULT");
-            hit = true;
+            hitItem = true;
         }
 
         else {
@@ -53,7 +53,7 @@ public class Items extends EnhancedMapTile {
             player.setCurrentHealth(player.getCurrentHealth() + 1);
 
         } else if (itemBlock.getAnimation().equals("COIN")) {
-
+            player.setCoins(player.getCoins() + 1);
 
         } else if (itemBlock.equals("ENEMY")) {
 

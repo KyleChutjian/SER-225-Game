@@ -20,7 +20,7 @@ public class ItemBlock extends EnhancedMapTile {
     private int z = 0;
     private Boolean cycle = false;
     private Boolean hit = false;
-    private int test = 1000;
+    private int countDown = 1000;
     private Items items;
 
     public ItemBlock(Point location, ArrayList<EnhancedMapTile> arrayList, ArrayList<Enemy> enemyList) {
@@ -41,10 +41,10 @@ public class ItemBlock extends EnhancedMapTile {
         z += randomNumber;
 
         if (cycle == true) {
-            test -= 5;
+            countDown -= 5;
         }
 
-        if (test > 0 && test < 1000 && test % 50 == 0 && hit != true) {
+        if (countDown > 0 && countDown < 1000 && countDown % 50 == 0 && hit != true) {
             changeAnimation(z);
         }
         if (player.getBoundsX2() < x + 40 && player.getBoundsX2() > x - 30 && player.getBoundsY2() > y + 37 && player.getBoundsY2() < y + 38) {
@@ -52,9 +52,9 @@ public class ItemBlock extends EnhancedMapTile {
             cycle = true;
 
         } else {
-            if (test < 0) {
+            if (countDown < 0) {
                 cycle = false;
-                test = 1000;
+                countDown = 1000;
                 if (hit == false) {
                     releaseItem(getAnimation());
                 }
@@ -80,7 +80,7 @@ public class ItemBlock extends EnhancedMapTile {
     }
 
     public void changeAnimation(int x) {
-        if (test != 1) {
+        if (countDown != 1) {
                 z++;
                 if (z % 3 == 0) {
                     setAnimation("HEART");
@@ -101,6 +101,10 @@ public class ItemBlock extends EnhancedMapTile {
         }
 
 
+    }
+
+    public boolean getHit() {
+        return hit;
     }
 
     @Override

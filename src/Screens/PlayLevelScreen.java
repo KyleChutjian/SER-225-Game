@@ -4,10 +4,7 @@ import Engine.Audio;
 import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import Level.HUD;
-import Level.Map;
-import Level.Player;
-import Level.PlayerListener;
+import Level.*;
 import Maps.TestMap;
 import Maps.Level2Fields;
 import Maps.Level3Forest;
@@ -121,10 +118,44 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		// if level is "running" update player and map to keep game logic for the
 		// platformer level going
 		case RUNNING:
+			if (player.getLevelState() == LevelState.LEVEL_COMPLETED || player.getLevelState() == LevelState.PLAYER_DEAD) {
+				audio.stopPlayingMusic();
+			}
+			if (!isGamePaused && player.getLevelState() == LevelState.RUNNING) {
+				switch (k) {
+					case 0,1,2:
+						audio.startPlayingLoop(0); // jumper
+						break;
+					case 3,4:
+						audio.startPlayingLoop(13); // mario forest
+						break;
+
+					case 5,6,7:
+						audio.startPlayingLoop(12); // day sonic desert
+						break;
+
+					case 8,9:
+						audio.startPlayingLoop(11); // mario desert
+						break;
+
+					case 10,11,12:
+						audio.startPlayingLoop(9); // aquatic mountain
+						break;
+
+					case 13:
+						audio.startPlayingLoop(8); // second mountain clip
+						break;
+
+					case 14:
+						audio.startPlayingLoop(14); // credits
+				}
+			}
+
 			if (Keyboard.isKeyDown(Key.P) && !keyLocker.isKeyLocked(Key.P)) {
 				audio.stopPlaying(0);
 				isGamePaused = !isGamePaused;
 				keyLocker.lockKey(Key.P);
+
 
 				if (isGamePaused) {
 					audio.startPlayingOnce(4);
@@ -156,14 +187,14 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 			levelClearedScreen.initialize();
 			screenTimer.setWaitTime(2500);
 			playLevelScreenState = PlayLevelScreenState.LEVEL_WIN_MESSAGE;
-			audio.stopPlaying(0);
+			audio.stopPlayingMusic();
+			audio.startPlayingOnce(1);
 			break;
 		// if level cleared screen is up and the timer is up for how long it should stay
 		// out, go back to main menu
 		case LEVEL_WIN_MESSAGE:
 			if (screenTimer.isTimeUp()) {
 				levelClearedScreen = null;
-				audio.stopPlaying(0);
 				goBackToMenu();
 			}
 			break;

@@ -3,18 +3,14 @@ package Maps;
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
 import Engine.ImageLoader;
+import EnhancedMapTiles.*;
 import EnhancedMapTiles.CuriosityOrb;
-import EnhancedMapTiles.CuriosityOrb;
-import EnhancedMapTiles.EndLevelBox;
-import EnhancedMapTiles.HorizontalMovingPlatform;
-import EnhancedMapTiles.Items;
 import GameObject.Rectangle;
 import Level.*;
 import NPCs.Walrus;
 import Tilesets.CommonTileset;
 import Utils.Direction;
 import Utils.Point;
-import EnhancedMapTiles.ItemBlock;
 
 import java.util.ArrayList;
 
@@ -58,7 +54,16 @@ public class TestMap extends Map {
         
         ItemBlock itemBlock = new ItemBlock(getPositionByTileIndex(14, 5), enhancedMapTiles, loadEnemies());
         enhancedMapTiles.add(itemBlock);
-       
+
+        ArrayList<Point> coinLocations = new ArrayList<Point>();
+        coinLocations.add(new Point(900,250));
+        coinLocations.add(new Point(300, 300));
+
+        for (int i = 0; i < coinLocations.size(); i++) {
+            Coin coin = new Coin(coinLocations.get(i));
+            enhancedMapTiles.add(coin);
+        }
+
         return enhancedMapTiles;
     }
 

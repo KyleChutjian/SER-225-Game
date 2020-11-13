@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /*
  * This is where the game loop starts
@@ -46,6 +48,17 @@ public class GamePanel extends JPanel {
 		graphicsHandler = new GraphicsHandler();
 
 		screenManager = new ScreenManager();
+
+		try {
+			FileWriter writer = new FileWriter("SavedData/MapData.txt");
+			writer.write("0");
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("Error");
+		}
+
+
+
 
 		// Every timer "tick" will call the update method as well as tell the JPanel to repaint
 		// Remember that repaint "schedules" a paint rather than carries it out immediately

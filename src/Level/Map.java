@@ -6,7 +6,7 @@ import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
 import Utils.Point;
-
+import Engine.GamePanel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -66,10 +66,8 @@ public abstract class Map {
 	// if set to false, camera will not move as player moves
 	protected boolean adjustCamera = true;
 
-	// For playing Audio
-	protected static AudioInputStream backgroundAudio, winningSoundAudio, gameOverAudio, jumpingAudio, menuButtonAudio, forwardAudio, backwardAudio, menuSelectionAudio, pauseAudio, mainMenuAudio;
-	protected static Clip backgroundClip, winningSoundClip, gameOverClip, jumpingClip, menuButtonClip, forwardClip, backwardClip, menuSelectionClip, pauseClip, mainMenuClip;
 	protected static ArrayList<Clip> audioList;
+	protected Audio audio;
 
 
 	public Map(String mapFileName, Tileset tileset, Point playerStartTile) {
@@ -83,6 +81,7 @@ public abstract class Map {
 		this.xMidPoint = ScreenManager.getScreenWidth() / 2;
 		this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
 		this.playerStartTile = playerStartTile;
+		audio = GamePanel.getAudio();
 	}
 
 	// sets up map by reading in the map file to create the tile map
@@ -337,6 +336,7 @@ public abstract class Map {
 	}
 
 	public void update(Player player) {
+
 		if (adjustCamera) {
 			adjustMovementY(player);
 			adjustMovementX(player);

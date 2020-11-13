@@ -10,7 +10,11 @@ import Utils.AirGroundState;
 import Utils.Direction;
 import Engine.Audio;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public abstract class Player extends GameObject {
 
@@ -23,6 +27,7 @@ public abstract class Player extends GameObject {
 	protected float terminalVelocityY = 0;
 	protected float momentumYIncrease = 0;
 	protected int currentHealth = 9;
+	protected int coins = 0;
 	protected float knockbackAmount = 0;
 	protected float knockMaxHeight = 20;
 
@@ -59,6 +64,7 @@ public abstract class Player extends GameObject {
 	protected boolean justHurt = false;
 
 	protected Audio audio = null;
+	protected FileWriter mapWriter;
 
 	public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
 		super(spriteSheet, x, y, startingAnimationName);
@@ -69,6 +75,16 @@ public abstract class Player extends GameObject {
 		playerState = PlayerState.STANDING;
 		previousPlayerState = playerState;
 		levelState = LevelState.RUNNING;
+
+		try {
+			File fileReader = new File("SavedData/MapData.txt");
+			Scanner mapReader = null;
+			mapReader = new Scanner(fileReader);
+			setCoins(mapReader.nextInt());
+			mapWriter = new FileWriter("SavedData/MapData.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void update() {
@@ -107,7 +123,7 @@ public abstract class Player extends GameObject {
 
 		// if player is currently playing through level (has not won or lost)
 		if (levelState == LevelState.RUNNING) {
-			audio.startPlayingLoop(0);
+
 			applyGravity();
 
 			// update player's state and current actions, which includes things like
@@ -141,7 +157,16 @@ public abstract class Player extends GameObject {
 			audio.startPlayingOnce(2);
 			updatePlayerDead();
 		}
+
+		try {
+			mapWriter = new FileWriter("SavedData/MapData.txt");
+			mapWriter.write("" + coins);
+			mapWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+
 
 	// add gravity to player, which is a downward force
 	protected void applyGravity() {
@@ -486,9 +511,16 @@ public abstract class Player extends GameObject {
 	public void setCurrentHealth(int currentHealth) {
 		if (currentHealth > 0 && currentHealth < 10) {
 			this.currentHealth = currentHealth;
-		} else {
-			System.out.println("Not within 0 and 9 health");
 		}
+
+	}
+
+	public int getCoins() {
+		return coins;
+	}
+
+	public void setCoins(int coins) {
+		this.coins = coins;
 
 	}
 
@@ -516,6 +548,10 @@ public abstract class Player extends GameObject {
 		this.levelState = levelState;
 	}
 
+	public LevelState getLevelState() {
+		return levelState;
+	}
+
 	public void addListener(PlayerListener listener) {
 		listeners.add(listener);
 	}
@@ -529,5 +565,6 @@ public abstract class Player extends GameObject {
 			return;
 		}
 	}
+
 
 }
