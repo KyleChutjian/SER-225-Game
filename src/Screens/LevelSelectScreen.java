@@ -494,7 +494,7 @@ public class LevelSelectScreen extends Screen {
             audio.startPlayingOnce(7);
         	
         		if(currentMenuItemHovered == 0) {
-        			screenCoordinator.setGameState(GameState.LEVEL);
+        			screenCoordinator.setGameState(GameState.STORY);
         			PlayLevelScreen.mapSelection(0);
         		} else if (currentMenuItemHovered == 1) {
         			screenCoordinator.setGameState(GameState.LEVEL2);
@@ -509,7 +509,7 @@ public class LevelSelectScreen extends Screen {
         			screenCoordinator.setGameState(GameState.LEVEL5);
         			PlayLevelScreen.mapSelection(4);
         		} else if (currentMenuItemHovered == 5) {
-        			screenCoordinator.setGameState(GameState.LEVEL6);
+        			screenCoordinator.setGameState(GameState.STORY2);
         			PlayLevelScreen.mapSelection(5);
         		} else if (currentMenuItemHovered == 6) {
         			screenCoordinator.setGameState(GameState.LEVEL7);
@@ -524,7 +524,7 @@ public class LevelSelectScreen extends Screen {
         			screenCoordinator.setGameState(GameState.LEVEL10);
         			PlayLevelScreen.mapSelection(9);
         		} else if (currentMenuItemHovered == 10) {
-        			screenCoordinator.setGameState(GameState.LEVEL11);
+        			screenCoordinator.setGameState(GameState.STORY3);
         			PlayLevelScreen.mapSelection(10);
         		} else if (currentMenuItemHovered == 11) {
         			screenCoordinator.setGameState(GameState.LEVEL12);
@@ -533,10 +533,10 @@ public class LevelSelectScreen extends Screen {
         			screenCoordinator.setGameState(GameState.LEVEL13);
         			PlayLevelScreen.mapSelection(12);
         		} else if (currentMenuItemHovered == 13) {
-        			screenCoordinator.setGameState(GameState.LEVEL14);
+        			screenCoordinator.setGameState(GameState.STORY4);
         			PlayLevelScreen.mapSelection(13);
         		} else if (currentMenuItemHovered == 14) {
-        			screenCoordinator.setGameState(GameState.LEVEL15);
+        			screenCoordinator.setGameState(GameState.STORY5);
         			PlayLevelScreen.mapSelection(14);
         		}
         	}

@@ -2,15 +2,22 @@ package Game;
 
 
 import Engine.DefaultScreen;
+
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Level.Map;
 import Screens.CreditsScreen;
 import Screens.InstructionsScreen;
+import Screens.LevelClearedScreen;
 import Screens.OptionsScreen;
 import Screens.MenuScreen;
 import Screens.LevelSelectScreen;
 import Screens.PlayLevelScreen;
+import Screens.StoryScreen;
+import Screens.StoryScreen2;
+import Screens.StoryScreen3;
+import Screens.StoryScreen4;
+import Screens.StoryScreen5;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -48,6 +55,21 @@ public class ScreenCoordinator extends Screen {
 				switch(gameState) {
 					case MENU:
 						currentScreen = new MenuScreen(this);
+						break;
+					case STORY:
+						currentScreen = new StoryScreen(this);
+						break;
+					case STORY2:
+						currentScreen = new StoryScreen2(this);
+						break;
+					case STORY3:
+						currentScreen = new StoryScreen3(this);
+						break;
+					case STORY4:
+						currentScreen = new StoryScreen4(this);
+						break;
+					case STORY5:
+						currentScreen = new StoryScreen5(this);
 						break;
 					case LEVELSELECT:
 						currentScreen = new LevelSelectScreen(this);

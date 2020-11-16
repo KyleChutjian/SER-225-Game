@@ -26,7 +26,7 @@ public class Level15Descent extends Map {
 //        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 //
 //        enhancedMapTiles.add(new EndLevelBox(
-//                getPositionByTileIndex(47, 1)
+//                getPositionByTileIndex(97, 18)
 //        ));
 //
 //        return enhancedMapTiles;
