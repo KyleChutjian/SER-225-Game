@@ -214,7 +214,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		case LEVEL_WIN_MESSAGE:
 			if (screenTimer.isTimeUp()) {
 				levelClearedScreen = null;
-				goBackToMenu();
+				goToNextLevel();
 			}
 			break;
 		// if player died in level, bring up level lost screen
@@ -270,6 +270,54 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
 	public void resetLevel() {
 		initialize();
+	}
+	
+	public void goToNextLevel() {
+		if (k == 0) {
+		k = 1;
+		screenCoordinator.setGameState(GameState.LEVEL2);
+		} else if ( k == 1 ){
+			k = 2;
+			screenCoordinator.setGameState(GameState.LEVEL3);
+		} else if ( k == 2 ){
+			k = 3;
+			screenCoordinator.setGameState(GameState.LEVEL4);
+		} else if ( k == 3 ){
+			k = 4;
+			screenCoordinator.setGameState(GameState.LEVEL5);
+		} else if ( k == 4 ){
+			k = 5;
+			screenCoordinator.setGameState(GameState.LEVEL6);
+		} else if ( k == 5 ){
+			k = 6;
+			screenCoordinator.setGameState(GameState.LEVEL7);
+		} else if ( k == 6 ){
+			k = 7;
+			screenCoordinator.setGameState(GameState.LEVEL8);
+		} else if ( k == 7 ){
+			k = 8;
+			screenCoordinator.setGameState(GameState.LEVEL9);
+		} else if ( k == 8 ){
+			k = 9;
+			screenCoordinator.setGameState(GameState.LEVEL10);
+		} else if ( k == 9 ){
+			k = 10;
+			screenCoordinator.setGameState(GameState.LEVEL11);
+		} else if ( k == 10 ){
+			k = 11;
+			screenCoordinator.setGameState(GameState.LEVEL12);
+		} else if ( k == 11 ){
+			k = 12;
+			screenCoordinator.setGameState(GameState.LEVEL13);
+		} else if ( k == 12 ){
+			k = 13;
+			screenCoordinator.setGameState(GameState.LEVEL14);
+		} else if ( k == 13 ){
+			k = 14;
+			screenCoordinator.setGameState(GameState.LEVEL15);
+		} else {
+			goBackToMenu();
+		}
 	}
 
 	public void goBackToMenu() {
