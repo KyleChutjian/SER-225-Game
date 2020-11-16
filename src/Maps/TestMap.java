@@ -2,6 +2,7 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.StillDinosaurEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.*;
 import EnhancedMapTiles.CuriosityOrb;
@@ -18,15 +19,20 @@ import java.util.ArrayList;
 // Represents a test map to be used in a level
 public class TestMap extends Map {
 
+    private ArrayList<Enemy> enemies;
+
     public TestMap() {
         super("test_map.txt", new CommonTileset(), new Point(1, 11));
     }
 
     @Override
     public ArrayList<Enemy> loadEnemies() {
-        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies = new ArrayList<>();
         enemies.add(new BugEnemy(getPositionByTileIndex(15, 9), Direction.LEFT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 1).addY(2), getPositionByTileIndex(22, 1).addY(2), Direction.RIGHT));
+        StillDinosaurEnemy testdino = new StillDinosaurEnemy(getPositionByTileIndex(14, 4).addY(2), getPositionByTileIndex(15, 4).addY(2), Direction.RIGHT);
+        enemies.add(testdino);
+
         return enemies;
     }
 
@@ -52,7 +58,7 @@ public class TestMap extends Map {
                 getPositionByTileIndex(21, 5)
         ));
         
-        ItemBlock itemBlock = new ItemBlock(getPositionByTileIndex(14, 5), enhancedMapTiles, loadEnemies());
+        ItemBlock itemBlock = new ItemBlock(getPositionByTileIndex(14, 5), enhancedMapTiles, enemies);
         enhancedMapTiles.add(itemBlock);
 
         ArrayList<Point> coinLocations = new ArrayList<Point>();

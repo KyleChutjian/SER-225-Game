@@ -123,29 +123,48 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 			}
 			if (!isGamePaused && player.getLevelState() == LevelState.RUNNING) {
 				switch (k) {
-					case 0,1,2:
+					case 0:
 						audio.startPlayingLoop(0); // jumper
 						break;
-					case 3,4:
+					case 1:
+						audio.startPlayingLoop(0); // jumper
+						break;
+					case 2:
+						audio.startPlayingLoop(0); // jumper
+						break;
+					case 3:
 						audio.startPlayingLoop(13); // mario forest
 						break;
-
-					case 5,6,7:
+					case 4:
+						audio.startPlayingLoop(13); // mario forest
+						break;
+					case 5:
 						audio.startPlayingLoop(12); // day sonic desert
 						break;
-
-					case 8,9:
+					case 6:
+						audio.startPlayingLoop(12); // day sonic desert
+						break;
+					case 7:
+						audio.startPlayingLoop(12); // day sonic desert
+						break;
+					case 8:
 						audio.startPlayingLoop(11); // mario desert
 						break;
-
-					case 10,11,12:
+					case 9:
+						audio.startPlayingLoop(11); // mario desert
+						break;
+					case 10:
 						audio.startPlayingLoop(9); // aquatic mountain
 						break;
-
+					case 11:
+						audio.startPlayingLoop(9); // aquatic mountain
+						break;
+					case 12:
+						audio.startPlayingLoop(9); // aquatic mountain
+						break;
 					case 13:
 						audio.startPlayingLoop(8); // second mountain clip
 						break;
-
 					case 14:
 						audio.startPlayingLoop(14); // credits
 				}

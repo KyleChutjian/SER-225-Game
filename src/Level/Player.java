@@ -27,7 +27,8 @@ public abstract class Player extends GameObject {
 	protected float terminalVelocityY = 0;
 	protected float momentumYIncrease = 0;
 	protected int currentHealth = 9;
-	protected int coins = 0;
+	protected int totalCoins = 0;
+	protected int currentCoins = 0;
 	protected float knockbackAmount = 0;
 	protected float knockMaxHeight = 20;
 
@@ -66,6 +67,7 @@ public abstract class Player extends GameObject {
 	protected Audio audio = null;
 	protected FileWriter mapWriter;
 
+
 	public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
 		super(spriteSheet, x, y, startingAnimationName);
 		audio = GamePanel.getAudio();
@@ -80,8 +82,12 @@ public abstract class Player extends GameObject {
 			File fileReader = new File("SavedData/MapData.txt");
 			Scanner mapReader = null;
 			mapReader = new Scanner(fileReader);
-			setCoins(mapReader.nextInt());
-			mapWriter = new FileWriter("SavedData/MapData.txt");
+			currentCoins = mapReader.nextInt();
+			totalCoins = mapReader.nextInt();
+
+			setCoins(totalCoins);
+
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -123,7 +129,16 @@ public abstract class Player extends GameObject {
 
 		// if player is currently playing through level (has not won or lost)
 		if (levelState == LevelState.RUNNING) {
+			try {
+				mapWriter = new FileWriter("SavedData/MapData.txt");
+				mapWriter.write("" + currentCoins);
+				mapWriter.write("\n" + totalCoins);
+				mapWriter.close();
 
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			applyGravity();
 
 			// update player's state and current actions, which includes things like
@@ -150,6 +165,19 @@ public abstract class Player extends GameObject {
 		else if (levelState == LevelState.LEVEL_COMPLETED) {
 			audio.startPlayingOnce(1);
 			updateLevelCompleted();
+
+			try {
+				mapWriter = new FileWriter("SavedData/MapData.txt");
+				mapWriter.write("" + (totalCoins + currentCoins));
+				mapWriter.write("\n" + (totalCoins + currentCoins));
+				mapWriter.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
+
 		}
 
 		// if player has lost level
@@ -158,14 +186,8 @@ public abstract class Player extends GameObject {
 			updatePlayerDead();
 		}
 
-		try {
-			mapWriter = new FileWriter("SavedData/MapData.txt");
-			mapWriter.write("" + coins);
-			mapWriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-	}
+
 
 
 	// add gravity to player, which is a downward force
@@ -399,7 +421,8 @@ public abstract class Player extends GameObject {
 
 	// other entities can call this method to hurt the player
 	public void hurtPlayer(MapEntity mapEntity) {
-		if (!isInvincible) {
+
+		if (!isInvincible && mapEntity.isActive) {
 			// if map entity is an enemy, hurt player on touch and initiate knock back.
 			if (justHurt == true) {
 				return;
@@ -516,11 +539,11 @@ public abstract class Player extends GameObject {
 	}
 
 	public int getCoins() {
-		return coins;
+		return currentCoins;
 	}
 
 	public void setCoins(int coins) {
-		this.coins = coins;
+		currentCoins = coins;
 
 	}
 

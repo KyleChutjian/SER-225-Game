@@ -90,11 +90,11 @@ public abstract class Map {
 	public void setupMap() {
 		loadMapFile();
 
+
 		this.enemies = loadEnemies();
 		for (Enemy enemy : this.enemies) {
 			enemy.setMap(this);
 		}
-
 		this.enhancedMapTiles = loadEnhancedMapTiles();
 		for (EnhancedMapTile enhancedMapTile : this.enhancedMapTiles) {
 			enhancedMapTile.setMap(this);
@@ -107,6 +107,7 @@ public abstract class Map {
 
 		this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
 	}
+
 
 	// reads in a map file to create the map's tilemap
 	private void loadMapFile() {

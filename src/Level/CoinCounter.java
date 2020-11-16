@@ -9,7 +9,10 @@ import GameObject.SpriteSheet;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 
 public class CoinCounter extends AnimatedSprite {
@@ -19,7 +22,6 @@ public class CoinCounter extends AnimatedSprite {
     private int coins = 0;
 
     public CoinCounter(float x, float y, Player player) {
-        //super(new SpriteSheet(ImageLoader.load("Items.png"), 16, 16), x, y, "COIN_DEFAULT");
         super(new SpriteSheet(ImageLoader.load("CoinCount.png"), 33, 16), x, y, "Default");
         this.player = player;
         coinCounter = new SpriteFont("" + coins, 425, 63, "Retro", 20, new Color(240, 237, 49));
@@ -49,8 +51,17 @@ public class CoinCounter extends AnimatedSprite {
 
     public void update() {
         super.update();
-        coins = player.getCoins();
-        coinCounter.setText("" + coins);
+        int currentCoins = 0;
+        try {
+            File fileReader = new File("SavedData/MapData.txt");
+            Scanner mapReader = null;
+            mapReader = new Scanner(fileReader);
+            currentCoins = mapReader.nextInt();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        coinCounter.setText("" + currentCoins);
 
     }
 

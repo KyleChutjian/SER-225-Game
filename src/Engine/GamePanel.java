@@ -52,6 +52,7 @@ public class GamePanel extends JPanel {
 		try {
 			FileWriter writer = new FileWriter("SavedData/MapData.txt");
 			writer.write("0");
+			writer.write("\n0");
 			writer.close();
 		} catch (IOException e) {
 			System.out.println("Error");

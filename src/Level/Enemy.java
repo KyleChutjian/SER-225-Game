@@ -11,6 +11,8 @@ import java.util.HashMap;
 // This class is a base class for all enemies in the game -- all enemies should extend from it
 public class Enemy extends MapEntity {
 
+    protected String type = "DEFAULT";
+
     public Enemy(float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
         super(x, y, spriteSheet, startingAnimation);
     }
@@ -53,6 +55,28 @@ public class Enemy extends MapEntity {
 
     // A subclass can override this method to specify what it does when it touches the player
     public void touchedPlayer(Player player) {
-        player.hurtPlayer(this);
+        if (super.isActive) {
+            player.hurtPlayer(this);
+        }
+
+    }
+
+    public void setActive(boolean active) {
+        super.isActive = active;
+    }
+    public boolean getActive() {
+        return isActive;
+    }
+
+    public String getEnemyType() {
+        if (type.equals("DINOSAUR_STILL")) {
+            return type;
+        } else {
+            return "Not still, skip in the loop";
+        }
+
+    }
+    public void setEnemyType(String type) {
+        this.type = type;
     }
 }
