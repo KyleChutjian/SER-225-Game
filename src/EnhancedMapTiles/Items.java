@@ -2,6 +2,7 @@ package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
 import Enemies.BugEnemy;
+import Enemies.DinosaurEnemy;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Frame;
@@ -12,15 +13,17 @@ import Level.Player;
 import Level.TileType;
 import Utils.Direction;
 import Utils.Point;
-
+import Engine.GamePanel;
+import Engine.Audio;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Items extends EnhancedMapTile {
     private Float x,y;
     private ItemBlock itemBlock;
-    private boolean hit = false;
+    private boolean hitItem = false;
     private ArrayList<Enemy> enemyList;
+    private Audio audio;
 
 
     public Items(Point location, ItemBlock itemBlock, ArrayList<Enemy> enemyList) {
@@ -29,20 +32,30 @@ public class Items extends EnhancedMapTile {
         this.y = location.y;
         this.itemBlock = itemBlock;
         this.enemyList = enemyList;
+        audio = GamePanel.getAudio();
     }
 
     @Override
     public void update(Player player) {
         super.update(player);
 
-        if (player.intersects(this) && hit == false) {
-            System.out.println("Hit Item");
-            getItem(player);
-            setAnimation("DEFAULT");
-            hit = true;
-        }
 
-        else {
+
+        if (itemBlock.getHit() == true) {
+            if (player.intersects(this) && hitItem == false) {
+                getItem(player);
+                setAnimation("DEFAULT");
+                hitItem = true;
+                System.out.println("Playing once:");
+                audio.startPlayingOnce(7);
+            } else if (itemBlock.getAnimation().equals("ENEMY")) {
+                for (int i = 0; i < enemyList.size(); i++) {
+                    if (enemyList.get(i).getEnemyType().equals("DINOSAUR_STILL")) {
+                        enemyList.get(i).setActive(true);
+                    }
+                }
+
+            }
 
         }
 
@@ -53,10 +66,11 @@ public class Items extends EnhancedMapTile {
             player.setCurrentHealth(player.getCurrentHealth() + 1);
 
         } else if (itemBlock.getAnimation().equals("COIN")) {
-
+            player.setCoins(player.getCoins() + 1);
 
         } else if (itemBlock.equals("ENEMY")) {
-
+            hitItem = true;
+            itemBlock.setHit(true);
 
         }
     }
@@ -65,13 +79,13 @@ public class Items extends EnhancedMapTile {
     public void changeAnimation(int x) {
 
             if (itemBlock.getAnimation().equals("HEART")) {
-
                 setAnimation("HEART_ITEM");
             } else if (itemBlock.getAnimation().equals("COIN")) {
                 setAnimation("COIN_ITEM");
-            } else if (itemBlock.equals("ENEMY")) {
-
-                enemyList.add(new BugEnemy(new Point(x,y +20), Direction.RIGHT));
+            } else if (itemBlock.getAnimation().equals("ENEMY")) {
+                hitItem = true;
+                itemBlock.setHit(true);
+                enemyList.get(2).setActive(true);
 
 
             }
@@ -101,9 +115,6 @@ public class Items extends EnhancedMapTile {
                     .withBounds(1, 1, 14, 14)
                     .build()
             });
-
-
-
 
         }};
     }

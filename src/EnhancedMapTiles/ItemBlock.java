@@ -1,6 +1,7 @@
 package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
+import Engine.Audio;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Frame;
@@ -10,7 +11,7 @@ import Level.EnhancedMapTile;
 import Level.Player;
 import Level.TileType;
 import Utils.Point;
-
+import Engine.GamePanel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -20,8 +21,9 @@ public class ItemBlock extends EnhancedMapTile {
     private int z = 0;
     private Boolean cycle = false;
     private Boolean hit = false;
-    private int test = 1000;
+    private int countDown = 1100;
     private Items items;
+    private Audio audio;
 
     public ItemBlock(Point location, ArrayList<EnhancedMapTile> arrayList, ArrayList<Enemy> enemyList) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("ItemBlock.png"), 16, 16), "DEFAULT", TileType.NOT_PASSABLE);
@@ -30,6 +32,7 @@ public class ItemBlock extends EnhancedMapTile {
         Point itemPoint = new Point(x, y-50);
         items = new Items(itemPoint, this, enemyList);
         arrayList.add(items);
+        audio = GamePanel.getAudio();
     }
 
     @Override
@@ -41,20 +44,21 @@ public class ItemBlock extends EnhancedMapTile {
         z += randomNumber;
 
         if (cycle == true) {
-            test -= 5;
+            countDown -= 5;
+
         }
 
-        if (test > 0 && test < 1000 && test % 50 == 0 && hit != true) {
+        if (countDown > 0 && countDown < 1100 && countDown % 50 == 0 && hit != true) {
             changeAnimation(z);
+            audio.startPlayingOnce(15);
         }
         if (player.getBoundsX2() < x + 40 && player.getBoundsX2() > x - 30 && player.getBoundsY2() > y + 37 && player.getBoundsY2() < y + 38) {
-            System.out.println("Hit Block");
             cycle = true;
 
         } else {
-            if (test < 0) {
+            if (countDown < 0) {
                 cycle = false;
-                test = 1000;
+                countDown = 1100;
                 if (hit == false) {
                     releaseItem(getAnimation());
                 }
@@ -67,20 +71,17 @@ public class ItemBlock extends EnhancedMapTile {
 
     private void releaseItem(String animation) {
         if (animation.equals("HEART")) {
-            //spawn heart
             items.changeAnimation(z);
         } else if (animation.equals("COIN")) {
-            //spawn coin
             items.changeAnimation(z);
         } else if (animation.equals("ENEMY")) {
-            //spawn enemy
             items.changeAnimation(z);
         }
 
     }
 
     public void changeAnimation(int x) {
-        if (test != 1) {
+        if (countDown != 1) {
                 z++;
                 if (z % 3 == 0) {
                     setAnimation("HEART");
@@ -102,6 +103,15 @@ public class ItemBlock extends EnhancedMapTile {
 
 
     }
+
+    public boolean getHit() {
+        return hit;
+    }
+
+    public void setHit(boolean hit) {
+        this.hit = hit;
+    }
+
 
     @Override
     public HashMap<String, Frame[]> getAnimations(SpriteSheet spriteSheet) {

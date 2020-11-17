@@ -5,14 +5,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.sound.sampled.*;
 
-
-
-
-
 public class Audio {
 
-    protected AudioInputStream backgroundAudio, winningSoundAudio, gameOverAudio, jumpingAudio, pauseAudio, mainMenuAudio, forwardAudio, backwardAudio;
-    protected Clip backgroundClip, winningSoundClip, gameOverClip, jumpingClip, pauseClip, mainMenuClip, forwardClip, backwardClip;
+    protected AudioInputStream forestAudio, forest2Audio, winningSoundAudio, gameOverAudio, jumpingAudio, pauseAudio, mainMenuAudio, forwardAudio, backwardAudio, mountainAudio, mountain2Audio, desertAudio, desert2Audio, desert3Audio, itemBlockAudio, creditsAudio;
+    protected Clip forestClip, forest2Clip, winningSoundClip, gameOverClip, jumpingClip, pauseClip, mainMenuClip, forwardClip, backwardClip, mountainClip, mountain2Clip, desertClip, desert2Clip, desert3Clip, itemBlockClip, creditsClip;
     protected ArrayList<Clip> audioList = new ArrayList<Clip>();
 
     public Audio() {
@@ -22,9 +18,13 @@ public class Audio {
     public ArrayList<Clip> loadAudio() {
 
         try {
-            backgroundAudio = AudioSystem.getAudioInputStream(new File("Audio/Jumper.wav"));
-            backgroundClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, backgroundAudio.getFormat()));
-            backgroundClip.open(backgroundAudio);
+            forestAudio = AudioSystem.getAudioInputStream(new File("Audio/Jumper.wav"));
+            forestClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, forestAudio.getFormat()));
+            forestClip.open(forestAudio);
+
+            forest2Audio = AudioSystem.getAudioInputStream(new File("Audio/Forest2.wav"));
+            forest2Clip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, forest2Audio.getFormat()));
+            forest2Clip.open(forest2Audio);
 
             winningSoundAudio = AudioSystem.getAudioInputStream(new File("Audio/winningSound.wav"));
             winningSoundClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, winningSoundAudio.getFormat()));
@@ -54,7 +54,35 @@ public class Audio {
             backwardClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, backwardAudio.getFormat()));
             backwardClip.open(backwardAudio);
 
-            audioList.add(backgroundClip); // index 0
+            mountainAudio = AudioSystem.getAudioInputStream(new File("Audio/MountainMusic.wav"));
+            mountainClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, mountainAudio.getFormat()));
+            mountainClip.open(mountainAudio);
+
+            mountain2Audio = AudioSystem.getAudioInputStream(new File("Audio/Mountain2Music.wav"));
+            mountain2Clip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, mountain2Audio.getFormat()));
+            mountain2Clip.open(mountain2Audio);
+
+            desertAudio = AudioSystem.getAudioInputStream(new File("Audio/DesertMusic.wav"));
+            desertClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, desertAudio.getFormat()));
+            desertClip.open(desertAudio);
+
+            desert2Audio = AudioSystem.getAudioInputStream(new File("Audio/Desert2Music.wav"));
+            desert2Clip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, desert2Audio.getFormat()));
+            desert2Clip.open(desert2Audio);
+
+            desert3Audio = AudioSystem.getAudioInputStream(new File("Audio/Desert3Music.wav"));
+            desert3Clip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, desert3Audio.getFormat()));
+            desert3Clip.open(desert3Audio);
+
+            creditsAudio = AudioSystem.getAudioInputStream(new File("Audio/Credits.wav"));
+            creditsClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, creditsAudio.getFormat()));
+            creditsClip.open(creditsAudio);
+
+            itemBlockAudio = AudioSystem.getAudioInputStream(new File("Audio/ItemBlock.wav"));
+            itemBlockClip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, itemBlockAudio.getFormat()));
+            itemBlockClip.open(itemBlockAudio);
+
+            audioList.add(forestClip); // index 0
             audioList.add(winningSoundClip); // index 1
             audioList.add(gameOverClip); // index 2
             audioList.add(jumpingClip); // index 3
@@ -62,6 +90,14 @@ public class Audio {
             audioList.add(mainMenuClip); // index 5
             audioList.add(forwardClip); // index 6
             audioList.add(backwardClip); // index 7
+            audioList.add(mountainClip); // index 8
+            audioList.add(mountain2Clip); // index 9
+            audioList.add(desertClip); // index 10
+            audioList.add(desert2Clip); // index 11
+            audioList.add(desert3Clip); // index 12
+            audioList.add(forest2Clip); // index 13
+            audioList.add(creditsClip); // index 14
+            audioList.add(itemBlockClip); // index 15
 
             setVolume(0, -10);
             setVolume(1, -10);
@@ -71,6 +107,14 @@ public class Audio {
             setVolume(5, -40);
             setVolume(6, -10);
             setVolume(7, -10);
+            setVolume(8, -10);
+            setVolume(9, -10);
+            setVolume(10, -10);
+            setVolume(11, -10);
+            setVolume(12, -10);
+            setVolume(13, -10);
+            setVolume(14, -10);
+            setVolume(15, -10);
 
             File audioFile = new File("SavedData/AudioPreferences.txt");
             Scanner audioInput = null;
@@ -101,8 +145,6 @@ public class Audio {
             } else if (effectPreference == 4) {
                 setEffectVolume(6);
             }
-
-
 
             return audioList;
 
@@ -135,14 +177,37 @@ public class Audio {
         if (audioList.get(index).getFramePosition() == audioList.get(index).getFrameLength()) {
             audioList.get(index).setFramePosition(0);
             audioList.get(index).start();
-        } else {
-            audioList.get(index).start();
         }
+        audioList.get(index).start();
 
     }
 
     public void stopPlaying(int index) {
         audioList.get(index).stop();
+    }
+
+    public void stopPlayingAll() {
+        for (int i = 0; i < audioList.size(); i++) {
+            audioList.get(i).stop();
+        }
+    }
+    public void stopPlayingMusic() {
+        audioList.get(0).stop();
+        audioList.get(8).stop();
+        audioList.get(9).stop();
+        audioList.get(10).stop();
+        audioList.get(11).stop();
+        audioList.get(12).stop();
+        audioList.get(13).stop();
+        audioList.get(14).stop();
+
+    }
+
+    public void resetAll() {
+        for (int i = 0; i < audioList.size(); i++) {
+            audioList.get(i).setFramePosition(0);
+        }
+
     }
 
     public void setVolume(int index, int volume) {
@@ -157,9 +222,29 @@ public class Audio {
             audioList.get(5).flush();
             audioList.get(5).setFramePosition(audioList.get(5).getFramePosition() - 45000);
         }
+        FloatControl forest = (FloatControl) audioList.get(0).getControl(FloatControl.Type.MASTER_GAIN);
+        forest.setValue(volume);
 
-        FloatControl game = (FloatControl) audioList.get(0).getControl(FloatControl.Type.MASTER_GAIN);
-        game.setValue(volume);
+        FloatControl forest2 = (FloatControl) audioList.get(13).getControl(FloatControl.Type.MASTER_GAIN);
+        forest2.setValue(volume);
+
+        FloatControl mountain = (FloatControl) audioList.get(8).getControl(FloatControl.Type.MASTER_GAIN);
+        mountain.setValue(volume);
+
+        FloatControl mountain2 = (FloatControl) audioList.get(9).getControl(FloatControl.Type.MASTER_GAIN);
+        mountain2.setValue(volume);
+
+        FloatControl desert = (FloatControl) audioList.get(10).getControl(FloatControl.Type.MASTER_GAIN);
+        desert.setValue(volume);
+
+        FloatControl desert2 = (FloatControl) audioList.get(11).getControl(FloatControl.Type.MASTER_GAIN);
+        desert2.setValue(volume);
+
+        FloatControl desert3 = (FloatControl) audioList.get(12).getControl(FloatControl.Type.MASTER_GAIN);
+        desert3.setValue(volume);
+
+        FloatControl credits = (FloatControl) audioList.get(14).getControl(FloatControl.Type.MASTER_GAIN);
+        credits.setValue(volume);
     }
 
     public void setEffectVolume(int volume) {
