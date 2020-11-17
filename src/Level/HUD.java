@@ -8,17 +8,21 @@ public class HUD {
 	protected Player player;
 	protected SpriteFont healthLabel;
 	private HealthBar healthBar;
+	private CoinCounter coins;
 
 	public HUD(Player player) {
 		this.player = player;
 		healthBar = new HealthBar(300, 20);
+		coins = new CoinCounter(367, 40, player);
 	}
 
 	public void draw(GraphicsHandler graphicsHandler) {
 		healthBar.draw(graphicsHandler);
+		coins.draw(graphicsHandler);
 	}
 
 	public void update() {
+		coins.update();
 		if (player.getCurrentHealth() == 9) {
 			healthBar.setAnimation("FULL_HEALTH");
 			healthBar.update();

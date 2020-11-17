@@ -4,10 +4,7 @@ import Engine.Audio;
 import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import Level.HUD;
-import Level.Map;
-import Level.Player;
-import Level.PlayerListener;
+import Level.*;
 import Maps.TestMap;
 import Maps.Level2Fields;
 import Maps.Level3Forest;
@@ -121,10 +118,63 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		// if level is "running" update player and map to keep game logic for the
 		// platformer level going
 		case RUNNING:
+			if (player.getLevelState() == LevelState.LEVEL_COMPLETED || player.getLevelState() == LevelState.PLAYER_DEAD) {
+				audio.stopPlayingMusic();
+			}
+			if (!isGamePaused && player.getLevelState() == LevelState.RUNNING) {
+				switch (k) {
+					case 0:
+						audio.startPlayingLoop(0); // jumper
+						break;
+					case 1:
+						audio.startPlayingLoop(0); // jumper
+						break;
+					case 2:
+						audio.startPlayingLoop(0); // jumper
+						break;
+					case 3:
+						audio.startPlayingLoop(13); // mario forest
+						break;
+					case 4:
+						audio.startPlayingLoop(13); // mario forest
+						break;
+					case 5:
+						audio.startPlayingLoop(12); // day sonic desert
+						break;
+					case 6:
+						audio.startPlayingLoop(12); // day sonic desert
+						break;
+					case 7:
+						audio.startPlayingLoop(12); // day sonic desert
+						break;
+					case 8:
+						audio.startPlayingLoop(11); // mario desert
+						break;
+					case 9:
+						audio.startPlayingLoop(11); // mario desert
+						break;
+					case 10:
+						audio.startPlayingLoop(9); // aquatic mountain
+						break;
+					case 11:
+						audio.startPlayingLoop(9); // aquatic mountain
+						break;
+					case 12:
+						audio.startPlayingLoop(9); // aquatic mountain
+						break;
+					case 13:
+						audio.startPlayingLoop(8); // second mountain clip
+						break;
+					case 14:
+						audio.startPlayingLoop(14); // credits
+				}
+			}
+
 			if (Keyboard.isKeyDown(Key.P) && !keyLocker.isKeyLocked(Key.P)) {
 				audio.stopPlaying(0);
 				isGamePaused = !isGamePaused;
 				keyLocker.lockKey(Key.P);
+
 
 				if (isGamePaused) {
 					audio.startPlayingOnce(4);
@@ -156,15 +206,15 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 			levelClearedScreen.initialize();
 			screenTimer.setWaitTime(2500);
 			playLevelScreenState = PlayLevelScreenState.LEVEL_WIN_MESSAGE;
-			audio.stopPlaying(0);
+			audio.stopPlayingMusic();
+			audio.startPlayingOnce(1);
 			break;
 		// if level cleared screen is up and the timer is up for how long it should stay
 		// out, go back to main menu
 		case LEVEL_WIN_MESSAGE:
 			if (screenTimer.isTimeUp()) {
 				levelClearedScreen = null;
-				audio.stopPlaying(0);
-				goBackToMenu();
+				goToNextLevel();
 			}
 			break;
 		// if player died in level, bring up level lost screen
@@ -220,6 +270,54 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
 	public void resetLevel() {
 		initialize();
+	}
+	
+	public void goToNextLevel() {
+		if (k == 0) {
+		k = 1;
+		screenCoordinator.setGameState(GameState.LEVEL2);
+		} else if ( k == 1 ){
+			k = 2;
+			screenCoordinator.setGameState(GameState.LEVEL3);
+		} else if ( k == 2 ){
+			k = 3;
+			screenCoordinator.setGameState(GameState.LEVEL4);
+		} else if ( k == 3 ){
+			k = 4;
+			screenCoordinator.setGameState(GameState.LEVEL5);
+		} else if ( k == 4 ){
+			k = 5;
+			screenCoordinator.setGameState(GameState.LEVEL6);
+		} else if ( k == 5 ){
+			k = 6;
+			screenCoordinator.setGameState(GameState.LEVEL7);
+		} else if ( k == 6 ){
+			k = 7;
+			screenCoordinator.setGameState(GameState.LEVEL8);
+		} else if ( k == 7 ){
+			k = 8;
+			screenCoordinator.setGameState(GameState.LEVEL9);
+		} else if ( k == 8 ){
+			k = 9;
+			screenCoordinator.setGameState(GameState.LEVEL10);
+		} else if ( k == 9 ){
+			k = 10;
+			screenCoordinator.setGameState(GameState.LEVEL11);
+		} else if ( k == 10 ){
+			k = 11;
+			screenCoordinator.setGameState(GameState.LEVEL12);
+		} else if ( k == 11 ){
+			k = 12;
+			screenCoordinator.setGameState(GameState.LEVEL13);
+		} else if ( k == 12 ){
+			k = 13;
+			screenCoordinator.setGameState(GameState.LEVEL14);
+		} else if ( k == 13 ){
+			k = 14;
+			screenCoordinator.setGameState(GameState.LEVEL15);
+		} else {
+			goBackToMenu();
+		}
 	}
 
 	public void goBackToMenu() {
