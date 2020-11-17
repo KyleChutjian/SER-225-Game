@@ -122,6 +122,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 				audio.stopPlayingMusic();
 			}
 			if (!isGamePaused && player.getLevelState() == LevelState.RUNNING) {
+
 				switch (k) {
 					case 0:
 						audio.startPlayingLoop(0); // jumper

@@ -266,6 +266,9 @@ public class Audio {
         FloatControl backward = (FloatControl) audioList.get(7).getControl(FloatControl.Type.MASTER_GAIN);
         backward.setValue(volume);
 
+        FloatControl itemBlock = (FloatControl) audioList.get(15).getControl(FloatControl.Type.MASTER_GAIN);
+        itemBlock.setValue(volume);
+
     }
 
     public void setPosition(int index, int position) {
