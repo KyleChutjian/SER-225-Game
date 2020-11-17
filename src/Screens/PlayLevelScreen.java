@@ -22,7 +22,7 @@ import Maps.Level11Rocks;
 import Maps.Level12Mountains;
 import Maps.Level13Cliffs;
 import Maps.Level14Volcano;
-import Maps.Level15Descent;
+import Maps.Level15Crucible;
 import Players.Cat;
 import Utils.Stopwatch;
 import javax.sound.sampled.Clip;
@@ -95,7 +95,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		} else if (k == 13) {
 			this.map = new Level14Volcano();
 		} else if (k == 14) {
-			this.map = new Level15Descent();
+			this.map = new Level15Crucible();
 		}
 
 		map.reset();

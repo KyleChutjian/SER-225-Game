@@ -1,10 +1,8 @@
 package Game;
 
-
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
-import Level.Map;
 import Screens.CreditsScreen;
 import Screens.InstructionsScreen;
 import Screens.OptionsScreen;

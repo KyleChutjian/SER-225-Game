@@ -466,6 +466,70 @@ public class CommonTileset extends Tileset {
 
         mapTiles.add(Night3Tile);
         
+     // Dark Stone Background
+        Frame DarkStoneFrame = new FrameBuilder(getSubImage(7, 3), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder DarkStoneTile = new MapTileBuilder(DarkStoneFrame);
+
+        mapTiles.add(DarkStoneTile);
+        
+     // Low Lava Glow Stone
+        
+        Frame LowGlowFrame = new FrameBuilder(getSubImage(7, 4), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder LowGlowTile = new MapTileBuilder(LowGlowFrame);
+
+        mapTiles.add(LowGlowTile);
+        
+     // Left Lava Glow Stone
+        
+        Frame LeftGlowFrame = new FrameBuilder(getSubImage(7, 5), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder LeftGlowTile = new MapTileBuilder(LeftGlowFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(LeftGlowTile);
+        
+     // Right Lava Glow Stone
+        
+        Frame RightGlowFrame = new FrameBuilder(getSubImage(8, 0), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder RightGlowTile = new MapTileBuilder(RightGlowFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(RightGlowTile);
+        
+     // Lava with Glow
+        
+        Frame LavaWGlowFrame = new FrameBuilder(getSubImage(8, 1), 0)
+                .withScale(tileScale)
+                .withBounds(new Rectangle(0, 8, 16, 8))
+                .build();
+
+        MapTileBuilder LavaWGlowTile = new MapTileBuilder(LavaWGlowFrame)
+                .withTileType(TileType.LIQUID);
+
+        mapTiles.add(LavaWGlowTile);
+        
+     // Low Lava Glow on Dark Stone
+        
+        Frame LowGlow2Frame = new FrameBuilder(getSubImage(8, 2), 0)
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder LowGlow2Tile = new MapTileBuilder(LowGlow2Frame);
+
+        mapTiles.add(LowGlow2Tile);
+
         return mapTiles;
     }
+
 }

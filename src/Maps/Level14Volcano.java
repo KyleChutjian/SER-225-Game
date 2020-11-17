@@ -18,40 +18,20 @@ import java.util.ArrayList;
 public class Level14Volcano extends Map {
 
     public Level14Volcano() {
-        super("Level14-Volcano.txt", new CommonTileset(), new Point(25, 137));
+        super("Level14-Volcano.txt", new CommonTileset(), new Point(5, 116));
     }
 
     @Override
     public ArrayList<Enemy> loadEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<>();
-        enemies.add(new BugEnemy(getPositionByTileIndex(41, 135), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(30, 95), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(19, 94), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(28, 58), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(38, 57), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(21, 26), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(30, 26), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(26, 26), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(24, 23), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(27, 23), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(20, 23), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(22, 29), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(28, 29), Direction.LEFT));
 
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(16, 122).addY(2), getPositionByTileIndex(20, 122).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 122).addY(2), getPositionByTileIndex(23, 122).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(28, 109).addY(2), getPositionByTileIndex(32, 109).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(33, 109).addY(2), getPositionByTileIndex(36, 109).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(27, 71).addY(2), getPositionByTileIndex(31, 71).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(28, 66).addY(2), getPositionByTileIndex(32, 66).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 66).addY(2), getPositionByTileIndex(23, 66).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(30, 58).addY(2), getPositionByTileIndex(34, 58).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(32, 58).addY(2), getPositionByTileIndex(38, 58).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(35, 52).addY(2), getPositionByTileIndex(41, 52).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(28, 46).addY(2), getPositionByTileIndex(33, 46).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(18, 46).addY(2), getPositionByTileIndex(23, 46).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(28, 19).addY(2), getPositionByTileIndex(32, 19).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 19).addY(2), getPositionByTileIndex(23, 19).addY(2), Direction.RIGHT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(15, 115).addY(2), getPositionByTileIndex(18, 115).addY(2), Direction.RIGHT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(42, 115).addY(2), getPositionByTileIndex(44, 115).addY(2), Direction.RIGHT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(47, 112).addY(2), getPositionByTileIndex(53, 112).addY(2), Direction.RIGHT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(45, 99).addY(2), getPositionByTileIndex(49, 99).addY(2), Direction.RIGHT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(45, 99).addY(2), getPositionByTileIndex(48, 99).addY(2), Direction.LEFT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(43, 89).addY(2), getPositionByTileIndex(46, 89).addY(2), Direction.RIGHT));
+        enemies.add(new DinosaurEnemy(getPositionByTileIndex(60, 78).addY(2), getPositionByTileIndex(62, 78).addY(2), Direction.RIGHT));
 
         return enemies;
     }
@@ -62,8 +42,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(16, 118),
-                getPositionByTileIndex(24, 118),
+                getPositionByTileIndex(10, 115),
+                getPositionByTileIndex(15, 115),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -72,8 +52,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(25, 105),
-                getPositionByTileIndex(33, 105),
+                getPositionByTileIndex(55, 107),
+                getPositionByTileIndex(60, 107),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -82,8 +62,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(22, 95),
-                getPositionByTileIndex(27, 95),
+                getPositionByTileIndex(56, 104),
+                getPositionByTileIndex(60, 104),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -92,8 +72,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(20, 92),
-                getPositionByTileIndex(23, 92),
+                getPositionByTileIndex(55, 100),
+                getPositionByTileIndex(58, 100),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -102,8 +82,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(27, 92),
-                getPositionByTileIndex(30, 92),
+                getPositionByTileIndex(60, 99),
+                getPositionByTileIndex(70, 99),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -112,8 +92,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(20, 89),
-                getPositionByTileIndex(28, 89),
+                getPositionByTileIndex(28, 95),
+                getPositionByTileIndex(35, 95),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -122,8 +102,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(19, 86),
-                getPositionByTileIndex(26, 86),
+                getPositionByTileIndex(26, 92),
+                getPositionByTileIndex(32, 92),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -132,8 +112,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(27, 86),
-                getPositionByTileIndex(31, 86),
+                getPositionByTileIndex(31, 89),
+                getPositionByTileIndex(40, 89),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -142,8 +122,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(23, 83),
-                getPositionByTileIndex(27, 83),
+                getPositionByTileIndex(42, 83),
+                getPositionByTileIndex(47, 83),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -152,8 +132,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(23, 64),
-                getPositionByTileIndex(27, 64),
+                getPositionByTileIndex(41, 80),
+                getPositionByTileIndex(46, 80),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -162,8 +142,8 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(17, 42),
-                getPositionByTileIndex(22, 42),
+                getPositionByTileIndex(45, 68),
+                getPositionByTileIndex(54, 68),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -172,8 +152,168 @@ public class Level14Volcano extends Map {
 
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(21, 40),
-                getPositionByTileIndex(26, 40),
+                getPositionByTileIndex(44, 65),
+                getPositionByTileIndex(50, 65),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(48, 63),
+                getPositionByTileIndex(54, 63),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(52, 61),
+                getPositionByTileIndex(57, 61),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(64, 61),
+                getPositionByTileIndex(69, 61),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(68, 60),
+                getPositionByTileIndex(71, 60),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(68, 57),
+                getPositionByTileIndex(73, 57),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(79, 45),
+                getPositionByTileIndex(82, 45),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(76, 42),
+                getPositionByTileIndex(82, 42),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(75, 39),
+                getPositionByTileIndex(83, 39),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(79, 36),
+                getPositionByTileIndex(82, 36),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(75, 33),
+                getPositionByTileIndex(83, 33),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(80, 27),
+                getPositionByTileIndex(85, 27),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(76, 24),
+                getPositionByTileIndex(83, 24),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(78, 22),
+                getPositionByTileIndex(85, 22),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(74, 17),
+                getPositionByTileIndex(82, 17),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(78, 14),
+                getPositionByTileIndex(85, 14),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6,16,4),
+                Direction.RIGHT
+        ));
+        
+        enhancedMapTiles.add(new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getPositionByTileIndex(89, 11),
+                getPositionByTileIndex(92, 11),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -181,7 +321,7 @@ public class Level14Volcano extends Map {
         ));
 
         enhancedMapTiles.add(new EndLevelBox(
-                getPositionByTileIndex(47, 1)
+                getPositionByTileIndex(97, 7)
         ));
 
         return enhancedMapTiles;

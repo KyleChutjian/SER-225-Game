@@ -16,7 +16,7 @@ import Maps.Level11Rocks;
 import Maps.Level12Mountains;
 import Maps.Level13Cliffs;
 import Maps.Level14Volcano;
-import Maps.Level15Descent;
+import Maps.Level15Crucible;
 import java.util.ArrayList;
 
 public class EditorMaps {
@@ -37,7 +37,7 @@ public class EditorMaps {
             add("Level12Mountains");
             add("Level13Cliffs");
             add("Level14Volcano");
-            add("Level15Descent");
+            add("Level15Crucible");
         }};
     }
 
@@ -73,10 +73,11 @@ public class EditorMaps {
             	return new Level13Cliffs();
             case "Level14Volcano":
             	return new Level14Volcano();
-            case "Level15Descent":
-            	return new Level15Descent();
+            case "Level15Crucible":
+            	return new Level15Crucible();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }
     }
+
 }
