@@ -30,8 +30,8 @@ public class TestMap extends Map {
         enemies = new ArrayList<>();
         enemies.add(new BugEnemy(getPositionByTileIndex(15, 9), Direction.LEFT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 1).addY(2), getPositionByTileIndex(22, 1).addY(2), Direction.RIGHT));
-        StillDinosaurEnemy testdino = new StillDinosaurEnemy(getPositionByTileIndex(14, 4).addY(2), getPositionByTileIndex(15, 4).addY(2), Direction.RIGHT);
-        enemies.add(testdino);
+        StillDinosaurEnemy itemBlockDino = new StillDinosaurEnemy(getPositionByTileIndex(14, 4).addY(2), getPositionByTileIndex(15, 4).addY(2), Direction.RIGHT);
+        enemies.add(itemBlockDino);
 
         return enemies;
     }
@@ -62,8 +62,10 @@ public class TestMap extends Map {
         enhancedMapTiles.add(itemBlock);
 
         ArrayList<Point> coinLocations = new ArrayList<Point>();
-        coinLocations.add(new Point(900,250));
-        coinLocations.add(new Point(300, 300));
+
+        coinLocations.add(getPositionByTileIndex(6,6));
+        coinLocations.add(getPositionByTileIndex(19,5));
+
 
         for (int i = 0; i < coinLocations.size(); i++) {
             Coin coin = new Coin(coinLocations.get(i));

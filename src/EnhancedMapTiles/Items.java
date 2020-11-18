@@ -49,6 +49,7 @@ public class Items extends EnhancedMapTile {
                 for (int i = 0; i < enemyList.size(); i++) {
                     if (enemyList.get(i).getEnemyType().equals("DINOSAUR_STILL")) {
                         enemyList.get(i).setActive(true);
+                        return;
                     }
                 }
 

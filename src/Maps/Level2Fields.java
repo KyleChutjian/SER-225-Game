@@ -3,6 +3,7 @@ package Maps;
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
 import Engine.ImageLoader;
+import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
 import GameObject.Rectangle;
@@ -53,6 +54,17 @@ public class Level2Fields extends Map {
         enhancedMapTiles.add(new EndLevelBox(
                 getPositionByTileIndex(96, 14)
         ));
+
+        ArrayList<Point> coinLocations = new ArrayList<Point>();
+
+        coinLocations.add(getPositionByTileIndex(10,16));
+        coinLocations.add(getPositionByTileIndex(19,5));
+
+
+        for (int i = 0; i < coinLocations.size(); i++) {
+            Coin coin = new Coin(coinLocations.get(i));
+            enhancedMapTiles.add(coin);
+        }
 
         return enhancedMapTiles;
     }
