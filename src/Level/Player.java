@@ -168,8 +168,8 @@ public abstract class Player extends GameObject {
 
 			try {
 				mapWriter = new FileWriter("SavedData/MapData.txt");
-				mapWriter.write("" + (totalCoins + currentCoins));
-				mapWriter.write("\n" + (totalCoins + currentCoins));
+				mapWriter.write("" + (currentCoins));
+				mapWriter.write("\n" + (currentCoins));
 				mapWriter.close();
 
 			} catch (IOException e) {

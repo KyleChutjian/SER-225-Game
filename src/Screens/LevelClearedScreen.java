@@ -1,9 +1,12 @@
 package Screens;
 
+import Engine.Audio;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Engine.ScreenManager;
+import Game.ScreenCoordinator;
 import SpriteFont.SpriteFont;
+import Utils.Stopwatch;
 
 import java.awt.*;
 
@@ -19,8 +22,9 @@ public class LevelClearedScreen extends Screen {
     	this.pauseTime = pauseTime;
     }
 
-    @Override
+	@Override
     public void initialize() {
+		
         winMessage = new SpriteFont("Level Cleared", 320, 270, "Comic Sans", 30, Color.white);
         
         long currentTime = System.currentTimeMillis();
@@ -36,7 +40,7 @@ public class LevelClearedScreen extends Screen {
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        // paint entire screen black and dislpay level cleared text
+        // paint entire screen black and display level cleared text
         graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.black);
         winMessage.draw(graphicsHandler);
         timeMessage.draw(graphicsHandler);

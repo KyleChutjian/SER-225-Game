@@ -122,6 +122,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 				audio.stopPlayingMusic();
 			}
 			if (!isGamePaused && player.getLevelState() == LevelState.RUNNING) {
+
 				switch (k) {
 					case 0:
 						audio.startPlayingLoop(0); // jumper
@@ -236,7 +237,6 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 		// based on screen state, draw appropriate graphics
 		switch (playLevelScreenState) {
 		case RUNNING:
-		case LEVEL_COMPLETED:
 		case PLAYER_DEAD:
 			map.draw(graphicsHandler);
 			player.draw(graphicsHandler);
@@ -250,6 +250,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 			break;
 		case LEVEL_LOSE_MESSAGE:
 			levelLoseScreen.draw(graphicsHandler);
+			break;
+		default:
 			break;
 		}
 	}

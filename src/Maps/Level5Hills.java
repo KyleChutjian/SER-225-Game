@@ -78,4 +78,13 @@ public class Level5Hills extends Map {
 
         return enhancedMapTiles;
     }
+    
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
+
+        npcs.add(new Walrus(getPositionByTileIndex(145, 21).subtract(new Point(0, 13)), this));
+
+        return npcs;
+    }
 }

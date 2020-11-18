@@ -495,7 +495,7 @@ public class LevelSelectScreen extends Screen {
             audio.startPlayingOnce(7);
         	
         		if(currentMenuItemHovered == 0) {
-        			screenCoordinator.setGameState(GameState.LEVEL);
+        			screenCoordinator.setGameState(GameState.STORY);
         			PlayLevelScreen.mapSelection(0);
         			CuriosityOrb.mapSelection(0);
         		} else if (currentMenuItemHovered == 1) {
@@ -515,7 +515,7 @@ public class LevelSelectScreen extends Screen {
         			PlayLevelScreen.mapSelection(4);
         			CuriosityOrb.mapSelection(4);
         		} else if (currentMenuItemHovered == 5) {
-        			screenCoordinator.setGameState(GameState.LEVEL6);
+        			screenCoordinator.setGameState(GameState.STORY2);
         			PlayLevelScreen.mapSelection(5);
         			CuriosityOrb.mapSelection(5);
         		} else if (currentMenuItemHovered == 6) {
@@ -535,7 +535,7 @@ public class LevelSelectScreen extends Screen {
         			PlayLevelScreen.mapSelection(9);
         			CuriosityOrb.mapSelection(9);
         		} else if (currentMenuItemHovered == 10) {
-        			screenCoordinator.setGameState(GameState.LEVEL11);
+        			screenCoordinator.setGameState(GameState.STORY3);
         			PlayLevelScreen.mapSelection(10);
         			CuriosityOrb.mapSelection(10);
         		} else if (currentMenuItemHovered == 11) {
@@ -547,11 +547,11 @@ public class LevelSelectScreen extends Screen {
         			PlayLevelScreen.mapSelection(12);
         			CuriosityOrb.mapSelection(12);
         		} else if (currentMenuItemHovered == 13) {
-        			screenCoordinator.setGameState(GameState.LEVEL14);
+        			screenCoordinator.setGameState(GameState.STORY4);
         			PlayLevelScreen.mapSelection(13);
         			CuriosityOrb.mapSelection(13);
         		} else if (currentMenuItemHovered == 14) {
-        			screenCoordinator.setGameState(GameState.LEVEL15);
+        			screenCoordinator.setGameState(GameState.STORY5);
         			PlayLevelScreen.mapSelection(14);
         			CuriosityOrb.mapSelection(14);
         		}

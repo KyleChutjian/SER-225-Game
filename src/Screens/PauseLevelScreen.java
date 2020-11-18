@@ -53,6 +53,7 @@ public class PauseLevelScreen extends Screen{
 	@Override
 	public void update() {
 		audio.stopPlayingMusic();
+		audio.stopPlaying(15);
 		// Pause menu logic
 		  // if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
         if (Keyboard.isKeyDown(Key.currentDOWN) && keyTimer.isTimeUp()) {

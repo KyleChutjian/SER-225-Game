@@ -44,4 +44,13 @@ public class Level6Sands extends Map {
 
         return enhancedMapTiles;
     }
+    
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
+
+        npcs.add(new Walrus(getPositionByTileIndex(96, 16).subtract(new Point(0, 13)), this));
+
+        return npcs;
+    }
 }

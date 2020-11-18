@@ -39,19 +39,17 @@ public class Items extends EnhancedMapTile {
     public void update(Player player) {
         super.update(player);
 
-
-
         if (itemBlock.getHit() == true) {
             if (player.intersects(this) && hitItem == false) {
                 getItem(player);
                 setAnimation("DEFAULT");
                 hitItem = true;
-                System.out.println("Playing once:");
                 audio.startPlayingOnce(7);
             } else if (itemBlock.getAnimation().equals("ENEMY")) {
                 for (int i = 0; i < enemyList.size(); i++) {
                     if (enemyList.get(i).getEnemyType().equals("DINOSAUR_STILL")) {
                         enemyList.get(i).setActive(true);
+                        return;
                     }
                 }
 
