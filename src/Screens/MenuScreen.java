@@ -16,6 +16,7 @@ public class MenuScreen extends Screen {
     protected int currentMenuItemHovered = 0; // current menu item being "hovered" over
     protected int menuItemSelected = -1;
     protected SpriteFont playGame;
+    protected SpriteFont characters;
     protected SpriteFont instructions;
     protected SpriteFont options;
     protected SpriteFont credits;
@@ -36,19 +37,24 @@ public class MenuScreen extends Screen {
         playGame = new SpriteFont("PLAY GAME", 110, 200, "Comic Sans", 30, new Color(49, 207, 240));
         playGame.setOutlineColor(Color.black);
         playGame.setOutlineThickness(3);
+        
+        	//"Cosmetics" main menu text
+        characters = new SpriteFont("COSMETICS", 110, 250, "Comic Sans", 30, new Color(49, 207, 240));
+        characters.setOutlineColor(Color.black);
+        characters.setOutlineThickness(3);
 
         	//"Instruction" main menu text
-        instructions = new SpriteFont("INSTRUCTIONS", 110, 250, "Comic Sans", 30, new Color(49, 207, 240));
+        instructions = new SpriteFont("INSTRUCTIONS", 110, 300, "Comic Sans", 30, new Color(49, 207, 240));
         instructions.setOutlineColor(Color.black);
         instructions.setOutlineThickness(3);
 
         	//"Options" main menu text
-        options = new SpriteFont("OPTIONS", 110, 300, "Comic Sans", 30, new Color(49, 207, 240));
+        options = new SpriteFont("OPTIONS", 110, 350, "Comic Sans", 30, new Color(49, 207, 240));
         options.setOutlineColor(Color.black);
         options.setOutlineThickness(3);
 
         	//"Credits" main menu text
-        credits = new SpriteFont("CREDITS", 110, 350, "Comic Sans", 30, new Color(49, 207, 240));
+        credits = new SpriteFont("CREDITS", 110, 400, "Comic Sans", 30, new Color(49, 207, 240));
         credits.setOutlineColor(Color.black);
         credits.setOutlineThickness(3);
 
@@ -77,45 +83,58 @@ public class MenuScreen extends Screen {
         }
 
         // if down is pressed on last menu item or up is pressed on first menu item, "loop" the selection back around to the beginning/end
-        if (currentMenuItemHovered > 3) {
+        if (currentMenuItemHovered > 4) {
             currentMenuItemHovered = 0;
         } else if (currentMenuItemHovered < 0) {
-            currentMenuItemHovered = 3;
+            currentMenuItemHovered = 4;
         }
 
         // sets location for blue square in front of text (pointerLocation) and also sets color of spritefont text based on which menu item is being hovered
         if (currentMenuItemHovered == 0) {
         	//Highlists "Play Game"
             playGame.setColor(new Color(255, 215, 0));
+            characters.setColor(new Color(49, 207, 240));
             instructions.setColor(new Color( 49, 207, 240));
             options.setColor(new Color(49, 207, 240));
             credits.setColor(new Color(49, 207, 240));
             pointerLocationX = 70;
             pointerLocationY = 180;
         } else if (currentMenuItemHovered == 1) {
-        	//Highlights "Instructions"
+        	//Highlights "Cosmetics Shop"
             playGame.setColor(new Color(49, 207, 240));
-            instructions.setColor(new Color(255, 215, 0));
+            characters.setColor(new Color(255, 215, 0));
+            instructions.setColor(new Color(49, 207, 240));
             options.setColor(new Color(49, 207, 240));
             credits.setColor(new Color(49, 207, 240));
             pointerLocationX = 70;
             pointerLocationY = 230;
-        }else if (currentMenuItemHovered == 2) {
+        } else if (currentMenuItemHovered == 2) {
+        	//Highlights "Instructions"
+            playGame.setColor(new Color(49, 207, 240));
+            characters.setColor(new Color(49, 207, 240));
+            instructions.setColor(new Color(255, 215, 0));
+            options.setColor(new Color(49, 207, 240));
+            credits.setColor(new Color(49, 207, 240));
+            pointerLocationX = 70;
+            pointerLocationY = 280;
+        }else if (currentMenuItemHovered == 3) {
         	//Highlights "Options"
         	playGame.setColor(new Color(49, 207, 240));
+        	characters.setColor(new Color(49, 207, 240));
             instructions.setColor(new Color(49, 207, 240));
             options.setColor(new Color(255, 215, 0));
             credits.setColor(new Color(49, 207, 240));
             pointerLocationX = 70;
-            pointerLocationY = 280;
-        } else if (currentMenuItemHovered == 3) {
+            pointerLocationY = 330;
+        } else if (currentMenuItemHovered == 4) {
         	//Highlights "Credits"
         	playGame.setColor(new Color(49, 207, 240));
+        	characters.setColor(new Color(49, 207, 240));
         	instructions.setColor(new Color(49, 207, 240));
         	options.setColor(new Color(49, 207, 240));
         	credits.setColor(new Color(255, 215, 0));
         	pointerLocationX = 70;
-        	pointerLocationY = 330;
+        	pointerLocationY = 380;
         }
 
         // if space is pressed on menu item, change to appropriate screen based on which menu item was chosen
@@ -128,10 +147,12 @@ public class MenuScreen extends Screen {
             if (menuItemSelected == 0) {
                 screenCoordinator.setGameState(GameState.LEVELSELECT);
             } else if (menuItemSelected == 1) {
-                screenCoordinator.setGameState(GameState.INSTRUCTIONS);
+                screenCoordinator.setGameState(GameState.CHARACTERS);
             } else if (menuItemSelected == 2) {
-            	screenCoordinator.setGameState(GameState.OPTIONS);
+            	screenCoordinator.setGameState(GameState.INSTRUCTIONS);
             } else if (menuItemSelected == 3) {
+            	screenCoordinator.setGameState(GameState.OPTIONS);
+            } else if (menuItemSelected == 4) {
             	screenCoordinator.setGameState(GameState.CREDITS);
             }
         }
@@ -140,6 +161,7 @@ public class MenuScreen extends Screen {
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
         playGame.draw(graphicsHandler);
+        characters.draw(graphicsHandler);
         instructions.draw(graphicsHandler);
         options.draw(graphicsHandler);
         credits.draw(graphicsHandler);

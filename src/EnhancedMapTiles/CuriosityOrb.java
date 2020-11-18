@@ -26,12 +26,12 @@ public class CuriosityOrb extends EnhancedMapTile {
 		super(location.x, location.y, new SpriteSheet(ImageLoader.load("CuriosityOrbSprite.png"), 16, 16), "DEFAULT",
 				TileType.PASSABLE);
 	}
-	
+
 	public static int mapSelection(int i) {
 		k = i;
 		return k;
 	}
-	
+
 	@Override
 	public void update(Player player) {
 		super.update(player);
@@ -55,8 +55,48 @@ public class CuriosityOrb extends EnhancedMapTile {
 					player.setY(100);
 				}
 			}
-			System.out.println(randomNumber);
-			randomNumber = random.nextInt(5);
+			if (k == 1) {
+				if (randomNumber == 0) {
+					player.setX(160);
+					player.setY(700);
+				} else if (randomNumber == 1) {
+					player.setX(400);
+					player.setY(100);
+				} else if (randomNumber == 2) {
+					System.out.println(k);
+					player.setX(500);
+					player.setY(500);
+				} else if (randomNumber == 3) {
+					player.setX(100);
+					player.setY(300);
+				} else if (randomNumber == 4) {
+					player.setX(160);
+					player.setY(700);
+				}
+			}
+//			if (k == 2) {
+//				if (randomNumber == 0) {
+//					System.out.println(k);
+//					player.setX(160);
+//					player.setY(700);
+//				} else if (randomNumber == 1) {
+//					System.out.println(k);
+//					player.setX(400);
+//					player.setY(100);
+//				} else if (randomNumber == 2) {
+//					System.out.println(k);
+//					player.setX(500);
+//					player.setY(500);
+//				} else if (randomNumber == 3) {
+//					System.out.println(k);
+//					player.setX(100);
+//					player.setY(300);
+//				} else if (randomNumber == 4) {
+//					System.out.println(k);
+//					player.setX(160);
+//					player.setY(700);
+//				}
+//			}
 		}
 	}
 

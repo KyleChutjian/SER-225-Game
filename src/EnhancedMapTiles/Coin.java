@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Coin extends EnhancedMapTile {
-
     private Float x,y;
     private Point location;
 
@@ -23,7 +22,6 @@ public class Coin extends EnhancedMapTile {
         this.y = location.y;
         this.location = location;
     }
-
 
     @Override
     public HashMap<String, Frame[]> getAnimations(SpriteSheet spriteSheet) {
@@ -42,12 +40,8 @@ public class Coin extends EnhancedMapTile {
                             .build(),
             });
 
-
-
-
         }};
     }
-
 
     public void setAnimation(String animationName) {
         currentAnimationName = animationName;
@@ -56,7 +50,6 @@ public class Coin extends EnhancedMapTile {
         return currentAnimationName;
     }
 
-
     @Override
         public void update(Player player) {
             super.update(player);
@@ -64,13 +57,11 @@ public class Coin extends EnhancedMapTile {
                 setAnimation("INVISIBLE_COIN");
                 player.setCoins(player.getCoins() + 1);
             }
-
         }
 
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
     }
-
 
 }

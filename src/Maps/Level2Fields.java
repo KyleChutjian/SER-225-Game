@@ -2,9 +2,13 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.StillDinosaurEnemy;
 import Engine.ImageLoader;
+import EnhancedMapTiles.Coin;
+import EnhancedMapTiles.CuriosityOrb;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
+import EnhancedMapTiles.ItemBlock;
 import GameObject.Rectangle;
 import Level.*;
 import NPCs.Walrus;
@@ -33,6 +37,13 @@ public class Level2Fields extends Map {
         enemies.add(new BugEnemy(getPositionByTileIndex(75, 16), Direction.LEFT));
         
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(92, 8).addY(2), getPositionByTileIndex(95, 8).addY(2), Direction.RIGHT));
+
+        StillDinosaurEnemy blockDino1 = new StillDinosaurEnemy(getPositionByTileIndex(14, 11).addY(2), getPositionByTileIndex(15, 11).addY(2), Direction.RIGHT);
+        enemies.add(blockDino1);
+
+        StillDinosaurEnemy blockDino2 = new StillDinosaurEnemy(getPositionByTileIndex(85, 12).addY(2), getPositionByTileIndex(86, 12).addY(2), Direction.RIGHT);
+        enemies.add(blockDino2);
+
         return enemies;
     }
 
@@ -54,6 +65,31 @@ public class Level2Fields extends Map {
                 getPositionByTileIndex(96, 14)
         ));
 
+        enhancedMapTiles.add(new CuriosityOrb(
+                getPositionByTileIndex(99, 8)
+        ));
+
+        enhancedMapTiles.add(new CuriosityOrb(
+                getPositionByTileIndex(0, 5)
+        ));
+
+        ItemBlock itemBlock = new ItemBlock(getPositionByTileIndex(14, 13), enhancedMapTiles, enemies);
+        enhancedMapTiles.add(itemBlock);
+        
+        ItemBlock itemBlock2 = new ItemBlock(getPositionByTileIndex(85, 13), enhancedMapTiles, enemies);
+        enhancedMapTiles.add(itemBlock2);
+
+        ArrayList<Point> coinLocations = new ArrayList<Point>();
+        coinLocations.add(new Point(1500,650));
+        coinLocations.add(new Point(1950, 600));
+        coinLocations.add(new Point(2950, 500));
+
+        for (int i = 0; i < coinLocations.size(); i++) {
+            Coin coin = new Coin(coinLocations.get(i));
+            enhancedMapTiles.add(coin);
+        }
+
         return enhancedMapTiles;
     }
+
 }
