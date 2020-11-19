@@ -25,12 +25,12 @@ public class ItemBlock extends EnhancedMapTile {
     private Items items;
     private Audio audio;
 
-    public ItemBlock(Point location, ArrayList<EnhancedMapTile> arrayList, ArrayList<Enemy> enemyList) {
+    public ItemBlock(Point location, ArrayList<EnhancedMapTile> arrayList, ArrayList<Enemy> enemyList, int enemyIndex) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("ItemBlock.png"), 16, 16), "DEFAULT", TileType.NOT_PASSABLE);
         this.x = location.x;
         this.y = location.y;
         Point itemPoint = new Point(x, y-50);
-        items = new Items(itemPoint, this, enemyList);
+        items = new Items(itemPoint, this, enemyList, enemyIndex);
         arrayList.add(items);
         audio = GamePanel.getAudio();
     }
@@ -70,6 +70,7 @@ public class ItemBlock extends EnhancedMapTile {
     }
 
     private void releaseItem(String animation) {
+        setAnimation("ENEMY");
         if (animation.equals("HEART")) {
             items.changeAnimation(z);
         } else if (animation.equals("COIN")) {

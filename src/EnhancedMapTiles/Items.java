@@ -23,15 +23,19 @@ public class Items extends EnhancedMapTile {
     private ItemBlock itemBlock;
     private boolean hitItem = false;
     private ArrayList<Enemy> enemyList;
+    private ArrayList<Integer> enemyInts;
+    private int index;
     private Audio audio;
 
 
-    public Items(Point location, ItemBlock itemBlock, ArrayList<Enemy> enemyList) {
+    public Items(Point location, ItemBlock itemBlock, ArrayList<Enemy> enemyList, int enemyIndex) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("Items.png"), 16, 16), "DEFAULT", TileType.PASSABLE);
         this.x = location.x;
         this.y = location.y;
         this.itemBlock = itemBlock;
         this.enemyList = enemyList;
+        this.index = enemyIndex;
+        this.enemyInts = enemyInts;
         audio = GamePanel.getAudio();
     }
 
@@ -46,13 +50,14 @@ public class Items extends EnhancedMapTile {
                 hitItem = true;
                 audio.startPlayingOnce(7);
             } else if (itemBlock.getAnimation().equals("ENEMY")) {
-                for (int i = 0; i < enemyList.size(); i++) {
-                    if (enemyList.get(i).getEnemyType().equals("DINOSAUR_STILL")) {
-                        enemyList.get(i).setActive(true);
-                        return;
-                    }
-                }
-
+//                if (!enemyInts.isEmpty()) {
+//                    System.out.println(enemyInts.toString());
+//                    enemyList.get(enemyInts.get(0)).setActive(true);
+//                    enemyInts.remove(0);
+//                    System.out.println(enemyInts.toString());
+//                    itemBlock.setHit(false);
+//                }
+                enemyList.get(index).setActive(true);
             }
 
         }
@@ -66,7 +71,8 @@ public class Items extends EnhancedMapTile {
         } else if (itemBlock.getAnimation().equals("COIN")) {
             player.setCoins(player.getCoins() + 1);
 
-        } else if (itemBlock.equals("ENEMY")) {
+        } else if (itemBlock.getAnimation().equals("ENEMY")) {
+            System.out.println("Get item enemy");
             hitItem = true;
             itemBlock.setHit(true);
 
@@ -83,7 +89,7 @@ public class Items extends EnhancedMapTile {
             } else if (itemBlock.getAnimation().equals("ENEMY")) {
                 hitItem = true;
                 itemBlock.setHit(true);
-                enemyList.get(2).setActive(true);
+                System.out.println("changeAnimation enemy");
 
 
             }

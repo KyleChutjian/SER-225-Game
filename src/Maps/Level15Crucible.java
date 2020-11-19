@@ -3,6 +3,7 @@ package Maps;
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
 import Engine.ImageLoader;
+import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
 import GameObject.Rectangle;
@@ -168,7 +169,17 @@ public class Level15Crucible extends Map {
         enhancedMapTiles.add(new EndLevelBox(
                 getPositionByTileIndex(97, 14)
         ));
+        ArrayList<Point> coinLocations = new ArrayList<Point>();
 
+        coinLocations.add(getPositionByTileIndex(74,15));
+        coinLocations.add(getPositionByTileIndex(26,14));
+        coinLocations.add(getPositionByTileIndex(94,14));
+
+
+        for (int i = 0; i < coinLocations.size(); i++) {
+            Coin coin = new Coin(coinLocations.get(i));
+            enhancedMapTiles.add(coin);
+        }
         return enhancedMapTiles;
     }
 

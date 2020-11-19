@@ -29,8 +29,7 @@ public class TestMap extends Map {
         enemies = new ArrayList<>();
         enemies.add(new BugEnemy(getPositionByTileIndex(15, 9), Direction.LEFT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 1).addY(2), getPositionByTileIndex(22, 1).addY(2), Direction.RIGHT));
-        StillDinosaurEnemy itemBlockDino = new StillDinosaurEnemy(getPositionByTileIndex(14, 4).addY(2), getPositionByTileIndex(15, 4).addY(2), Direction.RIGHT);
-        enemies.add(itemBlockDino);
+        enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(14, 4).addY(2), getPositionByTileIndex(15, 4).addY(2), Direction.RIGHT));
 
         return enemies;
     }
@@ -56,9 +55,8 @@ public class TestMap extends Map {
         enhancedMapTiles.add(new CuriosityOrb(
                 getPositionByTileIndex(21, 5)
         ));
-        
-        ItemBlock itemBlock = new ItemBlock(getPositionByTileIndex(14, 5), enhancedMapTiles, enemies);
-        enhancedMapTiles.add(itemBlock);
+
+        enhancedMapTiles.add(new ItemBlock(getPositionByTileIndex(14, 5), enhancedMapTiles, enemies, 2));
 
         ArrayList<Point> coinLocations = new ArrayList<Point>();
 

@@ -73,6 +73,7 @@ public class StillDinosaurEnemy extends Enemy {
     @Override
     public void update(Player player) {
             isActive = super.getActive();
+            //isActive = true;
 
         if (isActive) {
             float startBound = startLocation.x;

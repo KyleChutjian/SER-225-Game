@@ -2,9 +2,12 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.StillDinosaurEnemy;
 import Engine.ImageLoader;
+import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
+import EnhancedMapTiles.ItemBlock;
 import GameObject.Rectangle;
 import Level.*;
 import NPCs.Walrus;
@@ -17,15 +20,19 @@ import java.util.ArrayList;
 // Represents a test map to be used in a level
 public class Level4Lake extends Map {
 
+    private ArrayList<Enemy> enemies;
+
     public Level4Lake() {
         super("Level4-Lake.txt", new CommonTileset(), new Point(3, 16));
     }
 
     @Override
     public ArrayList<Enemy> loadEnemies() {
-        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies = new ArrayList<>();
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(40, 9).addY(2), getPositionByTileIndex(43, 9).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(77, 7).addY(2), getPositionByTileIndex(82, 7).addY(2), Direction.RIGHT));
+        enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(47, 16).addY(2), getPositionByTileIndex(48, 16).addY(2), Direction.RIGHT));
+        enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(81, 15).addY(2), getPositionByTileIndex(82, 15).addY(2), Direction.RIGHT));
         return enemies;
     }
 
@@ -166,6 +173,21 @@ public class Level4Lake extends Map {
         enhancedMapTiles.add(new EndLevelBox(
                 getPositionByTileIndex(98, 15)
         ));
+
+        enhancedMapTiles.add(new ItemBlock(getPositionByTileIndex(47, 17), enhancedMapTiles, enemies, 2));
+        enhancedMapTiles.add(new ItemBlock(getPositionByTileIndex(81, 16), enhancedMapTiles, enemies, 3));
+
+        ArrayList<Point> coinLocations = new ArrayList<Point>();
+
+        coinLocations.add(getPositionByTileIndex(23,17));
+        coinLocations.add(getPositionByTileIndex(41,8));
+        coinLocations.add(getPositionByTileIndex(92,16));
+
+
+        for (int i = 0; i < coinLocations.size(); i++) {
+            Coin coin = new Coin(coinLocations.get(i));
+            enhancedMapTiles.add(coin);
+        }
 
         return enhancedMapTiles;
     }

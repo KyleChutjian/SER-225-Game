@@ -2,9 +2,12 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.StillDinosaurEnemy;
 import Engine.ImageLoader;
+import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
+import EnhancedMapTiles.ItemBlock;
 import GameObject.Rectangle;
 import Level.*;
 import NPCs.Walrus;
@@ -16,14 +19,14 @@ import java.util.ArrayList;
 //Comment
 // Represents a test map to be used in a level
 public class Level7Dunes extends Map {
-
+    private ArrayList<Enemy> enemies;
     public Level7Dunes() {
         super("Level7-Dunes.txt", new CommonTileset(), new Point(4, 26));
     }
     
     @Override
     public ArrayList<Enemy> loadEnemies() {
-        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies = new ArrayList<>();
         enemies.add(new BugEnemy(getPositionByTileIndex(33, 26), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(37, 26), Direction.RIGHT));
         enemies.add(new BugEnemy(getPositionByTileIndex(44, 26), Direction.RIGHT));
@@ -52,7 +55,8 @@ public class Level7Dunes extends Map {
         } else if (set2 == 1) {
         	enemies.add(new DinosaurEnemy(getPositionByTileIndex(121, 17).addY(2), getPositionByTileIndex(124, 17).addY(2), Direction.RIGHT));
         }
-
+        enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(46, 18).addY(2), getPositionByTileIndex(47, 18).addY(2), Direction.RIGHT));
+        enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(132, 23).addY(2), getPositionByTileIndex(133, 23).addY(2), Direction.RIGHT));
         return enemies;
     }
 
@@ -84,6 +88,20 @@ public class Level7Dunes extends Map {
                 getPositionByTileIndex(147, 17)
         ));
 
+        enhancedMapTiles.add(new ItemBlock(getPositionByTileIndex(46, 19), enhancedMapTiles, enemies, 17));
+        enhancedMapTiles.add(new ItemBlock(getPositionByTileIndex(132, 24), enhancedMapTiles, enemies, 18));
+
+        ArrayList<Point> coinLocations = new ArrayList<Point>();
+
+        coinLocations.add(getPositionByTileIndex(57,17));
+        coinLocations.add(getPositionByTileIndex(62,11));
+        coinLocations.add(getPositionByTileIndex(139,13));
+
+
+        for (int i = 0; i < coinLocations.size(); i++) {
+            Coin coin = new Coin(coinLocations.get(i));
+            enhancedMapTiles.add(coin);
+        }
         return enhancedMapTiles;
     }
 }

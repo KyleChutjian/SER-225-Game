@@ -69,7 +69,7 @@ public class Enemy extends MapEntity {
     }
 
     public String getEnemyType() {
-        if (type.equals("DINOSAUR_STILL")) {
+        if (type.equals("STILL_DINOSAUR")) {
             return type;
         } else {
             return "Not still, skip in the loop";
