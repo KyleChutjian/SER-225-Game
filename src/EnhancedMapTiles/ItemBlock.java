@@ -70,7 +70,6 @@ public class ItemBlock extends EnhancedMapTile {
     }
 
     private void releaseItem(String animation) {
-        setAnimation("ENEMY");
         if (animation.equals("HEART")) {
             items.changeAnimation(z);
         } else if (animation.equals("COIN")) {

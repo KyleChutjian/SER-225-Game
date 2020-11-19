@@ -50,13 +50,6 @@ public class Items extends EnhancedMapTile {
                 hitItem = true;
                 audio.startPlayingOnce(7);
             } else if (itemBlock.getAnimation().equals("ENEMY")) {
-//                if (!enemyInts.isEmpty()) {
-//                    System.out.println(enemyInts.toString());
-//                    enemyList.get(enemyInts.get(0)).setActive(true);
-//                    enemyInts.remove(0);
-//                    System.out.println(enemyInts.toString());
-//                    itemBlock.setHit(false);
-//                }
                 enemyList.get(index).setActive(true);
             }
 
@@ -72,7 +65,6 @@ public class Items extends EnhancedMapTile {
             player.setCoins(player.getCoins() + 1);
 
         } else if (itemBlock.getAnimation().equals("ENEMY")) {
-            System.out.println("Get item enemy");
             hitItem = true;
             itemBlock.setHit(true);
 
@@ -81,7 +73,6 @@ public class Items extends EnhancedMapTile {
 
 
     public void changeAnimation(int x) {
-
             if (itemBlock.getAnimation().equals("HEART")) {
                 setAnimation("HEART_ITEM");
             } else if (itemBlock.getAnimation().equals("COIN")) {
