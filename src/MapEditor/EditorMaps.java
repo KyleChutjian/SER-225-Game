@@ -3,6 +3,7 @@ package MapEditor;
 import Level.Map;
 import Maps.TestMap;
 import Maps.TitleScreenMap;
+import Maps.ShopScreenMap;
 import Maps.Level2Fields;
 import Maps.Level3Forest;
 import Maps.Level4Lake;
@@ -24,6 +25,7 @@ public class EditorMaps {
         return new ArrayList<String>() {{
             add("TestMap");
             add("TitleScreen");
+            add("ShopScreen");
             add("Level2Fields");
             add("Level3Forest");
             add("Level4Lake");
@@ -47,6 +49,8 @@ public class EditorMaps {
                 return new TestMap();
             case "TitleScreen":
                 return new TitleScreenMap();
+            case "ShopScreen":
+            	return new ShopScreenMap();
             case "Level2Fields":
             	return new Level2Fields();
             case "Level3Forest":

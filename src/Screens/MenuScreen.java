@@ -39,7 +39,7 @@ public class MenuScreen extends Screen {
         playGame.setOutlineThickness(3);
         
         	//"Cosmetics" main menu text
-        characters = new SpriteFont("COSMETICS", 110, 250, "Comic Sans", 30, new Color(49, 207, 240));
+        characters = new SpriteFont("CHARACTERS", 110, 250, "Comic Sans", 30, new Color(49, 207, 240));
         characters.setOutlineColor(Color.black);
         characters.setOutlineThickness(3);
 

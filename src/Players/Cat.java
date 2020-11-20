@@ -1,6 +1,7 @@
 package Players;
 
 import Builders.FrameBuilder;
+import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import Engine.Key;
@@ -8,15 +9,62 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Player;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Random;
+import java.util.Scanner;
 
 // This is the class for the Cat player character
 // basically just sets some values for physics and then defines animations
 public class Cat extends Player {
+	private static String activeCharacter;
+
+	//Reads character selection value and applies appropriate character to Cat class
+	File controlsFile = new File("SavedData/CharacterPreferences.txt");
+	 Scanner fileInput = null;{
+	 try {
+		 fileInput = new Scanner(controlsFile);
+		 String fileValue = fileInput.nextLine();
+
+		 if (fileValue.equals("0")) {
+			 activeCharacter = "Cat.png";
+			 System.out.println(activeCharacter);
+		 }
+
+		 if (fileValue.equals("1")) {
+			 this.activeCharacter = "\"BlackCat.png\"";
+			 System.out.println(activeCharacter);
+		 }
+
+		 if (fileValue.equals("2")) {
+//			 activeCharacter = ImageLoader.load("IceCat.png");
+		 }
+
+		 if (fileValue.equals("3")) {
+//			 activeCharacter = "SavedData/IceCat.png";
+		 }
+
+		 if (fileValue.equals("4")) {
+//			 activeCharacter = "GhostCat.png";
+		 }
+
+		 if (fileValue.equals("5")) {
+//			 activeCharacter = "WizardCat.png";
+		 }
+
+		 if (fileValue.equals("6")) {
+//			 activeCharacter = "TopHatCat.png";
+		 }
+
+	 } catch (FileNotFoundException e) {
+		 System.out.println("Error");
+		 System.exit(1);
+	 }}
 
     public Cat(float x, float y) {
-        super(new SpriteSheet(ImageLoader.load("CoolCat.png"), 24, 24), x, y, "STAND_RIGHT");
+        super(new SpriteSheet(ImageLoader.load("Cat.png"), 24, 24), x, y, "STAND_RIGHT");
         gravity = .5f;
         terminalVelocityY = 6f;
         jumpHeight = 14.5f;
