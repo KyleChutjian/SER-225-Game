@@ -2,7 +2,9 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.SnakeEnemy;
 import Enemies.StillDinosaurEnemy;
+import Enemies.VultureEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
@@ -27,24 +29,23 @@ public class Level9Oasis extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         enemies = new ArrayList<>();
-        enemies.add(new BugEnemy(getPositionByTileIndex(3, 21), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(6, 21), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(12, 21), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(16, 19), Direction.LEFT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(3, 21), Direction.LEFT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(6, 21), Direction.RIGHT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(12, 21), Direction.LEFT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(16, 19), Direction.LEFT));
 
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(39, 15).addY(2), getPositionByTileIndex(42, 15).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(51, 15).addY(2), getPositionByTileIndex(56, 15).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(65, 16).addY(2), getPositionByTileIndex(70, 16).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(75, 13).addY(2), getPositionByTileIndex(80, 13).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(83, 21).addY(2), getPositionByTileIndex(89, 21).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(79, 21).addY(2), getPositionByTileIndex(86, 21).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(32, 10).addY(2), getPositionByTileIndex(42, 10).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(51, 10).addY(2), getPositionByTileIndex(61, 10).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(65, 11).addY(2), getPositionByTileIndex(72, 11).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(77, 8).addY(2), getPositionByTileIndex(81, 8).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(83, 14).addY(2), getPositionByTileIndex(94, 14).addY(2), Direction.RIGHT));
         int set1 = (int)(Math.random()*2);
         if (set1 == 0) {
-        	enemies.add(new DinosaurEnemy(getPositionByTileIndex(76, 13).addY(2), getPositionByTileIndex(79, 13).addY(2), Direction.RIGHT));
+        	enemies.add(new VultureEnemy(getPositionByTileIndex(44, 8).addY(2), getPositionByTileIndex(50, 8).addY(2), Direction.RIGHT));
         } else if (set1 == 1) {
-        	enemies.add(new DinosaurEnemy(getPositionByTileIndex(67, 16).addY(2), getPositionByTileIndex(70, 16).addY(2), Direction.RIGHT));
+        	enemies.add(new VultureEnemy(getPositionByTileIndex(62, 11).addY(2), getPositionByTileIndex(67, 11).addY(2), Direction.RIGHT));
         } else if (set1 == 2) {
-        	enemies.add(new DinosaurEnemy(getPositionByTileIndex(52, 15).addY(2), getPositionByTileIndex(55, 15).addY(2), Direction.RIGHT));
+        	enemies.add(new VultureEnemy(getPositionByTileIndex(73, 10).addY(2), getPositionByTileIndex(83, 10).addY(2), Direction.RIGHT));
         }
 
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(32, 18).addY(2), getPositionByTileIndex(33, 18).addY(2), Direction.RIGHT));

@@ -2,6 +2,8 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.HedgehogEnemy;
+import Enemies.MushroomEnemy;
 import Enemies.StillDinosaurEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.Coin;
@@ -27,26 +29,25 @@ public class Level5Hills extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         enemies = new ArrayList<>();
-        enemies.add(new BugEnemy(getPositionByTileIndex(10, 24), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(21, 21), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(23, 21), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(46, 22), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(50, 18), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(53, 26), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(58, 26), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(56, 19), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(67, 27), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(78, 15), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(89, 19), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(100, 19), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(119, 25), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(124, 25), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(132, 19), Direction.LEFT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(10, 24), Direction.LEFT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(21, 21), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(23, 21), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(46, 22), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(50, 18), Direction.LEFT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(53, 26), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(58, 26), Direction.RIGHT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(56, 19), Direction.RIGHT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(67, 27), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(78, 15), Direction.LEFT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(89, 19), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(100, 19), Direction.LEFT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(119, 25), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(124, 25), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(132, 19), Direction.LEFT));
 
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(78, 15).addY(2), getPositionByTileIndex(84, 15).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(113, 13).addY(2), getPositionByTileIndex(118, 13).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(128, 14).addY(2), getPositionByTileIndex(133, 14).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(41, 25).addY(2), getPositionByTileIndex(42, 25).addY(2), Direction.RIGHT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(113, 13).addY(2), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(128, 14).addY(2), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(41, 25).addY(2), Direction.RIGHT));
 
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(21, 18).addY(2), getPositionByTileIndex(22, 18).addY(2), Direction.RIGHT));
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(81, 12).addY(2), getPositionByTileIndex(82, 12).addY(2), Direction.RIGHT));

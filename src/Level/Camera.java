@@ -96,9 +96,11 @@ public class Camera extends Rectangle {
         ArrayList<Enemy> activeEnemies = new ArrayList<>();
         for (int i = map.getEnemies().size() - 1; i >= 0; i--) {
             Enemy enemy = map.getEnemies().get(i);
-
+           
             if (isMapEntityActive(enemy)) {
                 activeEnemies.add(enemy);
+                
+                
                 if (enemy.mapEntityStatus == MapEntityStatus.INACTIVE) {
                     enemy.setMapEntityStatus(MapEntityStatus.ACTIVE);
                 }

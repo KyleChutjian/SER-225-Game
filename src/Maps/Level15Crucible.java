@@ -1,14 +1,12 @@
 package Maps;
 
-import Enemies.BugEnemy;
-import Enemies.DinosaurEnemy;
+import Enemies.LavaFireball;
 import Engine.ImageLoader;
 import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
 import GameObject.Rectangle;
 import Level.*;
-import NPCs.Walrus;
 import Tilesets.CommonTileset;
 import Utils.Direction;
 import Utils.Point;
@@ -17,9 +15,31 @@ import java.util.ArrayList;
 //Comment
 // Represents a test map to be used in a level
 public class Level15Crucible extends Map {
-
+	 private ArrayList<Enemy> enemies;
     public Level15Crucible() {
         super("Level15-Crucible.txt", new CommonTileset(), new Point(3, 15));
+    }
+    
+    @Override
+    public ArrayList<Enemy> loadEnemies() {
+        enemies = new ArrayList<>();
+        enemies.add(new LavaFireball(getPositionByTileIndex(10, 17), -.5f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(18, 17), -.75f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(25, 17), -.5f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(31, 17), -.5f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(36, 17), -.75f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(40, 17), -.5f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(44, 17), -.75f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(49, 17), -.5f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(55, 17), -.75f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(62, 17), -.5f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(70, 17), -.75f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(77, 17), -.75f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(83, 17), -.75f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(88, 17), -.75f, 300));
+        enemies.add(new LavaFireball(getPositionByTileIndex(92, 17), -.75f, 300));
+      
+        return enemies;
     }
 
     @Override
@@ -29,12 +49,13 @@ public class Level15Crucible extends Map {
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
                 getPositionByTileIndex(7, 16),
-                getPositionByTileIndex(13, 16),
+                getPositionByTileIndex(15, 16),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
                 Direction.RIGHT
         ));
+        
         
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
@@ -46,6 +67,7 @@ public class Level15Crucible extends Map {
                 Direction.RIGHT
         ));
         
+        
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
                 getPositionByTileIndex(22, 16),
@@ -56,10 +78,11 @@ public class Level15Crucible extends Map {
                 Direction.RIGHT
         ));
         
+        
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(27, 16),
-                getPositionByTileIndex(32, 16),
+                getPositionByTileIndex(28, 16),
+                getPositionByTileIndex(33, 16),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),
@@ -68,8 +91,8 @@ public class Level15Crucible extends Map {
         
         enhancedMapTiles.add(new HorizontalMovingPlatform(
                 ImageLoader.load("GreenPlatform.png"),
-                getPositionByTileIndex(33, 16),
-                getPositionByTileIndex(41, 16),
+                getPositionByTileIndex(34, 16),
+                getPositionByTileIndex(42, 16),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
                 new Rectangle(0, 6,16,4),

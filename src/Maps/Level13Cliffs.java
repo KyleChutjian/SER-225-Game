@@ -3,6 +3,7 @@ package Maps;
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
 import Enemies.StillDinosaurEnemy;
+import Enemies.VultureEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
@@ -38,18 +39,21 @@ public class Level13Cliffs extends Map {
         enemies.add(new BugEnemy(getPositionByTileIndex(102, 63), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(107, 57), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(111, 50), Direction.LEFT));
-
+        
+        enemies.add(new VultureEnemy(getPositionByTileIndex(16, 11).addY(2), getPositionByTileIndex(21, 11).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(23, 19).addY(2), getPositionByTileIndex(26, 19).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(27, 20).addY(2), getPositionByTileIndex(33, 20).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(38, 37).addY(2), getPositionByTileIndex(46, 37).addY(2), Direction.RIGHT));
+        
+        
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(12, 17).addY(2), getPositionByTileIndex(17, 17).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(15, 17).addY(2), getPositionByTileIndex(19, 17).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(34, 41).addY(2), getPositionByTileIndex(37, 41).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(38, 42).addY(2), getPositionByTileIndex(44, 42).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(40, 42).addY(2), getPositionByTileIndex(47, 42).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(42, 67).addY(2), getPositionByTileIndex(47, 67).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(52, 61).addY(2), getPositionByTileIndex(55, 61).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(63, 58).addY(2), getPositionByTileIndex(68, 58).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(73, 52).addY(2), getPositionByTileIndex(78, 52).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(80, 49).addY(2), getPositionByTileIndex(86, 49).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(85, 49).addY(2), getPositionByTileIndex(90, 49).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(84, 49).addY(2), getPositionByTileIndex(93, 49).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(93, 64).addY(2), getPositionByTileIndex(101, 64).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(89, 64).addY(2), getPositionByTileIndex(94, 64).addY(2), Direction.RIGHT));

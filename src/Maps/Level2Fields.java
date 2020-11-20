@@ -2,7 +2,11 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.HedgehogEnemy;
+import Enemies.MushroomEnemy;
+import Enemies.SnakeEnemy;
 import Enemies.StillDinosaurEnemy;
+import Enemies.VultureEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.CuriosityOrb;
@@ -29,16 +33,12 @@ public class Level2Fields extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         enemies = new ArrayList<>();
-        enemies.add(new BugEnemy(getPositionByTileIndex(16, 15), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(27, 16), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(43, 16), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(37, 16), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(55, 16), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(65, 17), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(75, 16), Direction.LEFT));
-        
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(92, 8).addY(2), getPositionByTileIndex(95, 8).addY(2), Direction.RIGHT));
-
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(16, 15), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(27, 16), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(43, 16), Direction.LEFT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(37, 16), Direction.RIGHT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(55, 16), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(75, 16), Direction.LEFT));
 
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(14, 12).addY(2), getPositionByTileIndex(15, 11).addY(2), Direction.RIGHT));
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(85, 12).addY(2), getPositionByTileIndex(86, 12).addY(2), Direction.RIGHT));

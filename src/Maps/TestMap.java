@@ -2,6 +2,8 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.HedgehogEnemy;
+import Enemies.MushroomEnemy;
 import Enemies.StillDinosaurEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.*;
@@ -27,8 +29,8 @@ public class TestMap extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         enemies = new ArrayList<>();
-        enemies.add(new BugEnemy(getPositionByTileIndex(15, 9), Direction.LEFT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(19, 1).addY(2), getPositionByTileIndex(22, 1).addY(2), Direction.RIGHT));
+        enemies.add(new MushroomEnemy(getPositionByTileIndex(15, 9), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(19,10), Direction.RIGHT));
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(14, 4).addY(2), getPositionByTileIndex(15, 4).addY(2), Direction.RIGHT));
 
         return enemies;

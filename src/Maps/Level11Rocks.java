@@ -2,7 +2,9 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.HedgehogEnemy;
 import Enemies.StillDinosaurEnemy;
+import Enemies.VultureEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
@@ -27,32 +29,30 @@ public class Level11Rocks extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         enemies = new ArrayList<>();
-        enemies.add(new BugEnemy(getPositionByTileIndex(34, 23), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(34, 23), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(25, 24), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(50, 21), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(50, 21), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(67, 23), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(36, 23), Direction.RIGHT));
         enemies.add(new BugEnemy(getPositionByTileIndex(81, 22), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(80, 23), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(93, 19), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(100, 10), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(108, 24), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(108, 24), Direction.RIGHT));
         enemies.add(new BugEnemy(getPositionByTileIndex(114, 24), Direction.LEFT));
         enemies.add(new BugEnemy(getPositionByTileIndex(116, 22), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(110, 24), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(110, 24), Direction.RIGHT));
         enemies.add(new BugEnemy(getPositionByTileIndex(120, 22), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(134, 22), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(134, 22), Direction.RIGHT));
         enemies.add(new BugEnemy(getPositionByTileIndex(138, 14), Direction.LEFT));
 
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(42, 24).addY(2), getPositionByTileIndex(48, 24).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(50, 21).addY(2), getPositionByTileIndex(52, 21).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(53, 23).addY(2), getPositionByTileIndex(61, 23).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(56, 23).addY(2), getPositionByTileIndex(63, 23).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(53, 18).addY(2), getPositionByTileIndex(61, 18).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(73, 18).addY(2), getPositionByTileIndex(76, 18).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(87, 21).addY(2), getPositionByTileIndex(93, 21).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(100, 10).addY(2), getPositionByTileIndex(105, 10).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(125, 15).addY(2), getPositionByTileIndex(132, 15).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(127, 15).addY(2), getPositionByTileIndex(132, 15).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(113, 15).addY(2), getPositionByTileIndex(118,15).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(124, 10).addY(2), getPositionByTileIndex(137, 10).addY(2), Direction.RIGHT));
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(28, 21).addY(2), getPositionByTileIndex(29, 21).addY(2), Direction.RIGHT));
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(100, 19).addY(2), getPositionByTileIndex(99, 19).addY(2), Direction.LEFT));
 

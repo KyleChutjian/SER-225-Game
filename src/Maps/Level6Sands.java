@@ -2,7 +2,9 @@ package Maps;
 
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.SnakeEnemy;
 import Enemies.StillDinosaurEnemy;
+import Enemies.VultureEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
@@ -27,12 +29,12 @@ public class Level6Sands extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         enemies = new ArrayList<>();
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(23, 15).addY(2), getPositionByTileIndex(27, 15).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(38, 13).addY(2), getPositionByTileIndex(45, 13).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(46, 14).addY(2), getPositionByTileIndex(52, 14).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(57, 16).addY(2), getPositionByTileIndex(63, 16).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(63, 17).addY(2), getPositionByTileIndex(68, 17).addY(2), Direction.RIGHT));
-        enemies.add(new DinosaurEnemy(getPositionByTileIndex(77, 14).addY(2), getPositionByTileIndex(80, 14).addY(2), Direction.RIGHT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(23, 15).addY(2), Direction.RIGHT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(38, 13).addY(2), Direction.RIGHT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(46, 14).addY(2), Direction.RIGHT));
+        enemies.add(new VultureEnemy(getPositionByTileIndex(57, 10), getPositionByTileIndex(68, 10).addY(2), Direction.RIGHT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(63, 17).addY(2),  Direction.RIGHT));
+        enemies.add(new SnakeEnemy(getPositionByTileIndex(77, 14).addY(2),  Direction.RIGHT));
 
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(41, 10).addY(2), getPositionByTileIndex(42, 10).addY(2), Direction.RIGHT));
         enemies.add(new StillDinosaurEnemy(getPositionByTileIndex(65, 14).addY(2), getPositionByTileIndex(66, 14).addY(2), Direction.RIGHT));

@@ -362,7 +362,8 @@ public class CommonTileset extends Tileset {
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder LavaBodyTile = new MapTileBuilder(LavaBodyFrame);
+        MapTileBuilder LavaBodyTile = new MapTileBuilder(LavaBodyFrame)
+        		.withTileType(TileType.LIQUID);
 
         mapTiles.add(LavaBodyTile);
         

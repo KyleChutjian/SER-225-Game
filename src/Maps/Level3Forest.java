@@ -1,6 +1,8 @@
 package Maps;
 import Enemies.BugEnemy;
 import Enemies.DinosaurEnemy;
+import Enemies.HedgehogEnemy;
+import Enemies.MushroomEnemy;
 import Enemies.StillDinosaurEnemy;
 import EnhancedMapTiles.Coin;
 import EnhancedMapTiles.EndLevelBox;
@@ -24,12 +26,11 @@ public class Level3Forest extends Map {
     @Override
     public ArrayList<Enemy> loadEnemies() {
         enemies = new ArrayList<>();
-        enemies.add(new BugEnemy(getPositionByTileIndex(32, 20), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(3, 14), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(27, 4), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(48, 5), Direction.RIGHT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(74, 26), Direction.LEFT));
-        enemies.add(new BugEnemy(getPositionByTileIndex(77, 26), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(32, 20), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(3, 14), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(27, 4), Direction.LEFT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(48, 5), Direction.RIGHT));
+        enemies.add(new HedgehogEnemy(getPositionByTileIndex(74, 26), Direction.LEFT));
         
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(6, 27).addY(2), getPositionByTileIndex(12, 27).addY(2), Direction.RIGHT));
         enemies.add(new DinosaurEnemy(getPositionByTileIndex(10, 38).addY(2), getPositionByTileIndex(14, 38).addY(2), Direction.RIGHT));
