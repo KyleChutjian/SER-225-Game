@@ -30,12 +30,12 @@ public class Cat extends Player {
 
 		 if (fileValue.equals("0")) {
 			 activeCharacter = "Cat.png";
-			 System.out.println(activeCharacter);
+			 //System.out.println(activeCharacter);
 		 }
 
 		 if (fileValue.equals("1")) {
 			 this.activeCharacter = "\"BlackCat.png\"";
-			 System.out.println(activeCharacter);
+			 //System.out.println(activeCharacter);
 		 }
 
 		 if (fileValue.equals("2")) {
